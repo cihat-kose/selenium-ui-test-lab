@@ -1,5 +1,5 @@
 
-# TestingPractices_Selenium_UI
+# Selenium UI Test Lab
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
@@ -7,7 +7,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/ChatGTHB/JavaPatikaProjects?style=for-the-badge)
 
 ## 💡 Introduction
-Welcome to the **TestingPractices_Selenium_UI** repository! This project is designed to provide hands-on training and tutorials for UI testing with Selenium, targeting both beginners and experienced professionals. It includes a variety of test cases and examples that demonstrate the use of Selenium for automated UI testing.
+Welcome to the **selenium-ui-test-lab** repository! This project is designed to provide hands-on training and tutorials for UI testing with Selenium, targeting both beginners and experienced professionals. It includes a variety of test cases and examples that demonstrate the use of Selenium for automated UI testing.
 
 ## Table of Contents
 - [💡 Introduction](#💡-introduction)
@@ -26,7 +26,7 @@ Welcome to the **TestingPractices_Selenium_UI** repository! This project is desi
 ## 📥 Installation
 1. Open IntelliJ IDEA.
 2. Select **File > New > Project from Version Control**.
-3. Enter the repository URL: `https://github.com/ChatGTHB/TestingPractices_Selenium_UI.git` and click **Clone**.
+3. Enter the repository URL: `https://github.com/cihat-kose/selenium-ui-test-lab.git` and click **Clone**.
 4. Ensure you have JDK installed on your system:
    - Go to **File > Project Structure > Project** and ensure the Project SDK is set to the correct JDK version.
 5. Add the required dependencies using Maven:
@@ -98,7 +98,7 @@ If you encounter any issues:
 If you encounter any issues, please open an issue on the GitHub repository.
 
 ## 👥 Contributors
-- [ChatGTHB](https://github.com/ChatGTHB)
+- [cihat-kose](https://github.com/cihat-kose)
 
 ## 🤝 Contributing
 Contributions are welcome! Please follow these steps:
@@ -111,4 +111,4 @@ Contributions are welcome! Please follow these steps:
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-For more information on how to get started, visit the [TestingPractices_Selenium_UI GitHub repository](https://github.com/ChatGTHB/TestingPractices_Selenium_UI).
+For more information on how to get started, visit the [selenium-ui-test-lab GitHub repository](https://github.com/cihat-kose/selenium-ui-test-lab).
