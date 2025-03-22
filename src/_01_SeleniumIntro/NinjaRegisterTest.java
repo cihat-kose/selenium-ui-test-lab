@@ -25,12 +25,12 @@ public class NinjaRegisterTest extends BaseDriver {
         // 3. İlk adınızı (First Name) girin
         MyFunction.wait(2);  // Neticeyi görmek için kısa bekleme
         WebElement firstName = driver.findElement(By.id("input-firstname"));
-        firstName.sendKeys("John");
+        firstName.sendKeys("Kerem");
 
         // 4. Soyadınızı (Last Name) girin
         MyFunction.wait(2);  // Neticeyi görmek için kısa bekleme
         WebElement lastName = driver.findElement(By.id("input-lastname"));
-        lastName.sendKeys("Doe");
+        lastName.sendKeys("Said");
 
         // 5. E-posta adresinizi (Email) girin
         MyFunction.wait(2);  // Neticeyi görmek için kısa bekleme
