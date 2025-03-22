@@ -22,7 +22,7 @@ public class NinjaRegisterTest extends BaseDriver {
         WebElement registerLink = driver.findElement(By.linkText("Register"));
         registerLink.click();
 
-        // 3. İlk adınızı (First Name) girin
+        // 3. İlk adınızı (First Name) girintest
         MyFunction.wait(2);  // Neticeyi görmek için kısa bekleme
         WebElement firstName = driver.findElement(By.id("input-firstname"));
         firstName.sendKeys("Kerem");
