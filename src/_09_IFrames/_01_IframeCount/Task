@@ -1,0 +1,8 @@
+ Task: Count the Number of Iframes on the Page
+
+ Steps:
+ 1. Go to the page: "https://demoqa.com/frames".
+ 2. Count how many <iframe> elements are on the page.
+ 3. Print the count to the console.
+ 4. Close the browser.
+

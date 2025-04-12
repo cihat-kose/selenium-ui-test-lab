@@ -1,46 +1,71 @@
+Selenium Alerts Overview
+=========================
 
-Selenium Alerts
+1. What is an Alert in Selenium?
+--------------------------------
+- An alert is a pop-up window used in web applications to display a message or request user interaction.
+- In Selenium, alerts are handled using the method:
+  driver.switchTo().alert();
 
-1. Selenium'da Alert Nedir?
-   - Alert, web sayfalarında kullanıcıya bir mesaj göstermek için kullanılan pop-up pencerelerdir.
-   - Selenium, bu alert pencereleri ile etkileşimde bulunmak için `switchTo().alert()` metodunu kullanır.
+2. Types of Alerts in Selenium
+------------------------------
+a) Simple Alert:
+   - Displays a simple message.
+   - Contains only an "OK" button.
 
-2. Selenium'da Alert Türleri:
-   a) Simple Alert: Kullanıcıya basit bir mesaj gösterir ve yalnızca "Tamam" (OK) düğmesine sahiptir.
-   b) Confirmation Alert: Kullanıcıdan bir onay ister ve "Tamam" (OK) ve "İptal" (Cancel) düğmeleri vardır.
-   c) Prompt Alert: Kullanıcıdan bir giriş (input) bekler, "Tamam" (OK) ve "İptal" (Cancel) düğmeleri vardır.
+b) Confirmation Alert:
+   - Requests confirmation from the user.
+   - Contains both "OK" and "Cancel" buttons.
 
-3. Selenium ile Alert Yönetimi:
-   - Alert penceresi açıldığında, Selenium WebDriver kontrolü kaybeder,
-     bu yüzden alert penceresini yönetmek için önce ona geçmemiz gerekir.
-   - `driver.switchTo().alert()` metodu ile alert'e geçiş yapılır.
+c) Prompt Alert:
+   - Requests user input (text).
+   - Contains "OK" and "Cancel" buttons.
 
-4. Temel Alert Metodları:
-   a) accept(): Alert penceresindeki "Tamam" (OK) düğmesine tıklar.
-   b) dismiss(): Alert penceresindeki "İptal" (Cancel) düğmesine tıklar.
-   c) getText(): Alert penceresindeki mesajı alır.
-   d) sendKeys(): Prompt Alert'e bir değer girer.
+3. Handling Alerts in Selenium
+------------------------------
+- When an alert appears, the WebDriver loses control over the browser.
+- You must switch to the alert before interacting with it:
+  driver.switchTo().alert();
 
-5. Selenium Alerts ile Çalışma Adımları:
-   a) Alert'i yakalama: `Alert alert = driver.switchTo().alert();`
-   b) Mesajı okuma: `String alertText = alert.getText();`
-   c) "Tamam" düğmesine tıklama: `alert.accept();`
-   d) "İptal" düğmesine tıklama: `alert.dismiss();`
-   e) Alert'e giriş yapma (Prompt): `alert.sendKeys("metin");`
+4. Common Alert Methods
+-----------------------
+- accept(): Clicks the "OK" button.
+- dismiss(): Clicks the "Cancel" button.
+- getText(): Retrieves the alert message.
+- sendKeys(): Sends input text to a Prompt Alert.
 
-6. Örnekler:
-   - Simple Alert:
-     `driver.switchTo().alert().accept();`
+5. Working with Alerts - Step-by-Step
+-------------------------------------
+a) Switch to the alert:
+   Alert alert = driver.switchTo().alert();
 
-   - Confirmation Alert:
-     `Alert alert = driver.switchTo().alert();`
-     `alert.dismiss();`
+b) Get the alert message:
+   String alertText = alert.getText();
 
-   - Prompt Alert:
-     `Alert alert = driver.switchTo().alert();`
-     `alert.sendKeys("Selenium");`
-     `alert.accept();`
+c) Click OK:
+   alert.accept();
 
-7. Selenium'da UnhandledAlertException:
-   - Eğer bir alert açıldığında onu yakalayıp yönetmezseniz, Selenium `UnhandledAlertException` hatası verir.
-   - Bu yüzden alert'leri mutlaka `switchTo().alert()` ile yakalayın ve işleminizi gerçekleştirin.
+d) Click Cancel:
+   alert.dismiss();
+
+e) Send input (Prompt Alert):
+   alert.sendKeys("text");
+
+6. Examples
+-----------
+- Simple Alert:
+  driver.switchTo().alert().accept();
+
+- Confirmation Alert:
+  Alert alert = driver.switchTo().alert();
+  alert.dismiss();
+
+- Prompt Alert:
+  Alert alert = driver.switchTo().alert();
+  alert.sendKeys("Selenium");
+  alert.accept();
+
+7. UnhandledAlertException in Selenium
+--------------------------------------
+- If you do not handle an alert when it appears, Selenium will throw an UnhandledAlertException.
+- Always switch to the alert using driver.switchTo().alert() before attempting any interaction.

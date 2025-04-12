@@ -1,0 +1,10 @@
+
+Task: Switching between multiple browser windows (Herokuapp)
+
+Steps:
+1. Go to "https://the-internet.herokuapp.com/windows".
+2. Click the "Click Here" link to open a new window.
+3. Switch to the newly opened window.
+4. Print the text "New Window" from the new window.
+5. Switch back to the original window and print its title.
+6. Close all windows.

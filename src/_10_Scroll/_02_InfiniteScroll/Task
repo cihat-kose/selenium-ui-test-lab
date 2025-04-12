@@ -1,0 +1,8 @@
+ Task: Load and Print 10 Paragraphs with Infinite Scroll
+
+ Steps:
+ 1. Go to https://the-internet.herokuapp.com/infinite_scroll
+ 2. Scroll down to trigger lazy loading using JavascriptExecutor
+ 3. Wait briefly after each scroll
+ 4. Print each paragraph to the console
+ 5. Close the browser

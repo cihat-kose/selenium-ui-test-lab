@@ -1,0 +1,8 @@
+Task: Validate Selenium Keyword in Google Search Results
+
+Steps:
+1. Navigate to https://google.com/
+2. Enter the text "Selenium" into the search bar and press Enter.
+3. Wait for the first search result using Explicit Wait.
+4. Verify that the result contains the word "selenium" (case insensitive).
+5. Close the browser.

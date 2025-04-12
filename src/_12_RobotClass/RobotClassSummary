@@ -1,66 +1,39 @@
+// ===========================
+// Summary: Robot Class
+// ===========================
 
-Robot Class:
-===================
-Robot Class, Java’nın AWT (Abstract Window Toolkit) kütüphanesinde bulunan, fare ve klavye gibi donanım cihazlarını
-kontrol etmek için kullanılan bir sınıftır. GUI testlerinde, özellikle Selenium'un erişemediği sistem seviyesindeki
-durumlarda kullanılır. Bu sınıf, fareyi belirli bir noktaya taşıma, tıklama, klavye tuşlarına basma gibi işlemleri
-yapabilir.
+Robot Class (Java AWT)
+-----------------------
+Robot Class is a part of Java's AWT package that allows interaction with native system input devices such as keyboard and mouse.
+It is especially useful in GUI testing scenarios where Selenium WebDriver does not have access, such as interacting with OS-level dialogs.
 
-Robot Class'ın Kullanım Amaçları:
----------------------------------
-1. Fare Hareketi (Mouse Movement): Fareyi ekranda belirli bir noktaya taşıyabilir.
-2. Fare Tıklaması (Mouse Click): Fare ile belirli bir noktada sol veya sağ tıklama yapabilir.
-3. Klavyeden Tuşlara Basma (Keyboard Events): Klavyeden tuşlara basabilir veya yazı yazabilir.
-4. Ekran Görüntüsü Alma (Screen Capture): Belirli bir alanın ekran görüntüsünü alabilir.
-5. Kopyala-Yapıştır İşlemleri (Clipboard Usage): Panoya veri kopyalayıp yapıştırabilir.
+Common Use Cases:
+-----------------
+1. Simulating mouse movement and clicks.
+2. Simulating keyboard key presses (copy-paste, typing text).
+3. Taking screenshots.
+4. Working with clipboard (System copy/paste).
 
-Robot Class Kullanımı:
-----------------------
-1. Robot Class'ı Tanımlama:
-   - `Robot robot = new Robot();`
+Key Methods:
+------------
+- mouseMove(int x, int y): Move mouse to screen coordinates.
+- mousePress(int button): Simulate mouse button press (e.g., KeyEvent.BUTTON1_DOWN_MASK).
+- mouseRelease(int button): Release mouse button.
+- keyPress(int keycode): Press keyboard key (e.g., KeyEvent.VK_CONTROL).
+- keyRelease(int keycode): Release key.
+- createScreenCapture(Rectangle screenRect): Take screenshot.
+- Using clipboard:
+    StringSelection selection = new StringSelection("text");
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 
-2. Fareyi Hareket Ettirme:
-   - `robot.mouseMove(500, 300); // Fareyi x=500, y=300 koordinatına taşır`
+Why Use Robot Class:
+--------------------
+- To simulate real user interactions with keyboard/mouse.
+- To handle native OS dialogs or popups.
+- To test cross-platform behaviors with minimal external dependencies.
 
-3. Fare Tıklaması:
-   - Sol tıklama:
-     `robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);`
-     `robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);`
-   - Sağ tıklama:
-     `robot.mousePress(KeyEvent.BUTTON3_DOWN_MASK);`
-     `robot.mouseRelease(KeyEvent.BUTTON3_DOWN_MASK);`
-
-4. Klavyeden Tuşlara Basma:
-   - `robot.keyPress(KeyEvent.VK_CONTROL);`
-   - `robot.keyPress(KeyEvent.VK_C);`
-   - `robot.keyRelease(KeyEvent.VK_C);`
-   - `robot.keyRelease(KeyEvent.VK_CONTROL);`
-
-5. Panoya Veri Kopyalama:
-   - `StringSelection stringSelection = new StringSelection("Kopyalanacak metin");`
-   - `Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);`
-
-6. Ekran Görüntüsü Alma:
-   - `Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());`
-   - `BufferedImage screenFullImage = robot.createScreenCapture(screenRect);`
-   - `ImageIO.write(screenFullImage, "png", new File("screenshot.png"));`
-
-Neden Robot Class Kullanılır?
------------------------------
-1. Selenium'un Yapamadığı İşlemler: Örneğin, işletim sistemi seviyesindeki dosya yükleme pencerelerini kontrol edebilir.
-2. İnsan Etkileşimini Simüle Etme: Gerçek bir kullanıcıyı taklit ederek fareyi hareket ettirip tıklamalar yapabilir.
-3. Cross-platform Uygulamalarda Test: Windows, macOS, Linux gibi farklı platformlarda test otomasyonu yapmaya olanak sağlar.
-
-Robot Class Kullanımında Dikkat Edilmesi Gerekenler:
-----------------------------------------------------
-1. Sabit Koordinatlar: Farklı çözünürlüklerde aynı sonuçları vermeyebilir. Dinamik koordinatlar kullanmak daha iyidir.
-2. Thread.sleep() Kullanımı: İşlemler arasında bazen bekleme koymak gerekebilir, ancak bu minimum düzeyde tutulmalıdır.
-3. Multitasking Sorunları: Robot Class fiziksel fare ve klavye hareketlerini simüle eder, bu nedenle test sırasında başka
-   bir işlem yapılmamalıdır.
-
-Sonuç:
-------
-Robot Class, özellikle GUI testlerinde, işletim sistemi seviyesindeki etkileşimler için güçlü bir araçtır.
-Fare hareketlerini ve klavye tuş basımlarını simüle ederek kullanıcı etkileşimini otomatikleştirmek
-ve Selenium ile yapılamayan işlemleri tamamlamak için idealdir.
-Her ekran çözünürlüğüne uygun dinamik fare hareketleri ve tuş basımları ile testlerinizi daha esnek hale getirebilirsiniz.
+Important Notes:
+----------------
+- Robot actions affect the whole system (not browser-specific).
+- Fixed coordinates can be unreliable on different screen sizes.
+- Add short waits between actions to simulate realistic behavior (e.g., Thread.sleep or utility wait).

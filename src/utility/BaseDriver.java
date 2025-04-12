@@ -3,6 +3,7 @@ package utility;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -21,8 +22,13 @@ public class BaseDriver {
         Logger logger = Logger.getLogger("");
         logger.setLevel(Level.SEVERE);
 
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+        driver = new ChromeDriver(options);
+
+
         // ChromeDriver başlatılır ve temel ayarlamalar yapılır
-        driver = new ChromeDriver();
+        // driver = new ChromeDriver();
         driver.manage().window().maximize();  // Tarayıcı tam ekran yapılır
 
         // Sayfa yüklenmesi için maksimum bekleme süresi (30 saniye)
@@ -60,6 +66,6 @@ public class BaseDriver {
  * - ChromeDriver kullanılarak tarayıcı başlatılır ve yönetilir.
  * - Sayfa yükleme süresi ve zımni bekleme süreleri ayarlanmıştır.
  * - WebDriverWait ve JavascriptExecutor objeleri de global olarak tanımlanmıştır.
- *
+ * <p>
  * waitAndClose() metodu, belirli bir süre bekledikten sonra tarayıcıyı kapatır.
  */

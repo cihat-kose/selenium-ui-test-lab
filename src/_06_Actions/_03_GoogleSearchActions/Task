@@ -1,0 +1,10 @@
+Topic: Google Search Using Actions Class
+
+Site: https://google.com
+
+Tasks:
+1. Go to Google homepage.
+2. Accept cookies if the dialog appears.
+3. Enter "selenium" into the search bar using Actions class and press Enter.
+4. Wait for the first search result to become clickable.
+5. Verify that the result contains the word "selenium".

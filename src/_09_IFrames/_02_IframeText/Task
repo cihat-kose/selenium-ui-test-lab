@@ -1,0 +1,8 @@
+ Task: Print the Text Inside an Iframe
+
+ Steps:
+ 1. Go to the page: "https://demoqa.com/frames".
+ 2. Switch to the iframe with id "frame1".
+ 3. Locate the element with id "sampleHeading".
+ 4. Print its text content.
+ 5. Close the browser.

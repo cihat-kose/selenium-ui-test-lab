@@ -1,0 +1,9 @@
+ Task: Modify Text Inside a Textarea in an Iframe
+
+ Steps:
+ 1. Navigate to: "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_textarea"
+ 2. Accept cookies if present.
+ 3. Switch to the iframe with id "iframeResult".
+ 4. Clear the textarea content and type: "This text was changed with Selenium!"
+ 5. Exit the iframe.
+ 6. Close the browser.

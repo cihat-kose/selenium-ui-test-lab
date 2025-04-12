@@ -1,0 +1,11 @@
+
+Task: Handle opening a new window and reading text.
+
+Steps:
+1. Go to "https://demoqa.com/browser-windows".
+2. Close cookie consent if it appears.
+3. Click the "New Window" button.
+4. Switch to the newly opened window using window handles.
+5. Print the message "This is a sample page".
+6. Close all windows.
+

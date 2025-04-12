@@ -1,0 +1,10 @@
+
+ Task: Open a New Tab and Read Text
+
+ Steps:
+ 1. Go to https://demoqa.com/browser-windows
+ 2. Close cookie popup if present
+ 3. Click on the "New Tab" button
+ 4. Switch to the new tab
+ 5. Read and print the text: "This is a sample page"
+ 6. Close the browser
