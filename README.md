@@ -77,6 +77,11 @@ interactions being demonstrated.
 The project includes a variety of test scenarios to demonstrate the capabilities of Selenium WebDriver. Each example is
 designed to showcase different techniques and Selenium functionalities. Here are some highlighted examples:
 
+> ℹ️ **Note on wait methods:**  
+> In some examples, you might notice the use of static waits (e.g., `MyFunction.wait(5)` or `Thread.sleep()`).  
+> These are used only for demonstration and visual confirmation purposes.  
+> In real-world automation, always prefer **explicit waits**, such as `WebDriverWait`, for proper synchronization and reliability.
+
 ### Locators and Element Interaction
 
 - **Basic Locators**: Learn how to use ID, class, and name locators to interact with web elements.

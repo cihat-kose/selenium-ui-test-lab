@@ -24,21 +24,21 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
         Assert.assertEquals("Option 2", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by visible text: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2);
+        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
 
         // 2. Select by value
         dropdown.selectByValue("1");
         Assert.assertEquals("Option 1", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by value: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2);
+        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
 
         // 3. Select by index
         dropdown.selectByIndex(2); // Option 2
         Assert.assertEquals("Option 2", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by index: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2);
+        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
 
         // 4. Get all options
         List<WebElement> options = dropdown.getOptions();
@@ -47,7 +47,7 @@ public class SelectDropdownAllMethodsTask extends BaseDriver {
             System.out.println("- " + option.getText());
         }
 
-        MyFunction.wait(2);
+        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
 
         // 5. Get first selected option
         WebElement firstSelected = dropdown.getFirstSelectedOption();
