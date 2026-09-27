@@ -1,21 +1,41 @@
-Shadow DOM: A Separate Area Inside a Page
+# 🌳 Shadow DOM: A Separate Area Inside a Web Page
 
-Most page elements can be found directly with WebDriver. A web component can keep its internal elements inside a separate area called a Shadow DOM. The visible custom element is the shadow host. To find something inside it, first find the host, then get its shadow root, and search inside that root.
+## What is it?
 
-What the local test does:
-1. Opens the project's small Shadow DOM page.
-2. Finds the <consent-panel> host.
-3. Uses getShadowRoot() to enter its separate area.
-4. Clicks the Accept button inside that area.
-5. Checks that the page now shows "Consent accepted".
+A page component can keep its buttons, text, and other elements in its own separate area. That area is called **Shadow DOM**.
 
-The second test looks custom but has no Shadow DOM. It checks that getShadowRoot() throws NoSuchShadowRootException, then finds the input through ordinary DOM search and verifies the typed value.
+You can still see the button on screen. But a normal `driver.findElement(...)` search from the main page does not reach inside that area.
 
-An additional live-site example opens Akakce, finds the consent component's host, enters its Shadow DOM, and accepts the consent. It checks that the button disappears. This example depends on the live page continuing to use the same consent component; use the local test to learn the interaction without that dependency.
+## Why does it matter in a test?
 
-Remember:
-- Native Shadow DOM: find host -> getShadowRoot() -> find the internal element.
-- Regular DOM component: search inside the element as usual.
-- A custom-looking component does not always use Shadow DOM.
+Imagine an **Accept** button inside such a component. To click it, Selenium must first find the component and access its inner area.
 
-The first two tests use local HTML fixtures. The Akakce example uses a live website.
+Only two new terms are needed:
+
+- **Shadow host:** the element that owns the separate area.
+- **Shadow root:** the place Selenium starts searching inside that area.
+
+## What do we test here?
+
+Open [ShadowDomExampleTest](ShadowDomExampleTest.java).
+
+1. Open our local practice page.
+2. Find its `consent-panel` element: this is the host.
+3. Call `getShadowRoot()` to access the elements inside.
+4. Find and click **Accept** there.
+5. Check that the message becomes **Consent accepted**.
+
+The important part is just:
+
+```java
+WebElement host = driver.findElement(By.cssSelector("consent-panel"));
+SearchContext inside = host.getShadowRoot();
+inside.findElement(By.id("accept")).click();
+```
+
+**In one sentence:** We enter the component's separate area, click its button, and check the message produced by that click.
+
+## What do the other examples show?
+
+- [RegularDomComponentTest](RegularDomComponentTest.java): a component can look special but still use ordinary page elements. This test confirms it has no shadow root, types `student` into its input, and checks the value.
+- [AkakceConsentShadowDomTest](AkakceConsentShadowDomTest.java): the same technique on a live consent panel. It clicks the acceptance button and checks that the button disappears. The website may change; start with the local example above.

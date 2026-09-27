@@ -1,48 +1,34 @@
-// ===========================
-// Summary: Robot Class
-// ===========================
+# 🤖 Robot: Let Java Use Your Keyboard and Mouse
 
-Robot Class (Java AWT)
------------------------
-Robot Class is a part of Java's AWT package that allows interaction with native system input devices such as keyboard and mouse.
-It is especially useful in GUI testing scenarios where Selenium WebDriver does not have access, such as interacting with OS-level dialogs.
+## What is it?
 
-Common Use Cases:
------------------
-1. Simulating mouse movement and clicks.
-2. Simulating keyboard key presses (copy-paste, typing text).
-3. Taking screenshots.
-4. Working with clipboard (System copy/paste).
+Java's `Robot` class presses keyboard keys and moves or clicks the mouse on your computer, much as you would do yourself. It is a Java tool, not a Selenium feature.
 
-Key Methods:
-------------
-- mouseMove(int x, int y): Move mouse to screen coordinates.
-- mousePress(int button): Simulate mouse button press (e.g., KeyEvent.BUTTON1_DOWN_MASK).
-- mouseRelease(int button): Release mouse button.
-- keyPress(int keycode): Press keyboard key (e.g., KeyEvent.VK_CONTROL).
-- keyRelease(int keycode): Release key.
-- createScreenCapture(Rectangle screenRect): Take screenshot.
-- Using clipboard:
-    StringSelection selection = new StringSelection("text");
-    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+## What is it useful for?
 
-Why Use Robot Class:
---------------------
-- To simulate real user interactions with keyboard/mouse.
-- To handle native OS dialogs or popups.
-- To test cross-platform behaviors with minimal external dependencies.
+Imagine clicking **Choose file** on a page. Your computer opens a file picker. That window belongs to the operating system, so Selenium cannot find its buttons with `By.id(...)`.
 
-Important Notes:
-----------------
-- Robot actions affect the whole system (not browser-specific).
-- Fixed coordinates can be unreliable on different screen sizes.
-- Add short waits between actions to simulate realistic behavior (e.g., Thread.sleep or utility wait).
+Robot can press keys in that window. It sends input to whichever window currently has keyboard focus.
 
-File selection examples:
-------------------------
-- `FileSelectionWithRobotTest` opens the native file picker and pastes the project's shared sample path. It requires a visible desktop session and does not assume a fixed number of TAB presses.
-- `FileSelectionWithWebDriverTest` sends the same path directly to `input[type=file]` with WebDriver. It does not open the native dialog.
-- Both tests verify the selected file name. The local fixture demonstrates the selection flow; it does not upload a file to a server.
+## What do we do in our example?
 
+Open [FileSelectionWithRobotTest](../_15_FileUpload/FileSelectionWithRobotTest.java).
 
-See the [file selection lesson](../_15_FileUpload/Task.md) for the native Robot picker and direct WebDriver approaches side by side.
+1. Selenium opens our local page and clicks its file input.
+2. The computer's file picker opens.
+3. Robot presses **Ctrl+V** to paste the sample file's path, then **Enter** to select it.
+4. Selenium waits until the page shows `upload-sample.txt`.
+5. The test submits the local form and checks **File selected and form submitted.**
+
+**In one sentence:** Robot uses the keyboard to select a file in a window outside the web page; Selenium checks the result on the page.
+
+The example needs a visible desktop and the correct window in focus. It selects a local file; the practice page does not upload it to a server.
+
+## What do the other examples show?
+
+- [DuckDuckGoRobotSearchTest](_01_DuckDuckGoSearch/DuckDuckGoRobotSearchTest.java) pastes a search phrase, presses Enter, and demonstrates mouse movement and clicks.
+- [CrossPlatformTextEditorTest](_02_CrossPlatformEditorAutomation/CrossPlatformTextEditorTest.java) opens a desktop text editor and types a message. Its current code handles Windows and macOS.
+
+These two are interaction demonstrations; they do not assert the final search or editor contents.
+
+For comparison, [FileSelectionWithWebDriverTest](../_15_FileUpload/FileSelectionWithWebDriverTest.java) sends the file path directly to the page's file input. It does not use Robot or open the computer's file picker.

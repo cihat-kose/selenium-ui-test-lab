@@ -8,12 +8,13 @@ Examples are grouped by their main learning goal. A locator exercise can also cl
 | XPath exercises | [XPath practice](../src/test/java/_04_XPath/_01_Practice/Task.md) | The same scenarios using XPath, so students can compare locator strategies. |
 | Three drag-and-drop exercises | [Actions](../src/test/java/_06_Actions/_06_DragAndDropPractice) | Matching and distributing elements using click, hold, move, and release. |
 | YouTube search and scroll | [Scrolling](../src/test/java/_10_Scroll/_03_YouTubeSearchAndScroll/Task.md) | Loading enough results to open the 80th video. |
-| Calculator operations | [Combined exercises](../src/test/java/_16_CombinedExercises/Summary.md) | Combines keyboard Actions, Select, waiting, loops, and assertions. |
+| Calculator operations | [Select practice](../src/test/java/_05_SelectDropdown/_01_CalculatorOperations/Summary.md) | Selects each calculator operation from a dropdown and checks its result; Actions and waits support the interaction. |
 | HTML letter and reference image | [HTML basics](html-basics/README.md) | Manual page construction; contains no Selenium test. |
 
 ## Other naming and grouping decisions
 
 - `_05_SelectDropdown` names the actual topic: native HTML `select` controls.
+- The calculator is a follow-up Select exercise. A separate combined-exercises chapter is unnecessary for this one example; its summary identifies Actions and waits as additional prerequisites.
 - Shadow DOM and BiDi are chapters 13 and 14, matching the reference repository.
 - `_15_FileUpload` contains the two file-selection techniques together. Robot remains a desktop-input topic in chapter 12 and links to this comparison.
 - JUnit lesson classes end in `Test`. Utilities keep their existing names.

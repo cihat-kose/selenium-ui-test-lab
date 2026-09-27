@@ -14,3 +14,8 @@ Select Class in Selenium
 3. Purpose:
    - Learn to select options and assert selected values.
    - Practice real dropdown interactions with Selenium.
+
+## Practice order
+
+1. [SelectDropdownTest](SelectDropdownTest.java): select an option by text, value, or index and inspect the selection.
+2. [Calculator operations](_01_CalculatorOperations/Summary.md): select arithmetic operations and check the calculated results. This follow-up exercise also uses Actions and waits from later chapters.
