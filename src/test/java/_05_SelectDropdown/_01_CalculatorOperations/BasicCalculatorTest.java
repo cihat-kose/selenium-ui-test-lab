@@ -1,4 +1,4 @@
-package _16_CombinedExercises._01_BasicCalculator;
+package _05_SelectDropdown._01_CalculatorOperations;
 
 import org.junit.Assert;
 import org.junit.Test;

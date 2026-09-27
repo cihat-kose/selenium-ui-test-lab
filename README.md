@@ -45,50 +45,33 @@ The project uses the standard Maven test layout, matching `selenium-practice-les
 | [`.github/workflows/`](.github/workflows) | CI compilation checks |
 | [`LICENSE`](LICENSE) | MIT license |
 
-### Lesson folders
+Maven discovers `src/test/java` and `src/test/resources` automatically. Each lesson's `Task.md` and `Summary.md` notes sit beside its Java examples.
 
-- `src/test/java/`: lesson classes, shared utilities, and their accompanying `Task.md`/`Summary.md` notes.
-- `src/test/resources/`: shared HTML fixtures and sample upload files.
+## 📚 Learning Path
 
-Maven discovers these directories automatically; no custom test-source path is needed.
+Open a topic below to find its examples and notes. Start with the basic example in each chapter; follow-up exercises may combine skills from later chapters.
 
-```text
-src/test/java/
-├── _01_SeleniumIntro/
-├── _02_Locators/
-├── _03_CssSelector/
-├── _04_XPath/
-├── _05_SelectDropdown/
-├── _06_Actions/
-├── _07_Alerts/
-├── _08_Waits/
-├── _09_IFrames/
-├── _10_Scroll/
-├── _11_Windows/
-├── _12_RobotClass/
-├── _13_ShadowDom/
-├── _14_WebDriverBiDi/
-├── _15_FileUpload/
-├── _16_CombinedExercises/
-└── utility/
-```
+| # | Topic | What you practice |
+| --- | --- | --- |
+| 01 | [🚀 Selenium Introduction](src/test/java/_01_SeleniumIntro) | Open a browser, complete registration, and check the confirmation. |
+| 02 | [🔎 Locators](src/test/java/_02_Locators) | Find form elements using different locator strategies. |
+| 03 | [🎯 CSS Selectors](src/test/java/_03_CssSelector) | Locate elements with CSS in registration and practice scenarios. |
+| 04 | [🧭 XPath](src/test/java/_04_XPath) | Locate elements using attributes, text, and XPath expressions. |
+| 05 | [🔽 Select Dropdowns](src/test/java/_05_SelectDropdown) | Select options by text, value, or index; apply selection to calculator operations. |
+| 06 | [🖱️ Actions](src/test/java/_06_Actions) | Use keyboard input, hover, context click, double click, and drag-and-drop. |
+| 07 | [💬 Alerts](src/test/java/_07_Alerts) | Accept, dismiss, and enter text into browser dialogs. |
+| 08 | [⏱️ Waits](src/test/java/_08_Waits) | Practice implicit, explicit, and fluent waits for dynamic content. |
+| 09 | [🪟 Iframes](src/test/java/_09_IFrames) | Switch into a frame, interact with its contents, and return. |
+| 10 | [📜 Scrolling](src/test/java/_10_Scroll) | Scroll pages and load additional content. |
+| 11 | [🗔 Windows and Tabs](src/test/java/_11_Windows) | Switch browser contexts using window handles. |
+| 12 | [🤖 Robot](src/test/java/_12_RobotClass/Summary.md) | Let Java press keys and move the mouse, including in windows outside the web page. |
+| 13 | [🌳 Shadow DOM](src/test/java/_13_ShadowDom/Summary.md) | Reach a button inside a component's separate area, click it, and check the result. |
+| 14 | [🔄 WebDriver BiDi](src/test/java/_14_WebDriverBiDi/Summary.md) | Click a button and receive the console message it produces directly from the browser. |
+| 15 | [📎 File Selection](src/test/java/_15_FileUpload) | Compare direct WebDriver file selection with a native Robot file picker. |
 
-See the [lesson map](docs/LESSON_MAP.md) for grouping decisions and example locations. The independent [HTML exercise](docs/html-basics/README.md) is kept with the documentation.
+**Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, and test-data helpers.
 
-## 📚 Lessons
-
-- WebDriver basics, registration flows, locators, CSS selectors, and XPath
-- Native `select` dropdowns
-- Actions for mouse and keyboard input, including drag and drop
-- JavaScript alerts
-- Implicit, explicit, and fluent waits
-- Iframes, scrolling, browser tabs, and windows
-- Java Robot and file selection
-- Selenium 4 Shadow DOM access with local fixtures
-- WebDriver BiDi console-event listening with a local fixture and Selenium's live demo
-- A combined calculator exercise using Actions, Select, waits, and assertions
-
-The repository already teaches the core locator, dropdown, Actions, alert, wait, iframe, scroll, and window topics. The added Shadow DOM and BiDi lessons fill topics that were missing instead of repeating an existing lesson.
+**Further reading:** [Lesson map and verification limits](docs/LESSON_MAP.md) · [Manual HTML exercise](docs/html-basics/README.md)
 
 <a id="installation"></a>
 
