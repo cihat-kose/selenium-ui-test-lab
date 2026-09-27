@@ -172,9 +172,16 @@ The file-picker example requires a visible desktop session and keyboard focus. I
 
 ## ⏱️ Waits and Browser Lifecycle
 
-`WebDriverWait` waits for a condition and should be used to synchronize test steps. `MyFunction.wait(...)` calls `Thread.sleep(...)`; it pauses for a fixed time without checking page state and remains only for visual demonstration.
+> ℹ️ **Note on wait methods:**
+> Some examples include fixed pauses such as `MyFunction.wait(5)` or `Thread.sleep(...)` so you can watch the browser actions during a lesson.
+>
+> A fixed pause always waits for the chosen duration. It does **not** check whether an element is ready: five seconds may be too short on a slow page and unnecessary on a fast one.
+>
+> In real-world automation, prefer **explicit waits** such as `WebDriverWait`. They continue when a specific condition is met—for example, when a button becomes clickable—and fail if that condition is not met before the timeout.
+>
+> `waitAndClose()` is a three-second observation pause at the end of a lesson. It gives you time to inspect the final page before the browser closes; it is not test synchronization.
 
-`BaseDriver.waitAndClose()` leaves the final page visible for three seconds before closing Chrome. That delay is for observing the lesson result, not test synchronization. `BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. The shared driver retains a 30-second implicit wait for the existing lessons, and the implicit-wait lesson changes it to ten seconds. Combining implicit and explicit waits can make total wait times difficult to predict; use explicit waits alone in new examples.
+`BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. The shared driver retains a 30-second implicit wait for the existing lessons, and the implicit-wait lesson changes it to ten seconds. Combining implicit and explicit waits can make total wait times difficult to predict; use explicit waits alone in new examples.
 
 ## 🛠️ Troubleshooting and Limitations
 
