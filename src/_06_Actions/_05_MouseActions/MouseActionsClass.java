@@ -1,6 +1,7 @@
 package _06_Actions._05_MouseActions;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -11,7 +12,12 @@ import utility.BaseDriver;
 
 public class MouseActionsClass extends BaseDriver {
 
-    Actions actions = new Actions(driver);
+    private Actions actions;
+
+    @Before
+    public void createActions() {
+        actions = new Actions(driver);
+    }
 
     /**
      * Mouse Actions: Hover the mouse over an element
@@ -21,7 +27,7 @@ public class MouseActionsClass extends BaseDriver {
         driver.get("http://the-internet.herokuapp.com/hovers");
 
         WebElement elementToHover = driver.findElement(By.xpath("(//div[@class='figure'])[1]/img"));
-        actions.moveToElement(elementToHover).perform();  // Fareyi element üzerine getir
+        actions.moveToElement(elementToHover).perform();  // Move the pointer over the element.
 
 //      Alternative: hover the mouse over a specific point of the element
 //      actions.moveToElement(elementToHover, 50, 50).perform();

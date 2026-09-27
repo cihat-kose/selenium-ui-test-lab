@@ -1,8 +1,8 @@
- Task: Print the Text Inside an Iframe
+Task: Read and Verify Iframe Content
 
  Steps:
- 1. Go to the page: "https://demoqa.com/frames".
- 2. Switch to the iframe with id "frame1".
- 3. Locate the element with id "sampleHeading".
- 4. Print its text content.
- 5. Close the browser.
+ 1. Open https://www.selenium.dev/selenium/web/iframes.html.
+ 2. Locate iframe "iframe1" on the main page and switch into it.
+ 3. Verify that the expected iframe content is present.
+ 4. Enter a sample email and assert the input value.
+ 5. Return to the main page, verify it is accessible, and close the browser.

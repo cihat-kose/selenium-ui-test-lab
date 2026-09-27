@@ -1,6 +1,7 @@
 package _06_Actions._01_ContextClickAndDoubleClickTest;
 
 import org.junit.Test;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -32,6 +33,7 @@ public class ContextClickAndDoubleClickTest extends BaseDriver {
         // 6. Step: Verify and close the alert after right-click
         String alertMessage = driver.switchTo().alert().getText();
         System.out.println("Right-click alert: " + alertMessage);
+        Assert.assertEquals("clicked: copy", alertMessage);
         driver.switchTo().alert().accept();
 
         // 7. Step: Perform double-click action
@@ -42,7 +44,7 @@ public class ContextClickAndDoubleClickTest extends BaseDriver {
         // 8. Step: Verify the alert after double-click
         String doubleClickAlert = driver.switchTo().alert().getText();
         String expectedAlert = "You double clicked me.. Thank You..";
-        assert doubleClickAlert.equals(expectedAlert) : "Unexpected alert message after double click";
+        Assert.assertEquals("Unexpected alert message after double click", expectedAlert, doubleClickAlert);
 
         // 9. Step: Close the alert after double-click
         driver.switchTo().alert().accept();

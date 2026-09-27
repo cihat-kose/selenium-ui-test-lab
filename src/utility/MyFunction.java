@@ -2,11 +2,12 @@ package utility;
 
 public class MyFunction {
 
-    public static void wait(int sn) { // "wait" adında bir metot tanımlanıyor, "sn" adında bir tamsayı parametre alıyor
+    public static void wait(int seconds) {
         try {
-            Thread.sleep(1000L * sn); // Belirtilen süre kadar beklemek için Thread.sleep() kullanılıyor
-        } catch (InterruptedException e) { // Eğer beklemeyi kesintiye uğratan bir hata oluşursa
-            throw new RuntimeException(e); // RuntimeException hatası fırlatılıyor
+            Thread.sleep(1000L * seconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("The fixed lesson delay was interrupted.", e);
         }
     }
 }

@@ -1,6 +1,7 @@
 package _06_Actions._02_DragAndDropJquery;
 
 import org.junit.Test;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -32,7 +33,7 @@ public class DragAndDropJQueryTest extends BaseDriver {
         // Step 5: Verify the drop result
         String actualText = target.getText();
         String expectedText = "Dropped!";
-        assert actualText.equals(expectedText) : "Drag and drop failed!";
+        Assert.assertEquals("Drag and drop failed!", expectedText, actualText);
 
         waitAndClose();
     }

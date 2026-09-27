@@ -3,9 +3,12 @@ package _11_Windows._03_MultipleWindowsHerokuapp;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 public class MultipleWindowsHerokuappTest extends BaseDriver {
 
@@ -20,23 +23,21 @@ public class MultipleWindowsHerokuappTest extends BaseDriver {
 
         WebElement clickHereLink = driver.findElement(By.linkText("Click Here"));
         clickHereLink.click();
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
-        // Switch to the new window
         Set<String> allWindows = driver.getWindowHandles();
-        for (String window : allWindows) {
-            if (!window.equals(originalWindow)) {
-                driver.switchTo().window(window);
-                break;
-            }
-        }
+        String newWindow = allWindows.stream()
+                .filter(window -> !window.equals(originalWindow))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("The new window was not opened."));
+        driver.switchTo().window(newWindow);
 
-        // Print text from new window
-        WebElement heading = driver.findElement(By.tagName("h3"));
-        System.out.println("Text in new window: " + heading.getText());
+        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
+        assertEquals("New Window", heading.getText());
 
-        // Switch back to original window and print title
+        // Switch back to the original window and verify its title.
         driver.switchTo().window(originalWindow);
-        System.out.println("Title of original window: " + driver.getTitle());
+        assertEquals("The Internet", driver.getTitle());
 
         waitAndClose();
     }

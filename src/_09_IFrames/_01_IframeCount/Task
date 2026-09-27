@@ -1,8 +1,7 @@
- Task: Count the Number of Iframes on the Page
+Task: Count the Iframes on Selenium's Example Page
 
  Steps:
- 1. Go to the page: "https://demoqa.com/frames".
- 2. Count how many <iframe> elements are on the page.
- 3. Print the count to the console.
+ 1. Open https://www.selenium.dev/selenium/web/iframes.html.
+ 2. Count the <iframe> elements on the page.
+ 3. Print the count and assert that at least one iframe exists.
  4. Close the browser.
-

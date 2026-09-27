@@ -1,6 +1,7 @@
 package _06_Actions._04_KeyboardActions;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,12 @@ import utility.BaseDriver;
 
 public class KeyboardActionsTest extends BaseDriver {
 
-    Actions actions = new Actions(driver);
+    private Actions actions;
+
+    @Before
+    public void createActions() {
+        actions = new Actions(driver);
+    }
 
     /**
      * Keyboard Actions: Pressing a single key (e.g., SPACE)

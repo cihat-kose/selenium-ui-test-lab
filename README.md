@@ -1,154 +1,121 @@
 # Selenium UI Test Lab
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-4.13.1-25A162?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/cihat-kose/selenium-ui-test-lab?style=for-the-badge)
+This repository contains hands-on Selenium WebDriver lessons and exercises in Java. It is an educational project: examples focus on one browser interaction at a time and use JUnit assertions where the expected result can be checked.
 
-## 💡 Introduction
+## Technology stack
 
-Welcome to the **selenium-ui-test-lab** repository! This project is designed to provide hands-on training and tutorials
-for UI testing with Selenium, targeting both beginners and experienced professionals. It includes a variety of test
-cases and examples that demonstrate the use of Selenium for automated UI testing.
+| Technology | Version |
+| --- | --- |
+| Java | 21 |
+| Maven Wrapper | 3.3.4 |
+| Maven distribution | 3.9.11 |
+| Selenium Java | 4.49.0 |
+| JUnit | 4.13.2 |
+| Maven Compiler Plugin | 3.16.0 |
+| Maven Surefire Plugin | 3.6.0 |
 
-## Table of Contents
+The versions are pinned in `pom.xml`; no manual JAR installation is needed. Selenium Manager attempts to resolve a compatible ChromeDriver for the locally installed Chrome browser.
 
-- [💡 Introduction](#💡-introduction)
-- [📥 Installation](#📥-installation)
-- [⚙️ Usage](#⚙️-usage)
-- [✨ Features](#✨-features)
-- [📦 Dependencies](#📦-dependencies)
-- [🔧 Configuration](#🔧-configuration)
-- [📚 Documentation](#📚-documentation)
-- [💡 Examples](#💡-examples)
-- [🛠️ Troubleshooting](#🛠️-troubleshooting)
-- [👥 Contributors](#👥-contributors)
-- [🤝 Contributing](#🤝-contributing)
-- [📜 License](#📜-license)
+## Repository layout
 
-## 📥 Installation
+The lesson folders and their `Task`/`Summary` notes remain under `src/`. Maven is configured to compile the Java lesson files there as test sources. Shared local HTML and file fixtures are stored under `src/test/resources/`.
 
-1. Open IntelliJ IDEA.
-2. Select **File > New > Project from Version Control**.
-3. Enter the repository URL: `https://github.com/cihat-kose/selenium-ui-test-lab.git` and click **Clone**.
-4. Ensure you have JDK installed on your system:
-    - Go to **File > Project Structure > Project** and ensure the Project SDK is set to the correct JDK version.
-5. Add the required dependencies using Maven:
-    - Go to **File > Project Structure > Libraries**.
-    - Click the **+** icon, select **From Maven**.
-    - Add the following Maven artifacts:
-        - `org.seleniumhq.selenium:selenium-java:latest`
-        - `commons-io:commons-io:latest`
-        - `org.slf4j:slf4j-nop:latest`
+```text
+src/
+├── _01_SeleniumIntro/
+├── _02_Locators/
+├── _03_CssSelector/
+├── _04_XPath/
+├── _05_Select_ElementInStatus/
+├── _06_Actions/
+├── _07_Alerts/
+├── _08_Waits/
+├── _09_IFrames/
+├── _10_Scroll/
+├── _11_Windows/
+├── _12_RobotClass/
+├── _13_FinalAssignments/
+├── _14_ShadowDom/
+├── _15_WebDriverBiDi/
+└── utility/
+```
 
-## ⚙️ Usage
+## Lessons
 
-1. Open the project in IntelliJ IDEA.
-2. Locate the test cases in the appropriate directory provided.
-3. Run the test cases.
-4. Customize the test cases as needed to suit your testing requirements.
+- WebDriver basics, registration flows, locators, CSS selectors, and XPath
+- Native `select` dropdowns
+- Actions for mouse and keyboard input, including drag and drop
+- JavaScript alerts
+- Implicit, explicit, and fluent waits
+- Iframes, scrolling, browser tabs, and windows
+- Java Robot and file selection
+- Selenium 4 Shadow DOM access with local fixtures
+- WebDriver BiDi console-event listening with a local fixture and Selenium's live demo
+- Final exercises that combine several Selenium techniques
 
-## ✨ Features
+The repository already teaches the core locator, dropdown, Actions, alert, wait, iframe, scroll, and window topics. The added Shadow DOM and BiDi lessons fill topics that were missing instead of repeating an existing lesson.
 
-- Coverage of basic to advanced Selenium techniques.
-- Special modules on iframes, scrolling actions, robot classes, and alert handling.
-- Examples of explicit waits and Selenium WebDriver utilities.
+## Requirements and setup
 
-## 📦 Dependencies
+- JDK 21
+- Google Chrome for browser lessons
+- Internet access for lessons that use public demo sites
 
-- **Java JDK**: 11 or newer (tested on 21.0.6)
-- **Selenium WebDriver**: 4.31.0
-- **JUnit**: 4.13.1 (comes bundled with Java setup in most IDEs)
-- **Commons IO**: 2.11.0
-- **SLF4J NOP**: 1.7.30
+Clone the repository, then use the included Maven Wrapper.
 
-## 🔧 Configuration
+Windows PowerShell:
 
-Ensure all dependencies are correctly configured in your IDE and build tools. Use Maven or Gradle to handle library
-dependencies efficiently.
+```powershell
+.\mvnw.cmd -B -ntp test-compile
+```
 
-## 📚 Documentation
+macOS/Linux:
 
-Documentation is provided within each test script and module to explain the test setup and the specific Selenium
-interactions being demonstrated.
+```bash
+./mvnw -B -ntp test-compile
+```
 
-## 💡 Examples
+`test-compile` compiles the lesson and test sources without starting Chrome. GitHub Actions runs this same compilation check; it does not execute live-site or desktop automation tests.
 
-The project includes a variety of test scenarios to demonstrate the capabilities of Selenium WebDriver. Each example is
-designed to showcase different techniques and Selenium functionalities. Here are some highlighted examples:
+## Run one lesson
 
-> ℹ️ **Note on wait methods:**  
-> In some examples, you might notice the use of static waits (e.g., `MyFunction.wait(5)` or `Thread.sleep()`).  
-> These are used only for demonstration and visual confirmation purposes.  
-> In real-world automation, always prefer **explicit waits**, such as `WebDriverWait`, for proper synchronization and reliability.
+Run one JUnit class at a time. For example:
 
-### Locators and Element Interaction
+```bash
+./mvnw "-Dtest=InfiniteScrollTest" test
+```
 
-- **Basic Locators**: Learn how to use ID, class, and name locators to interact with web elements.
-- **CSS Selector**: Advanced usage of CSS selectors for elements that are hard to capture.
+The local Shadow DOM and WebDriver BiDi lessons can be run with:
 
-### Advanced User Interactions
+```bash
+./mvnw "-Dtest=ShadowDomExampleTest" test
+./mvnw "-Dtest=ConsoleLogBidiTest" test
+```
 
-- **Action Class**: Utilize the Action class for complex gestures like drag-and-drop and mouse movements.
-- **Robot Class**: Demonstrates how to use the Java Robot class for keyboard and mouse interaction beyond the
-  capabilities of Selenium.
+Browser tests depend on Chrome, network access, and the current state of external demo sites. The BiDi tests also require a Chrome/ChromeDriver combination that supports the WebSocket BiDi connection.
 
-### Synchronization Techniques
+## Stable local examples
 
-- **Explicit Waits**: Implement explicit waits to handle elements that take time to load.
-- **Fluent Wait**: Use fluent waits to handle AJAX components more efficiently.
+- The textarea iframe exercise uses `src/test/resources/iframe-textarea.html` instead of the W3Schools editor, which can be obscured by external page overlays.
+- Shadow DOM exercises use local HTML fixtures so students can see the host, shadow root, click, and expected result without a third-party site.
+- The file-selection examples share `src/test/resources/upload-sample.txt`. The Robot test interacts with the operating-system file picker; the WebDriver test sends the path directly to `input[type=file]`. These demonstrate different techniques. The Robot example opens the file control directly and does not guess a TAB count.
+- Both search lessons use DuckDuckGo instead of Google's variable automated-traffic and consent flow.
 
-### Frame Handling
+The file-picker example requires a visible desktop session and keyboard focus. It may not run in a headless CI environment. It demonstrates selection and the page's confirmation message; it does not upload a file to a server.
 
-- **Iframe Handling**: Navigate between iframes and interact with elements within iframes.
-- **Window Handling**: Techniques to manage multiple windows and switch between them.
+## Waits and browser lifecycle
 
-### Automation Tasks
+`WebDriverWait` waits for a condition and should be used to synchronize test steps. `MyFunction.wait(...)` calls `Thread.sleep(...)`; it pauses for a fixed time without checking page state and remains only for visual demonstration.
 
-- **File Upload**: Automate file upload processes using the Robot class to handle native OS dialogues.
-- **Scrolling**: Execute scripts to scroll through pages and interact with off-screen elements.
+`BaseDriver.waitAndClose()` leaves the final page visible for three seconds before closing Chrome. That delay is for observing the lesson result, not test synchronization. `BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. The shared driver retains a 30-second implicit wait for the existing lessons, and the implicit-wait lesson changes it to ten seconds. Combining implicit and explicit waits can make total wait times difficult to predict; use explicit waits alone in new examples.
 
-### Final Assignments
+## Known limitations
 
-- A collection of end-to-end scenario-based tests combining various Selenium concepts in one place.
-- Great for reviewing topics such as locators, waits, actions, JavaScript execution, and data validation. 
-- Ideal for practice and interview preparation.
+- Public demo websites can change, become unavailable, or block automated traffic.
+- Robot examples interact with the desktop and depend on the operating system and focused window.
+- The full set of lessons is not a stable headless CI suite; run focused examples locally.
+- A Chrome startup failure occurs before the test reaches its page and assertions.
 
-These examples provide a practical approach to mastering Selenium for robust UI testing. Each module within the project
-is accompanied by detailed comments and documentation to help you understand and apply the techniques effectively.
+## License
 
-## 🛠️ Troubleshooting
-
-If you encounter any issues:
-
-- Ensure that Selenium WebDriver is properly installed and operational. Check that extensions and drivers (such as
-  ChromeDriver or GeckoDriver) are up to date.
-- Make sure your Java environment is correctly set up for Selenium and other dependencies.
-- Ensure that your IntelliJ IDEA and other development tools are configured according to the project's requirements.
-- If you are experiencing issues with dependencies, check your Maven configurations and ensure that the necessary
-  libraries are properly included in your project.
-- If problems persist, open an issue on the GitHub repository. Try to describe your problem in as much detail as
-  possible so that you can receive help more quickly.
-
-If you encounter any issues, please open an issue on the GitHub repository.
-
-## 👥 Contributors
-
-- [cihat-kose](https://github.com/cihat-kose)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a Pull Request.
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-For more information on how to get started, visit
-the [selenium-ui-test-lab GitHub repository](https://github.com/cihat-kose/selenium-ui-test-lab).
+MIT. See [LICENSE](LICENSE) for details.
