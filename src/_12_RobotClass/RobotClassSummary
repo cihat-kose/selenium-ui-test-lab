@@ -37,3 +37,9 @@ Important Notes:
 - Robot actions affect the whole system (not browser-specific).
 - Fixed coordinates can be unreliable on different screen sizes.
 - Add short waits between actions to simulate realistic behavior (e.g., Thread.sleep or utility wait).
+
+File selection examples:
+------------------------
+- `FileUploadWithRobot` opens the native file picker and pastes the project's shared sample path. It requires a visible desktop session and does not assume a fixed number of TAB presses.
+- `FileUploadWithWebDriver` sends the same path directly to `input[type=file]` with WebDriver. It does not open the native dialog.
+- Both tests verify the selected file name. The local fixture demonstrates the selection flow; it does not upload a file to a server.

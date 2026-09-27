@@ -1,0 +1,1 @@
+This sample file is shared by the native Robot and direct WebDriver upload lessons.

@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
+import utility.TestData;
 
 public class RegisterUsingXPath extends BaseDriver {
 
@@ -16,22 +18,22 @@ public class RegisterUsingXPath extends BaseDriver {
         registerLink.click();
 
         WebElement firstName = driver.findElement(By.xpath("//input[@name='customer.firstName']"));
-        firstName.sendKeys("Ahmet");
+        firstName.sendKeys("Cihat");
 
         WebElement lastName = driver.findElement(By.xpath("//input[@id='customer.lastName']"));
-        lastName.sendKeys("Yilmaz");
+        lastName.sendKeys("Kose");
 
         WebElement address = driver.findElement(By.xpath("//input[@id='customer.address.street']"));
-        address.sendKeys("123 Main Street");
+        address.sendKeys("Munkegata 1");
 
         WebElement city = driver.findElement(By.xpath("//input[@name='customer.address.city']"));
-        city.sendKeys("Istanbul");
+        city.sendKeys("Trondheim");
 
         WebElement state = driver.findElement(By.xpath("//input[@id='customer.address.state']"));
-        state.sendKeys("Istanbul");
+        state.sendKeys("Trondelag");
 
         WebElement zipCode = driver.findElement(By.xpath("//input[@id='customer.address.zipCode']"));
-        zipCode.sendKeys("34000");
+        zipCode.sendKeys("7013");
 
         WebElement phone = driver.findElement(By.xpath("//input[@id='customer.phoneNumber']"));
         phone.sendKeys("5551234567");
@@ -40,7 +42,7 @@ public class RegisterUsingXPath extends BaseDriver {
         ssn.sendKeys("123456789");
 
         WebElement username = driver.findElement(By.xpath("//input[@id='customer.username']"));
-        username.sendKeys("user" + (int) (Math.random() * 10000));
+        username.sendKeys(TestData.uniqueUsername());
 
         WebElement password = driver.findElement(By.xpath("//input[@id='customer.password']"));
         password.sendKeys("Password123");
@@ -51,7 +53,8 @@ public class RegisterUsingXPath extends BaseDriver {
         WebElement registerButton = driver.findElement(By.xpath("//input[@value='Register']"));
         registerButton.click();
 
-        WebElement successMessage = driver.findElement(By.xpath("//h1[@class='title']"));
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[@class='title']")));
         String actualMessage = successMessage.getText();
         System.out.println("Message: " + actualMessage);
 
