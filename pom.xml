@@ -16,8 +16,6 @@
     </properties>
 
     <build>
-        <!-- Keep the existing lesson folders; compile their Java files as test sources. -->
-        <testSourceDirectory>src</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

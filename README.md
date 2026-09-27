@@ -18,10 +18,15 @@ The versions are pinned in `pom.xml`; no manual JAR installation is needed. Sele
 
 ## Repository layout
 
-The lesson folders and their `Task`/`Summary` notes remain under `src/`. Maven is configured to compile the Java lesson files there as test sources. Shared local HTML and file fixtures are stored under `src/test/resources/`.
+The project uses the standard Maven test layout, matching `selenium-practice-lessons`:
+
+- `src/test/java/`: lesson classes, shared utilities, and their accompanying `Task`/`Summary` notes.
+- `src/test/resources/`: shared HTML fixtures and sample upload files.
+
+Maven discovers these directories automatically; no custom test-source path is needed.
 
 ```text
-src/
+src/test/java/
 ├── _01_SeleniumIntro/
 ├── _02_Locators/
 ├── _03_CssSelector/
