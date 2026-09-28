@@ -1,4 +1,4 @@
-package _06_Actions._01_MouseActions;
+package _06_Actions._01_MouseActions._02_HoverClickAndDrag;
 
 import org.junit.Assert;
 import org.junit.Before;

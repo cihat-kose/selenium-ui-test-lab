@@ -14,14 +14,14 @@ Examples are grouped by their main learning goal. A locator exercise can also cl
 
 - `_05_SelectDropdown` names the actual topic: native HTML `select` controls.
 - The calculator is a follow-up Select exercise. A separate combined-exercises chapter is unnecessary for this one example; its summary identifies Actions and waits as additional prerequisites.
-- Actions used as supporting input in the Select calculator, Alerts context-menu example, and YouTube search/scroll lesson stay with their main learning topics. Their use of `Actions` alone does not make them Actions chapter lessons.
+- Actions used as supporting input in the Select calculator and YouTube search/scroll lesson stay with their main learning topics. The Alerts and Actions chapters each keep a context-menu example because they teach different alert and pointer interactions.
 - Shadow DOM and BiDi are chapters 13 and 14, matching the reference repository.
 - `_15_FileUpload` contains the two file-selection techniques together. Robot remains a desktop-input topic in chapter 12 and links to this comparison.
 - JUnit lesson classes end in `Test`. Utilities keep their existing names.
 - `Tests.java` is replaced by `CssSelectorPracticeTest.java` and `XPathPracticeTest.java`. Their six method names describe the actions or checks instead of `test1` through `test6`.
 - Tasks are named `Task.md`; topic explanations are named `Summary.md`.
-- The delayed DemoQA alert has one implementation in [Waits](../src/test/java/_08_Waits/_04_ExplicitWaitAlert/DelayedAlertWaitTest.java). The Alerts task links to it.
-- The Guru99 context-click/double-click flow has one implementation in [Actions](../src/test/java/_06_Actions/_01_MouseActions/ContextClickAndDoubleClickTest.java). The Alerts task links to it.
+- The delayed DemoQA alert appears in both the [Alerts](../src/test/java/_07_Alerts/_01_DemoQAAlertWait/DemoQAAlertWaitTest.java) and [Waits](../src/test/java/_08_Waits/_04_ExplicitWaitAlert/DelayedAlertWaitTest.java) chapters, where it illustrates alert handling and explicit synchronization respectively.
+- The Guru99 context-click/double-click flow appears in both [Alerts](../src/test/java/_07_Alerts/_02_Guru99Alert/Guru99AlertTest.java) and [Actions](../src/test/java/_06_Actions/_01_MouseActions/_01_ContextMenuAndDoubleClick/ContextClickAndDoubleClickTest.java), with each chapter emphasizing a different part of the interaction.
 
 ## What is actually verified
 

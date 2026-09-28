@@ -1,81 +1,69 @@
 package _07_Alerts._03_TheInternetHerokuappAlerts;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
 public class JavaScriptAlertsTest extends BaseDriver {
 
-    /**
-     * Example 1: JavaScript Alert
-     */
-    @Test
-    public void handleSimpleJSAlertTest() {
-        driver.get("https://the-internet.herokuapp.com/");
-        driver.findElement(By.linkText("JavaScript Alerts")).click();
-        driver.findElement(By.xpath("(//button)[1]")).click();
+    private static final String BASE_URL = "https://the-internet.herokuapp.com/";
 
-        Alert alert = driver.switchTo().alert();
-        System.out.println("Alert Text: " + alert.getText());
+    @Test
+    public void acceptSimpleAlert() {
+        openJavaScriptAlertsPage();
+        driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals("I am a JS Alert", alert.getText());
         alert.accept();
 
-//        waitAndClose();
+        Assert.assertEquals("You successfully clicked an alert", driver.findElement(By.id("result")).getText());
+        waitAndClose(); // Intentional pause to inspect the result during this lesson.
     }
 
-    /**
-     * Example 2: JavaScript Confirm Alert
-     */
     @Test
-    public void handleJSConfirmAlertTest() {
-        driver.get("https://the-internet.herokuapp.com/");
-        driver.findElement(By.linkText("JavaScript Alerts")).click();
-        driver.findElement(By.xpath("(//button)[2]")).click();
+    public void dismissConfirmationAlert() {
+        openJavaScriptAlertsPage();
+        driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
 
-        Alert alert = driver.switchTo().alert();
-        System.out.println("Alert Text: " + alert.getText());
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals("I am a JS Confirm", alert.getText());
         alert.dismiss();
 
-//        waitAndClose();
+        Assert.assertEquals("You clicked: Cancel", driver.findElement(By.id("result")).getText());
     }
 
-    /**
-     * Example 3: JavaScript Prompt Alert
-     */
     @Test
-    public void handleJSPromptAlertTest() {
-        driver.get("https://the-internet.herokuapp.com/");
-        driver.findElement(By.linkText("JavaScript Alerts")).click();
-        driver.findElement(By.xpath("(//button)[3]")).click();
+    public void enterTextInPromptAlert() {
+        openJavaScriptAlertsPage();
+        driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
 
-        Alert alert = driver.switchTo().alert();
-        System.out.println("Prompt Text: " + alert.getText());
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals("I am a JS prompt", alert.getText());
         alert.sendKeys("Hello, Selenium");
         alert.accept();
 
-        WebElement result = driver.findElement(By.id("result"));
-        System.out.println("Result: " + result.getText());
-
-//        waitAndClose();
+        Assert.assertEquals("You entered: Hello, Selenium", driver.findElement(By.id("result")).getText());
     }
 
-    /**
-     * Example 4: Right Click and Alert
-     */
     @Test
-    public void handleRightClickAlertTest() {
-        driver.get("http://the-internet.herokuapp.com/context_menu");
+    public void acceptContextMenuAlert() {
+        driver.get(BASE_URL + "context_menu");
+        WebElement hotSpot = driver.findElement(By.id("hot-spot"));
+        new Actions(driver).contextClick(hotSpot).perform();
 
-        WebElement rightClickArea = driver.findElement(By.id("hot-spot"));
-        Actions actions = new Actions(driver);
-        actions.contextClick(rightClickArea).perform();
-
-        Alert alert = driver.switchTo().alert();
-        System.out.println("Right-click alert text: " + alert.getText());
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals("You selected a context menu", alert.getText());
         alert.accept();
+    }
 
-        waitAndClose();
+    private void openJavaScriptAlertsPage() {
+        driver.get(BASE_URL);
+        driver.findElement(By.linkText("JavaScript Alerts")).click();
     }
 }

@@ -10,9 +10,9 @@ Selenium's `Actions` class models pointer and keyboard input that goes beyond a 
 
 ## Lessons
 
-- [Context click and double click](./_01_MouseActions/ContextClickAndDoubleClickTest.java) ([task](./_01_MouseActions/ContextClickAndDoubleClickTask.md)): trigger and handle the demo page's JavaScript alerts.
-- [Mouse actions](./_01_MouseActions/MouseActionsTest.java) ([task](./_01_MouseActions/MouseActionsTask.md)): hover, click, right-click, double-click, and drag elements.
-- [jQuery UI drag and drop](./_01_MouseActions/DragAndDropJQueryTest.java) ([task](./_01_MouseActions/JQueryUiTask.md)): drag an item into a target inside an iframe.
+- [Context click and double click](./_01_MouseActions/_01_ContextMenuAndDoubleClick/ContextClickAndDoubleClickTest.java) ([task](./_01_MouseActions/_01_ContextMenuAndDoubleClick/Task.md)): trigger and handle the demo page's JavaScript alerts.
+- [Mouse actions](./_01_MouseActions/_02_HoverClickAndDrag/MouseActionsTest.java) ([task](./_01_MouseActions/_02_HoverClickAndDrag/Task.md)): hover, click, right-click, double-click, and drag elements.
+- [jQuery UI drag and drop](./_01_MouseActions/_03_JQueryUiDragAndDrop/DragAndDropJQueryTest.java) ([task](./_01_MouseActions/_03_JQueryUiDragAndDrop/Task.md)): drag an item into a target inside an iframe.
 - [Keyboard actions](./_02_KeyboardActions/KeyboardActionsTest.java) ([task](./_02_KeyboardActions/Task.md)): send individual keys and key combinations.
 - [Search with Actions](./_03_SearchActions/DuckDuckGoSearchActionTest.java) ([task](./_03_SearchActions/Task.md)): enter a query and submit it with the Enter key.
 

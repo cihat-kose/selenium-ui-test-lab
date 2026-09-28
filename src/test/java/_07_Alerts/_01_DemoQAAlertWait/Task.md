@@ -7,4 +7,4 @@ Steps:
 4. Accept the alert once it becomes visible.
 
 
-Implementation: [shared lesson](../../_08_Waits/_04_ExplicitWaitAlert/DelayedAlertWaitTest.java). This task revisits the alert handling in that example; a second copy of the same test is unnecessary.
+Implementation: [DemoQAAlertWaitTest](DemoQAAlertWaitTest.java). The Waits chapter also demonstrates the same delayed-alert wait as a synchronization example.

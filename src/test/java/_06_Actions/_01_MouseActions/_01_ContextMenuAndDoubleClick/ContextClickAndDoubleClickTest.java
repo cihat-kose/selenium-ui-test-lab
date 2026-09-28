@@ -1,4 +1,4 @@
-package _06_Actions._01_MouseActions;
+package _06_Actions._01_MouseActions._01_ContextMenuAndDoubleClick;
 
 import org.junit.Test;
 import org.junit.Assert;

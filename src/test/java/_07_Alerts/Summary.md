@@ -1,71 +1,18 @@
-Selenium Alerts Overview
-=========================
+# Handling Browser Alerts with Selenium
 
-1. What is an Alert in Selenium?
---------------------------------
-- An alert is a pop-up window used in web applications to display a message or request user interaction.
-- In Selenium, alerts are handled using the method:
-  driver.switchTo().alert();
+Browser-native JavaScript alerts block normal page interaction until they are accepted or dismissed. Selenium handles them through `driver.switchTo().alert()`. In-page dialogs are regular HTML elements and should be located and handled as web elements instead.
 
-2. Types of Alerts in Selenium
-------------------------------
-a) Simple Alert:
-   - Displays a simple message.
-   - Contains only an "OK" button.
+## Alert methods
 
-b) Confirmation Alert:
-   - Requests confirmation from the user.
-   - Contains both "OK" and "Cancel" buttons.
+- `getText()` reads the alert message.
+- `accept()` confirms the alert.
+- `dismiss()` cancels a confirmation or prompt.
+- `sendKeys()` enters text into a prompt.
 
-c) Prompt Alert:
-   - Requests user input (text).
-   - Contains "OK" and "Cancel" buttons.
+## Examples
 
-3. Handling Alerts in Selenium
-------------------------------
-- When an alert appears, the WebDriver loses control over the browser.
-- You must switch to the alert before interacting with it:
-  driver.switchTo().alert();
+- [Delayed DemoQA alert](./_01_DemoQAAlertWait/DemoQAAlertWaitTest.java) ([task](./_01_DemoQAAlertWait/Task.md)): wait for a timed alert, check its message, then accept it. The Waits chapter also uses this page to demonstrate explicit waits.
+- [Guru99 context-menu and double-click alerts](./_02_Guru99Alert/Guru99AlertTest.java) ([task](./_02_Guru99Alert/Task.md)): perform the mouse gestures, verify both alert messages, and accept them. The Actions chapter demonstrates the same gestures.
+- [The Internet JavaScript alerts](./_03_TheInternetHerokuappAlerts/JavaScriptAlertsTest.java) ([task](./_03_TheInternetHerokuappAlerts/Task.md)): accept a simple alert, dismiss a confirmation, respond to a prompt, and handle a context-menu alert.
 
-4. Common Alert Methods
------------------------
-- accept(): Clicks the "OK" button.
-- dismiss(): Clicks the "Cancel" button.
-- getText(): Retrieves the alert message.
-- sendKeys(): Sends input text to a Prompt Alert.
-
-5. Working with Alerts - Step-by-Step
--------------------------------------
-a) Switch to the alert:
-   Alert alert = driver.switchTo().alert();
-
-b) Get the alert message:
-   String alertText = alert.getText();
-
-c) Click OK:
-   alert.accept();
-
-d) Click Cancel:
-   alert.dismiss();
-
-e) Send input (Prompt Alert):
-   alert.sendKeys("text");
-
-6. Examples
------------
-- Simple Alert:
-  driver.switchTo().alert().accept();
-
-- Confirmation Alert:
-  Alert alert = driver.switchTo().alert();
-  alert.dismiss();
-
-- Prompt Alert:
-  Alert alert = driver.switchTo().alert();
-  alert.sendKeys("Selenium");
-  alert.accept();
-
-7. UnhandledAlertException in Selenium
---------------------------------------
-- If you do not handle an alert when it appears, Selenium will throw an UnhandledAlertException.
-- Always switch to the alert using driver.switchTo().alert() before attempting any interaction.
+The repeated examples keep each lesson runnable from its own chapter while connecting alert handling to the related Waits and Actions lessons.
