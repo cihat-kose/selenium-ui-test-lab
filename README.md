@@ -55,8 +55,8 @@ Open a topic below to find its examples and notes. Start with the basic example 
 | --- | --- | --- |
 | 01 | [Selenium Introduction](src/test/java/_01_SeleniumIntro) | Open a browser, complete registration, and check the confirmation. |
 | 02 | [Locators](src/test/java/_02_Locators) | Find form elements using different locator strategies. |
-| 03 | [CSS Selectors](src/test/java/_03_CssSelector) | Locate elements with CSS in registration and practice scenarios. |
-| 04 | [XPath](src/test/java/_04_XPath) | Locate elements using attributes, text, and XPath expressions. |
+| 03 | [CSS Selectors](src/test/java/_03_CssSelector) | [Registration](src/test/java/_03_CssSelector/_01_Registration) and [practice exercises](src/test/java/_03_CssSelector/_02_Practice) for CSS locator patterns. |
+| 04 | [XPath](src/test/java/_04_XPath) | [Registration](src/test/java/_04_XPath/_01_Registration) and [practice exercises](src/test/java/_04_XPath/_02_Practice) for XPath locator patterns. |
 | 05 | [Select Dropdowns](src/test/java/_05_SelectDropdown) | Select options by text, value, or index; apply selection to calculator operations. |
 | 06 | [Actions](src/test/java/_06_Actions) | Use keyboard input, hover, context click, double click, and drag-and-drop. |
 | 07 | [Alerts](src/test/java/_07_Alerts) | Accept, dismiss, and enter text into browser dialogs. |
