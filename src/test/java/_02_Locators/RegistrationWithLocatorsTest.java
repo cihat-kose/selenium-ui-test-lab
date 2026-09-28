@@ -10,6 +10,17 @@ import utility.TestData;
 
 public class RegistrationWithLocatorsTest extends BaseDriver {
 
+    // Fictional details keep this public demo registration separate from real personal information.
+    private static final String FIRST_NAME = "Kerem";
+    private static final String LAST_NAME = "Said";
+    private static final String STREET = "123 Demo Street";
+    private static final String CITY = "Trondheim";
+    private static final String REGION = "Trondelag";
+    private static final String POSTAL_CODE = "7013";
+    private static final String PHONE = "2025550143"; // Reserved fictional 555-01xx number.
+    private static final String SSN = "999999999"; // Clearly synthetic; used only to satisfy the demo form.
+    private static final String PASSWORD = "ParaBankDemo!2026"; // Demo-only; never use for a real account.
+
     @Test
     public void testRegistration() {
         driver.get("https://parabank.parasoft.com/parabank/index.htm");
@@ -18,37 +29,38 @@ public class RegistrationWithLocatorsTest extends BaseDriver {
         registerLink.click();
 
         WebElement firstName = driver.findElement(By.name("customer.firstName"));
-        firstName.sendKeys("Cihat");
+        firstName.sendKeys(FIRST_NAME);
 
         WebElement lastName = driver.findElement(By.id("customer.lastName"));
-        lastName.sendKeys("Kose");
+        lastName.sendKeys(LAST_NAME);
 
         WebElement address = driver.findElement(By.id("customer.address.street"));
-        address.sendKeys("Munkegata 1");
+        address.sendKeys(STREET);
 
         WebElement city = driver.findElement(By.name("customer.address.city"));
-        city.sendKeys("Trondheim");
+        city.sendKeys(CITY);
 
         WebElement state = driver.findElement(By.id("customer.address.state"));
-        state.sendKeys("Trondelag");
+        state.sendKeys(REGION);
 
         WebElement zipCode = driver.findElement(By.id("customer.address.zipCode"));
-        zipCode.sendKeys("7013");
+        zipCode.sendKeys(POSTAL_CODE);
 
         WebElement phone = driver.findElement(By.id("customer.phoneNumber"));
-        phone.sendKeys("5551234567");
+        phone.sendKeys(PHONE);
 
         WebElement ssn = driver.findElement(By.id("customer.ssn"));
-        ssn.sendKeys("123456789");
+        ssn.sendKeys(SSN);
 
         WebElement username = driver.findElement(By.id("customer.username"));
-        username.sendKeys(TestData.uniqueUsername());
+        // ParaBank requires a new username on every registration attempt.
+        username.sendKeys(TestData.uniqueUsername(FIRST_NAME + LAST_NAME));
 
         WebElement password = driver.findElement(By.id("customer.password"));
-        password.sendKeys("Password123");
+        password.sendKeys(PASSWORD);
 
         WebElement confirmPassword = driver.findElement(By.id("repeatedPassword"));
-        confirmPassword.sendKeys("Password123");
+        confirmPassword.sendKeys(PASSWORD);
 
         WebElement registerButton = driver.findElement(By.cssSelector("[value='Register']"));
         registerButton.click();
@@ -56,9 +68,8 @@ public class RegistrationWithLocatorsTest extends BaseDriver {
         WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.className("title")));
         String actualMessage = successMessage.getText();
-        System.out.println("Message: " + actualMessage);
-
-        Assert.assertTrue("Registration failed – success message not found!", actualMessage.contains("Welcome"));
+        Assert.assertTrue("Registration failed; expected a welcome message but saw: " + actualMessage,
+                actualMessage.contains("Welcome"));
 
         waitAndClose();
     }

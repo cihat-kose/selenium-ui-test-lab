@@ -42,7 +42,7 @@ public class RegistrationWithCssSelectorsTest extends BaseDriver {
         ssn.sendKeys("123456789");
 
         WebElement username = driver.findElement(By.cssSelector("#customer\\.username"));
-        username.sendKeys(TestData.uniqueUsername());
+        username.sendKeys(TestData.uniqueUsername("student"));
 
         WebElement password = driver.findElement(By.cssSelector("#customer\\.password"));
         password.sendKeys("Password123");

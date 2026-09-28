@@ -42,7 +42,7 @@ public class RegistrationWithXPathTest extends BaseDriver {
         ssn.sendKeys("123456789");
 
         WebElement username = driver.findElement(By.xpath("//input[@id='customer.username']"));
-        username.sendKeys(TestData.uniqueUsername());
+        username.sendKeys(TestData.uniqueUsername("student"));
 
         WebElement password = driver.findElement(By.xpath("//input[@id='customer.password']"));
         password.sendKeys("Password123");

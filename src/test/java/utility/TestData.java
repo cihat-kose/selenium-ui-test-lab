@@ -7,9 +7,14 @@ public final class TestData {
     private TestData() {
     }
 
-    /** Returns a readable username that is unlikely to collide between runs. */
-    public static String uniqueUsername() {
-        return "student" + Instant.now().toEpochMilli();
+    /** Returns a readable username with a short suffix for routine repeated runs. */
+    public static String uniqueUsername(String name) {
+        String usernameBase = name.toLowerCase().replaceAll("[^a-z0-9]+", "");
+        if (usernameBase.isEmpty()) {
+            throw new IllegalArgumentException("name must contain at least one letter or digit");
+        }
+        int suffix = (int) (Instant.now().toEpochMilli() % 10_000);
+        return usernameBase + suffix;
     }
 
     /**
