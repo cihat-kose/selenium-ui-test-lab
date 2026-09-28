@@ -6,13 +6,13 @@
 [![Build validation](https://img.shields.io/github/actions/workflow/status/cihat-kose/selenium-ui-test-lab/build.yml?branch=master&style=for-the-badge&label=Build)](https://github.com/cihat-kose/selenium-ui-test-lab/actions/workflows/build.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/cihat-kose/selenium-ui-test-lab?style=for-the-badge)
 
-## 💡 Introduction
+## Introduction
 
 This repository contains hands-on Selenium WebDriver lessons and exercises in Java. It is an educational project: examples focus on one browser interaction at a time and use JUnit assertions where the expected result can be checked.
 
 **Quick links:** [Install in IntelliJ IDEA](#installation) · [Run a lesson](#run-a-lesson) · [Repository layout](#repository-layout) · [Lesson map](docs/LESSON_MAP.md)
 
-## 📦 Technology Stack
+## Technology Stack
 
 | Technology | Version |
 | --- | --- |
@@ -53,21 +53,21 @@ Open a topic below to find its examples and notes. Start with the basic example 
 
 | # | Topic | What you practice |
 | --- | --- | --- |
-| 01 | [🚀 Selenium Introduction](src/test/java/_01_SeleniumIntro) | Open a browser, complete registration, and check the confirmation. |
-| 02 | [🔎 Locators](src/test/java/_02_Locators) | Find form elements using different locator strategies. |
-| 03 | [🎯 CSS Selectors](src/test/java/_03_CssSelector) | Locate elements with CSS in registration and practice scenarios. |
-| 04 | [🧭 XPath](src/test/java/_04_XPath) | Locate elements using attributes, text, and XPath expressions. |
-| 05 | [🔽 Select Dropdowns](src/test/java/_05_SelectDropdown) | Select options by text, value, or index; apply selection to calculator operations. |
-| 06 | [🖱️ Actions](src/test/java/_06_Actions) | Use keyboard input, hover, context click, double click, and drag-and-drop. |
-| 07 | [💬 Alerts](src/test/java/_07_Alerts) | Accept, dismiss, and enter text into browser dialogs. |
-| 08 | [⏱️ Waits](src/test/java/_08_Waits) | Practice implicit, explicit, and fluent waits for dynamic content. |
-| 09 | [🪟 Iframes](src/test/java/_09_IFrames) | Switch into a frame, interact with its contents, and return. |
-| 10 | [📜 Scrolling](src/test/java/_10_Scroll) | Scroll pages and load additional content. |
-| 11 | [🗔 Windows and Tabs](src/test/java/_11_Windows) | Switch browser contexts using window handles. |
-| 12 | [🤖 Robot](src/test/java/_12_RobotClass/Summary.md) | Let Java press keys and move the mouse, including in windows outside the web page. |
-| 13 | [🌳 Shadow DOM](src/test/java/_13_ShadowDom/Summary.md) | Reach a button inside a component's separate area, click it, and check the result. |
-| 14 | [🔄 WebDriver BiDi](src/test/java/_14_WebDriverBiDi/Summary.md) | Click a button and receive the console message it produces directly from the browser. |
-| 15 | [📎 File Selection](src/test/java/_15_FileUpload) | Compare direct WebDriver file selection with a native Robot file picker. |
+| 01 | [Selenium Introduction](src/test/java/_01_SeleniumIntro) | Open a browser, complete registration, and check the confirmation. |
+| 02 | [Locators](src/test/java/_02_Locators) | Find form elements using different locator strategies. |
+| 03 | [CSS Selectors](src/test/java/_03_CssSelector) | Locate elements with CSS in registration and practice scenarios. |
+| 04 | [XPath](src/test/java/_04_XPath) | Locate elements using attributes, text, and XPath expressions. |
+| 05 | [Select Dropdowns](src/test/java/_05_SelectDropdown) | Select options by text, value, or index; apply selection to calculator operations. |
+| 06 | [Actions](src/test/java/_06_Actions) | Use keyboard input, hover, context click, double click, and drag-and-drop. |
+| 07 | [Alerts](src/test/java/_07_Alerts) | Accept, dismiss, and enter text into browser dialogs. |
+| 08 | [Waits](src/test/java/_08_Waits) | Practice implicit, explicit, and fluent waits for dynamic content. |
+| 09 | [Iframes](src/test/java/_09_IFrames) | Switch into a frame, interact with its contents, and return. |
+| 10 | [Scrolling](src/test/java/_10_Scroll) | Scroll pages and load additional content. |
+| 11 | [Windows and Tabs](src/test/java/_11_Windows) | Switch browser contexts using window handles. |
+| 12 | [Robot](src/test/java/_12_RobotClass/Summary.md) | Let Java press keys and move the mouse, including in windows outside the web page. |
+| 13 | [Shadow DOM](src/test/java/_13_ShadowDom/Summary.md) | Reach a button inside a component's separate area, click it, and check the result. |
+| 14 | [WebDriver BiDi](src/test/java/_14_WebDriverBiDi/Summary.md) | Click a button and receive the console message it produces directly from the browser. |
+| 15 | [File Selection](src/test/java/_15_FileUpload) | Compare direct WebDriver file selection with a native Robot file picker. |
 
 **Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, and test-data helpers.
 
@@ -144,7 +144,7 @@ Run the local Shadow DOM class and only the local method of the BiDi class with:
 
 Browser tests depend on Chrome, network access, and the current state of external demo sites. The BiDi tests also require a Chrome/ChromeDriver combination that supports the WebSocket BiDi connection.
 
-## 🧪 Stable Local Examples
+## Stable Local Examples
 
 - The textarea iframe exercise uses `src/test/resources/iframe-textarea.html` instead of the W3Schools editor, which can be obscured by external page overlays.
 - Shadow DOM exercises use local HTML fixtures so students can see the host, shadow root, click, and expected result without a third-party site.
@@ -153,7 +153,7 @@ Browser tests depend on Chrome, network access, and the current state of externa
 
 The file-picker example requires a visible desktop session and keyboard focus. It may not run in a headless CI environment. It demonstrates selection and the page's confirmation message; it does not upload a file to a server.
 
-## ⏱️ Waits and Browser Lifecycle
+## Waits and Browser Lifecycle
 
 > ℹ️ **Note on wait methods:**
 > Some examples include fixed pauses such as `MyFunction.wait(5)` or `Thread.sleep(...)` so you can watch the browser actions during a lesson.
@@ -166,7 +166,7 @@ The file-picker example requires a visible desktop session and keyboard focus. I
 
 `BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. The shared driver retains a 30-second implicit wait for the existing lessons, and the implicit-wait lesson changes it to ten seconds. Combining implicit and explicit waits can make total wait times difficult to predict; use explicit waits alone in new examples.
 
-## 🛠️ Troubleshooting and Limitations
+## Troubleshooting and Limitations
 
 - **No Run triangle or unresolved Selenium/JUnit imports:** reload the Maven project and wait for dependency resolution.
 - **Java release 21 error:** select JDK 21 for both the project and the Maven runner.
@@ -178,11 +178,11 @@ The file-picker example requires a visible desktop session and keyboard focus. I
 - Some legacy exercises only demonstrate interactions or print results; see the lesson map for their current verification limits.
 - A Chrome startup failure occurs before the test reaches its page and assertions.
 
-## 🔗 IDE Reference
+## IDE Reference
 
 - [JetBrains: Maven projects](https://www.jetbrains.com/help/idea/maven-support.html)
 - [JetBrains: running tests in Maven projects](https://www.jetbrains.com/help/idea/work-with-tests-in-maven.html)
 
-## 📜 License
+## License
 
 MIT. See [LICENSE](LICENSE) for details.
