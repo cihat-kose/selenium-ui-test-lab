@@ -1,10 +1,12 @@
 
-# Type in a System Text Editor with Robot
+Task: Write text in the default system text editor using Robot Class
 
-Run `CrossPlatformTextEditorTest` from a visible Windows or macOS desktop.
+Steps:
+1. Detect the operating system (Windows or macOS).
+2. Launch the appropriate text editor:
+   - Windows: Notepad
+   - macOS: TextEdit
+3. Wait a few seconds for the application to load.
+4. Use Robot Class to type the text "Hello from Robot Class" into the editor.
+5. After writing, close the application using OS-specific keyboard shortcuts.
 
-1. The test starts Notepad on Windows or TextEdit on macOS.
-2. After a short observation pause, Robot types **Hello from Robot Class**.
-3. Robot closes the editor using the platform's keyboard shortcut.
-
-The test is skipped on unsupported systems and headless sessions. Focus can vary by desktop and editor startup time, so this remains a manual demonstration rather than a CI check.

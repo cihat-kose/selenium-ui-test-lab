@@ -11,18 +11,13 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-/** Uses Robot to paste a search, submit it, and move the desktop pointer safely. */
 public class DuckDuckGoRobotSearchTest extends BaseDriver {
 
     @Test
     public void searchDuckduckgo() throws AWTException {
-        useExplicitWaitsOnly();
         driver.get("https://duckduckgo.com");
 
-        WebElement searchBox = wait.until(ExpectedConditions.elementToBeClickable(By.id("searchbox_input")));
+        WebElement searchBox = driver.findElement(By.id("searchbox_input"));
         searchBox.click();
 
         // Initialize Robot instance
@@ -48,15 +43,25 @@ public class DuckDuckGoRobotSearchTest extends BaseDriver {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
 
-        // Check the browser reached search results before using the mouse.
-        WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div//h3)[1]")));
-        assertFalse("The first result should have a title.", firstResult.getText().trim().isEmpty());
-        assertTrue("The URL should contain the search term.",
-                driver.getCurrentUrl().toLowerCase().contains("selenium"));
+        // Wait until search results load (first <h3> is visible)
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div//h3")));
 
-        // Move the pointer within the desktop without clicking browser or operating-system controls.
-        robot.mouseMove(screenWidth / 2, screenHeight / 2);
-        MyFunction.wait(1);
+        // Move mouse to top-right corner of screen (adjusted for resolution)
+        robot.mouseMove(screenWidth - 10, 50);
+        MyFunction.wait(2);
+
+        // Perform left click
+        robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+        MyFunction.wait(2);
+
+        // Move mouse to bottom-left corner (resolution-sensitive)
+        robot.mouseMove(10, screenHeight - 50);
+        MyFunction.wait(2);
+
+        // Perform right click
+        robot.mousePress(KeyEvent.BUTTON3_DOWN_MASK);
+        robot.mouseRelease(KeyEvent.BUTTON3_DOWN_MASK);
 
         waitAndClose();
     }

@@ -17,7 +17,6 @@ public class MultipleWindowsHerokuappTest extends BaseDriver {
      */
     @Test
     public void switchBetweenWindows() {
-        useExplicitWaitsOnly();
         driver.get("https://the-internet.herokuapp.com/windows");
 
         String originalWindow = driver.getWindowHandle();

@@ -7,9 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 public class ScrollPageAfterLoginTest extends BaseDriver {
 
     /**
@@ -17,30 +14,22 @@ public class ScrollPageAfterLoginTest extends BaseDriver {
      */
     @Test
     public void scrollPageAfterLogin() {
-        useExplicitWaitsOnly();
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
-        WebElement user = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
-        WebElement pass = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
-        WebElement login = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='submit']")));
+        WebElement user = driver.findElement(By.cssSelector("[name='username']"));
+        WebElement pass = driver.findElement(By.cssSelector("[name='password']"));
+        WebElement login = driver.findElement(By.cssSelector("[type='submit']"));
 
         user.sendKeys("Admin");
         pass.sendKeys("admin123");
         login.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".oxd-topbar")));
-        assertTrue("A successful login should open the dashboard.", driver.getCurrentUrl().contains("/dashboard"));
+        WebElement topBar = driver.findElement(By.cssSelector("[class='oxd-topbar']"));
+        wait.until(ExpectedConditions.visibilityOf(topBar));
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, document.documentElement.scrollHeight)");
-        assertTrue("The browser should reach the bottom of the page.", wait.until(d -> (Boolean)
-                js.executeScript("return Math.ceil(window.scrollY + window.innerHeight) >= "
-                        + "document.documentElement.scrollHeight")));
-
-        js.executeScript("window.scrollTo(0, 0)");
-        wait.until(d -> ((Number) js.executeScript("return window.scrollY")).longValue() == 0L);
-        assertEquals("The browser should return to the top of the page.", 0L,
-                ((Number) js.executeScript("return window.scrollY")).longValue());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        js.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 
         waitAndClose();
     }

@@ -14,7 +14,6 @@ public class DuckDuckGoSearchActionTest extends BaseDriver {
 
     @Test
     public void searchAndVerifySeleniumResult() {
-        useExplicitWaitsOnly();
         driver.get("https://duckduckgo.com/");
 
         WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("q")));

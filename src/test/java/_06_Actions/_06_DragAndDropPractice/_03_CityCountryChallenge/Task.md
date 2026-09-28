@@ -4,5 +4,5 @@ Task: Drag and Drop Matching Cities to Countries
 2. Use findElements to collect all cities (draggable elements).
 3. Use findElements to collect all countries (target boxes).
 4. Use group ID comparison to match each city to the correct country.
-5. Drag and drop each city into the country whose ID matches its `groupid`.
-6. Accept a native alert if the quiz displays one, then verify that every city is in its expected country box.
+5. Drag and drop each city into the correct country.
+6. Accept any alert popups if they appear.

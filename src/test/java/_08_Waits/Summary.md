@@ -1,19 +1,40 @@
-# Waiting for the Browser
+Waits Summary
 
-Pages can update after Selenium clicks or types. A wait prevents the next command from running before its required page state is ready.
+ 1. What are Waits in Selenium?
+    Waits are used in Selenium to delay the execution until a certain condition is met.
+    This prevents test failures caused by dynamic web elements that take time to load.
 
-## Three Selenium waits
+ 2. Types of Waits:
 
-- **Implicit wait** gives element searches a shared timeout when an element is missing. It applies to every search, which can make timing hard to predict when mixed with explicit waits.
-- **Explicit wait** checks one condition, such as a button becoming clickable or a JavaScript alert appearing. `WebDriverWait` continues as soon as that condition is met and times out if it never is.
-- **Fluent wait** is an explicit wait with additional control over polling frequency and which exceptions to ignore.
+    a) Implicit Wait:
+       - Sets a default waiting time before throwing an exception if the element is not found.
+       - Applied globally and works for all element searches.
+       - Example:
+         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-In new tests, prefer explicit waits tied to the next action. The shared driver keeps an implicit wait for older lessons, and the implicit-wait lesson changes its timeout to make that behavior visible. Tests that use explicit conditions call `useExplicitWaitsOnly()` so Selenium does not combine both timeouts.
+    b) Explicit Wait:
+       - Waits for a specific condition (like visibility or clickability of an element).
+       - Uses WebDriverWait and ExpectedConditions.
+       - Example:
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+         wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
 
-## Fixed pauses are different
+    c) Fluent Wait:
+       - Advanced version of Explicit Wait.
+       - Allows setting the frequency of checks and ignoring specific exceptions.
+       - Example:
+         FluentWait<WebDriver> wait = new FluentWait<>(driver)
+             .withTimeout(Duration.ofSeconds(30))
+             .pollingEvery(Duration.ofSeconds(5))
+             .ignoring(NoSuchElementException.class);
 
-`Thread.sleep()` and `MyFunction.wait()` always pause for the chosen duration. They do not check whether a page is ready. Some lessons retain short pauses so students can watch an interaction. `waitAndClose()` is a final observation pause; it is not test synchronization.
+ 3. Common ExpectedConditions:
+    - visibilityOfElementLocated()
+    - elementToBeClickable()
+    - alertIsPresent()
+    - presenceOfElementLocated()
+    - titleContains()
 
-## Example in this chapter
-
-[`DelayedAlertWaitTest`](./_04_ExplicitWaitAlert/DelayedAlertWaitTest.java) clicks a button, waits until a delayed browser alert exists, checks its message, accepts it, and checks the page response. The alert comes from a local fixture, so the lesson does not depend on a third-party site's layout or advertising.
+ 4. Best Practice:
+    - Use Implicit Wait for general setups.
+    - Use Explicit or Fluent Wait for dynamic content that requires conditions.

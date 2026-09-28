@@ -1,7 +1,16 @@
-# Finding Elements with Locators
+Locators in Selenium
 
-A locator tells Selenium which page element to work with. This lesson uses `id`, `name`, link text, CSS selectors, and XPath.
+1. What is a Locator?
+   - Locators are used to identify web elements on a web page.
+   - Selenium supports various locator strategies to interact with elements.
 
-[`RegistrationWithLocatorsTest`](RegistrationWithLocatorsTest.java) uses several locator types to fill the Parabank registration form, creates a unique username, submits it, and checks the welcome message.
+2. Common Locator Types:
+   a) id – Finds elements with a unique ID.
+   b) name – Uses the 'name' attribute.
+   c) linkText – Matches the visible link text.
+   d) cssSelector – Uses CSS syntax to locate elements.
+   e) xpath – Uses XPath expressions.
 
-Later chapters focus on CSS and XPath individually so you can compare their syntax and use cases. Public demo sites can change; run this registration lesson as a focused test.
+3. Purpose:
+   - Learn the advantages and differences between locator strategies.
+   - Understand when to prefer one over another in real-world scenarios.

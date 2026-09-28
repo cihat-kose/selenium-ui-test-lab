@@ -14,7 +14,6 @@ public class AkakceConsentShadowDomTest extends BaseDriver {
 
     @Test
     public void acceptConsentInsideShadowRoot() {
-        useExplicitWaitsOnly();
         driver.get("https://www.akakce.com/");
 
         WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(

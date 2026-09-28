@@ -12,7 +12,6 @@ public class RegistrationWithXPathTest extends BaseDriver {
 
     @Test
     public void testRegisterWithXPathOnly() {
-        useExplicitWaitsOnly();
         driver.get("https://parabank.parasoft.com/parabank/index.htm");
 
         WebElement registerLink = driver.findElement(By.xpath("//a[contains(@href, 'register.htm')]"));

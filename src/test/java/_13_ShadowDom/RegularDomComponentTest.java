@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
+import java.util.Objects;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
@@ -15,8 +17,8 @@ public class RegularDomComponentTest extends BaseDriver {
 
     @Test
     public void useRegularDomForAComponentWithoutShadowRoot() {
-        useExplicitWaitsOnly();
-        openFixture("non-native-component.html");
+        driver.get(Objects.requireNonNull(getClass().getResource("/non-native-component.html"))
+                .toExternalForm());
 
         WebElement component = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("custom-input")));
         assertThrows(NoSuchShadowRootException.class, component::getShadowRoot);

@@ -12,7 +12,6 @@ public class RegistrationWithLocatorsTest extends BaseDriver {
 
     @Test
     public void testRegistration() {
-        useExplicitWaitsOnly();
         driver.get("https://parabank.parasoft.com/parabank/index.htm");
 
         WebElement registerLink = driver.findElement(By.linkText("Register"));

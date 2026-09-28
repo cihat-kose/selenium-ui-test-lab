@@ -3,13 +3,13 @@ package _08_Waits._03_FluentWait;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import utility.BaseDriver;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 public class FluentWaitTest extends BaseDriver {
@@ -19,7 +19,6 @@ public class FluentWaitTest extends BaseDriver {
      */
     @Test
     public void fluentWaitTest() {
-        useExplicitWaitsOnly();
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
         WebElement startButton = driver.findElement(By.xpath("//button[text()='Start']"));

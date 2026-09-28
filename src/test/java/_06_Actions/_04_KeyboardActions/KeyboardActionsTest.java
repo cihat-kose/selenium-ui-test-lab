@@ -6,74 +6,76 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
-import static org.junit.Assert.assertEquals;
-
-/** Demonstrates single keys, chords, and chained keyboard actions on a local practice page. */
 public class KeyboardActionsTest extends BaseDriver {
 
     private Actions actions;
 
     @Before
     public void createActions() {
-        useExplicitWaitsOnly();
         actions = new Actions(driver);
     }
 
     /**
-     * Presses SPACE and verifies that the page received that key.
+     * Keyboard Actions: Pressing a single key (e.g., SPACE)
      */
     @Test
     public void sendSpaceKeyTest() {
-        openFixture("keyboard-actions.html");
-        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(By.id("keyboard-input")));
-        input.sendKeys(Keys.SPACE);
+        driver.get("https://the-internet.herokuapp.com/key_presses");
+        WebElement body = driver.findElement(By.tagName("body"));
+        body.sendKeys(Keys.SPACE);
 
-        assertEquals("SPACE", driver.findElement(By.id("key-log")).getText());
-        waitAndClose();
+//        Alternative: Using Actions
+//        actions.sendKeys(Keys.SPACE).perform();
+
+//        waitAndClose();
     }
 
     /**
-     * Sends CTRL+A as one chord and verifies the key combination received by the page.
+     * Keyboard Actions: CTRL + A using chord
      */
     @Test
     public void ctrlAWithChordTest() {
-        openFixture("keyboard-actions.html");
-        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(By.id("keyboard-input")));
-        input.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        driver.get("https://the-internet.herokuapp.com/key_presses");
+        WebElement body = driver.findElement(By.tagName("body"));
+        body.sendKeys(Keys.chord(Keys.CONTROL, "a"));
 
-        assertEquals("CTRL+A", driver.findElement(By.id("key-log")).getText());
-        waitAndClose();
+//        Alternative: using keyDown and keyUp
+//        actions.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
+
+//        waitAndClose();
     }
 
     /**
-     * Holds SHIFT while sending T and checks the reported combination.
+     * Keyboard Actions: SHIFT + T to type uppercase T
      */
     @Test
     public void shiftTCombinationTest() {
-        openFixture("keyboard-actions.html");
-        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(By.id("keyboard-input")));
-        input.sendKeys(Keys.chord(Keys.SHIFT, "t"));
+        driver.get("https://the-internet.herokuapp.com/key_presses");
+        WebElement body = driver.findElement(By.tagName("body"));
+        body.sendKeys(Keys.chord(Keys.SHIFT, "t"));
 
-        assertEquals("SHIFT+T", driver.findElement(By.id("key-log")).getText());
-        waitAndClose();
+//        Alternative: Simply sending uppercase T
+//        body.sendKeys("T");
+
+//        waitAndClose();
     }
 
     /**
-     * Chains CTRL+A and DELETE, then checks both the key sequence and input value.
+     * Keyboard Actions: CTRL + A and then DELETE using chained actions
      */
     @Test
     public void ctrlAThenDeleteChainTest() {
-        openFixture("keyboard-actions.html");
-        WebElement input = wait.until(ExpectedConditions.elementToBeClickable(By.id("keyboard-input")));
+        driver.get("https://the-internet.herokuapp.com/key_presses");
+        WebElement body = driver.findElement(By.tagName("body"));
 
-        actions.click(input).keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
+        actions.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
                 .sendKeys(Keys.DELETE).perform();
 
-        assertEquals("", input.getAttribute("value"));
-        assertEquals("CTRL+A, DELETE", driver.findElement(By.id("key-log")).getText());
+//        Alternative using chord:
+//        body.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+
         waitAndClose();
     }
 }

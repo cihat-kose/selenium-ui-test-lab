@@ -12,7 +12,6 @@ public class RegistrationWithCssSelectorsTest extends BaseDriver {
 
     @Test
     public void testRegisterWithCssSelectorsOnly() {
-        useExplicitWaitsOnly();
         driver.get("https://parabank.parasoft.com/parabank/index.htm");
 
         WebElement registerLink = driver.findElement(By.cssSelector("a[href*='register.htm']"));

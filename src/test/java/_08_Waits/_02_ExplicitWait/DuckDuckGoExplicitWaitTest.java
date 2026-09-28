@@ -15,7 +15,6 @@ public class DuckDuckGoExplicitWaitTest extends BaseDriver {
      */
     @Test
     public void searchAndVerifySeleniumResult() {
-        useExplicitWaitsOnly();
         driver.get("https://duckduckgo.com/");
         WebElement searchInput = driver.findElement(By.name("q"));
         searchInput.sendKeys("Selenium WebDriver" + Keys.ENTER);

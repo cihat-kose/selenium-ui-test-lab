@@ -29,19 +29,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.6.0</version>
-                <configuration>
-                    <!-- Keep a plain `mvn test` safe and repeatable: these tests use only local fixtures. -->
-                    <includes>
-                        <include>**/KeyboardActionsTest.java</include>
-                        <include>**/JavaScriptAlertsTest.java</include>
-                        <include>**/DelayedAlertWaitTest.java</include>
-                        <include>**/IframeTextAreaEditTest.java</include>
-                        <include>**/NewTabWindowTest.java</include>
-                        <include>**/RegularDomComponentTest.java</include>
-                        <include>**/ShadowDomExampleTest.java</include>
-                        <include>**/FileSelectionWithWebDriverTest.java</include>
-                    </includes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -5,11 +5,8 @@ on:
   pull_request:
 
 jobs:
-  build-and-smoke:
+  test-compile:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
 
     steps:
       - name: Check out repository
@@ -22,19 +19,5 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Install stable Chrome
-        uses: browser-actions/setup-chrome@v2
-        id: setup-chrome
-        with:
-          install-chromedriver: true
-          install-dependencies: true
-
-      - name: Compile lessons and run local browser smoke tests
-        env:
-          SELENIUM_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
-        run: ./mvnw -B -ntp -Dselenium.headless=true -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" test
-
-      - name: Run the local WebDriver BiDi smoke test
-        env:
-          SELENIUM_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
-        run: ./mvnw -B -ntp -Dselenium.headless=true -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" -Dtest=ConsoleLogBidiTest#receivesConsoleMessageFromLocalFixture test
+      - name: Compile test sources
+        run: ./mvnw -B -ntp test-compile

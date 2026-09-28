@@ -6,12 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
-import utility.TestResources;
 
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.nio.file.Paths;
 
 /**
  * Opens the native operating-system file picker and selects a shared project file with Robot.
@@ -21,10 +21,11 @@ public class FileSelectionWithRobotTest extends BaseDriver {
 
     @Test
     public void selectsAndSubmitsAFileUsingTheNativePicker() throws Exception {
-        useExplicitWaitsOnly();
-        openFixture("robot-file-upload.html");
+        driver.get(Paths.get("src/test/resources/robot-file-upload.html")
+                .toAbsolutePath().toUri().toString());
 
-        String filePath = TestResources.path("upload-sample.txt").toAbsolutePath().toString();
+        String filePath = Paths.get("src/test/resources/upload-sample.txt")
+                .toAbsolutePath().toString();
         Toolkit.getDefaultToolkit().getSystemClipboard()
                 .setContents(new StringSelection(filePath), null);
 
