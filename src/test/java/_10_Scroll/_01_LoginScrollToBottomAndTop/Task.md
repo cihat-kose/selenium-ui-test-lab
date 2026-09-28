@@ -5,6 +5,5 @@
  2. Log in using username: Admin and password: admin123
  3. Wait for the top bar to be visible
  4. Scroll to the bottom of the page using JavascriptExecutor
- 5. Wait 3 seconds
- 6. Scroll back to the top
- 7. Close the browser
+ 5. Scroll back to the top
+ 6. Leave the final page visible for 3 seconds, then close the browser

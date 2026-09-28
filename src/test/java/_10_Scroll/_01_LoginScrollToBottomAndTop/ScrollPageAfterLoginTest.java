@@ -28,8 +28,10 @@ public class ScrollPageAfterLoginTest extends BaseDriver {
         wait.until(ExpectedConditions.visibilityOf(topBar));
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        // scrollTo takes horizontal (x) first and vertical (y) second; keep x at zero.
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        js.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+        // Reset both coordinates to return to the top of the page.
+        js.executeScript("window.scrollTo(0, 0)");
 
         waitAndClose();
     }

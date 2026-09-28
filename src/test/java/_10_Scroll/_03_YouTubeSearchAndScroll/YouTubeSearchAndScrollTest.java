@@ -18,15 +18,16 @@ public class YouTubeSearchAndScrollTest extends BaseDriver {
     public void searchAndPrint80thVideoTitle() {
         driver.get("https://www.youtube.com/");
 
-        List<WebElement> rejectAll = driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[6]/div[1]/ytd-button-renderer[1]/yt-button-shape/button/yt-touch-feedback-shape/div/div[2]"));
+        By rejectAllButton = By.cssSelector(
+                "button[aria-label='Çerezlerin ve diğer verilerin açıklanan amaçlar doğrultusunda kullanılmasını reddet']");
+        List<WebElement> rejectAll = driver.findElements(rejectAllButton);
         if (!rejectAll.isEmpty()) {
-            rejectAll.get(0).click();
+            wait.until(ExpectedConditions.elementToBeClickable(rejectAllButton)).click();
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(rejectAllButton));
         }
 
-        ((JavascriptExecutor) driver).executeScript("location.reload();");
-
-        WebElement searchBox = driver.findElement(By.xpath("//input[@name='search_query']"));
-        wait.until(ExpectedConditions.visibilityOf(searchBox));
+        WebElement searchBox = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("input[name='search_query']")));
         searchBox.click();
         searchBox.sendKeys("Selenium");
 
@@ -37,6 +38,7 @@ public class YouTubeSearchAndScrollTest extends BaseDriver {
 
         List<WebElement> videos = driver.findElements(By.cssSelector(".style-scope ytd-video-renderer"));
 
+        // Load more results in batches until the 80th video is available.
         while (videos.size() < 80) {
             javascriptExecutor.executeScript("window.scrollBy(0,3000)");
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".style-scope ytd-video-renderer")));

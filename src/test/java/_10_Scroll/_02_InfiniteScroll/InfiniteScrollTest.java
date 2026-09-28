@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utility.BaseDriver;
+import utility.MyFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,12 @@ public class InfiniteScrollTest extends BaseDriver {
         List<String> paragraphs = new ArrayList<>();
 
         for (int i = 1; i <= 10; i++) {
+            // Reaching the bottom triggers the page to append its next paragraph.
             javascriptExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             int expectedCount = i;
             wait.until(d -> d.findElements(paragraphsLocator).size() >= expectedCount);
+
+            MyFunction.wait(1); // Optional: Wait for a second to ensure the paragraph is fully loaded
 
             WebElement paragraph = driver.findElements(paragraphsLocator).get(i - 1);
             String text = paragraph.getText().trim();

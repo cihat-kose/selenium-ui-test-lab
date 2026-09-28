@@ -15,7 +15,7 @@
 
    c) Scroll to Bottom/Top of Page:
       js.executeScript("window.scrollTo(0, document.body.scrollHeight);");  // Scroll to bottom
-      js.executeScript("window.scrollTo(document.body.scrollHeight, 0);");  // Scroll to top
+      js.executeScript("window.scrollTo(0, 0);");  // Scroll to top
 
  - Notes:
    - Scrolling is useful for lazy-loaded content and dynamic pages.
