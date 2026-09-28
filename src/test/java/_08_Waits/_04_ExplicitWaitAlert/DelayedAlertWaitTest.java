@@ -1,5 +1,6 @@
 package _08_Waits._04_ExplicitWaitAlert;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,13 +16,15 @@ public class DelayedAlertWaitTest extends BaseDriver {
     public void waitForAlert() {
         driver.get("https://demoqa.com/alerts");
 
-        // Click the button that triggers an alert after 5 seconds
-        WebElement timerAlertButton = driver.findElement(By.id("timerAlertButton"));
+        // This button opens a browser alert after a five-second delay.
+        WebElement timerAlertButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("timerAlertButton")));
         timerAlertButton.click();
 
-        wait.until(ExpectedConditions.alertIsPresent());
-
-        driver.switchTo().alert().accept();
+        // Wait for the browser alert before reading its text and accepting it.
+        var alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertTrue("Unexpected alert text",
+                alert.getText().contains("This alert appeared after 5 seconds"));
+        alert.accept();
 
         waitAndClose();
     }

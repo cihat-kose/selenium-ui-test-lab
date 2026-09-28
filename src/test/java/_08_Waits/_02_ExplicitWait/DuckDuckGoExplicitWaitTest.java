@@ -16,13 +16,16 @@ public class DuckDuckGoExplicitWaitTest extends BaseDriver {
     @Test
     public void searchAndVerifySeleniumResult() {
         driver.get("https://duckduckgo.com/");
-        WebElement searchInput = driver.findElement(By.name("q"));
+        // Wait for the search field to become ready before submitting the query.
+        WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("q")));
         searchInput.sendKeys("Selenium WebDriver" + Keys.ENTER);
 
+        // Wait specifically for the first result title to become visible.
         WebElement firstResultTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("(//div//h3)[1]")));
 
-        String firstResultUrl = firstResultTitle.findElement(By.xpath("./ancestor::a[1]")).getAttribute("href");
+        String firstResultUrl = firstResultTitle.findElement(By.xpath("ancestor::a[1]")).getAttribute("href");
+        Assert.assertNotNull("First result should have a destination URL", firstResultUrl);
         System.out.println("First result URL: " + firstResultUrl);
 
         Assert.assertTrue("First result should refer to Selenium: " + firstResultUrl,

@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import utility.BaseDriver;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
-import java.util.function.Function;
 
 public class FluentWaitTest extends BaseDriver {
 
@@ -21,26 +21,23 @@ public class FluentWaitTest extends BaseDriver {
     public void fluentWaitTest() {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
-        WebElement startButton = driver.findElement(By.xpath("//button[text()='Start']"));
+        WebElement startButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#start button")));
         startButton.click();
 
+        // FluentWait controls both the total timeout and how often the condition is checked.
         FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(15))
                 .pollingEvery(Duration.ofSeconds(2))
                 .ignoring(NoSuchElementException.class);
 
-        WebElement helloWorldText = fluentWait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                WebElement element = driver.findElement(By.xpath("//h4[text()='Hello World!']"));
-                if (element.isDisplayed()) {
-                    return element;
-                }
-                return null;
-            }
+        // The message is added dynamically, so retry lookup until it is present and visible.
+        WebElement helloWorldText = fluentWait.until(currentDriver -> {
+            WebElement element = currentDriver.findElement(By.cssSelector("#finish h4"));
+            return element.isDisplayed() ? element : null;
         });
 
-        Assert.assertNotNull("Element was not found!", helloWorldText);
         Assert.assertTrue("'Hello World!' is not visible!", helloWorldText.isDisplayed());
+        Assert.assertEquals("Unexpected text appeared", "Hello World!", helloWorldText.getText());
 
         System.out.println("Test Passed: 'Hello World!' appeared on the page.");
 

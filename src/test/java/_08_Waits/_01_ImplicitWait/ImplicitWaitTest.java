@@ -10,13 +10,12 @@ import java.time.Duration;
 
 public class ImplicitWaitTest extends BaseDriver {
 
-    /**
-     * Wait for first product to load using Implicit Wait
-     */
+    /** Waits up to ten seconds for elements found through WebDriver. */
     @Test
     public void implicitWaitTask() {
         driver.get("https://www.saucedemo.com/");
 
+        // Implicit wait applies to element lookups made after this setting.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         WebElement usernameField = driver.findElement(By.id("user-name"));
@@ -27,10 +26,13 @@ public class ImplicitWaitTest extends BaseDriver {
         passwordField.sendKeys("secret_sauce");
         loginButton.click();
 
-        WebElement firstProduct = driver.findElement(By.xpath("//div[@class='inventory_item'][1]"));
-        System.out.println("First Product: " + firstProduct.getText());
+        // findElement waits up to ten seconds for the inventory to appear.
+        WebElement firstProduct = driver.findElement(By.cssSelector(".inventory_item"));
+        String productName = firstProduct.findElement(By.cssSelector(".inventory_item_name")).getText();
+        System.out.println("First Product: " + productName);
 
         Assert.assertTrue("First product is not visible!", firstProduct.isDisplayed());
+        Assert.assertFalse("First product name should not be empty!", productName.isBlank());
 
         waitAndClose();
     }

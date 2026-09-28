@@ -16,13 +16,15 @@ public class DynamicLoadingTest extends BaseDriver {
     public void explicitWaitButtonTask() {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
 
-        WebElement startButton = driver.findElement(By.xpath("//button[text()='Start']"));
+        WebElement startButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#start button")));
         startButton.click();
 
-        WebElement helloWorldText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[text()='Hello World!']")));
+        // The page adds this heading after loading, so wait for it to become visible.
+        WebElement helloWorldText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#finish h4")));
 
         System.out.println("helloWorldText.getText() = " + helloWorldText.getText());
         Assert.assertTrue("'Hello World!' text is not visible!", helloWorldText.isDisplayed());
+        Assert.assertEquals("Unexpected text appeared", "Hello World!", helloWorldText.getText());
 
         waitAndClose();
     }
