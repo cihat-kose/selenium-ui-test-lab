@@ -26,9 +26,11 @@ public class BaseDriver {
         if (chromeBinary != null && !chromeBinary.isBlank()) {
             options.setBinary(chromeBinary);
         }
+        if (Boolean.getBoolean("selenium.ci")) {
+            options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+        }
         if (headless) {
-            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage",
-                    "--window-size=1440,1000");
+            options.addArguments("--headless=new", "--window-size=1440,1000");
         }
         driver = new ChromeDriver(options);
         if (!headless) {
