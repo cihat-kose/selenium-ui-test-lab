@@ -1,19 +1,27 @@
 package utility;
 
-import java.util.UUID;
+import java.time.Instant;
 
-/** Creates safe, unique values for repeated registration exercises. */
+/** Creates readable, non-personal test values for repeatable registration exercises. */
 public final class TestData {
     private TestData() {
     }
 
-    /** Returns a letters-and-digits username that is unlikely to collide between runs. */
+    /** Returns a readable username that is unlikely to collide between runs. */
     public static String uniqueUsername() {
-        return "student" + UUID.randomUUID().toString().replace("-", "");
+        return "student" + Instant.now().toEpochMilli();
     }
 
-    /** Returns a syntactically valid example address without using a real mailbox. */
-    public static String uniqueExampleEmail() {
-        return uniqueUsername() + "@example.com";
+    /**
+     * Returns a readable address at the reserved example.com domain.
+     * The short numeric suffix distinguishes routine repeat runs without cluttering the address.
+     */
+    public static String uniqueExampleEmail(String name) {
+        String emailName = name.toLowerCase().replaceAll("[^a-z0-9]+", ".").replaceAll("^\\.|\\.$", "");
+        if (emailName.isEmpty()) {
+            throw new IllegalArgumentException("name must contain at least one letter or digit");
+        }
+        int suffix = (int) (Instant.now().toEpochMilli() % 10_000);
+        return emailName + suffix + "@example.com";
     }
 }
