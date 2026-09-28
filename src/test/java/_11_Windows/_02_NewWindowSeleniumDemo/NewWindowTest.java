@@ -17,6 +17,7 @@ public class NewWindowTest extends BaseDriver {
 
         String mainWindow = driver.getWindowHandle();
         driver.findElement(By.linkText("Open new window")).click();
+        // Wait for the new browsing context before collecting its handle.
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         Set<String> allWindows = driver.getWindowHandles();
@@ -24,6 +25,7 @@ public class NewWindowTest extends BaseDriver {
                 .filter(window -> !window.equals(mainWindow))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("The new window was not opened."));
+        // Switch explicitly so title checks run against the new window.
         driver.switchTo().window(newWindow);
 
         wait.until(ExpectedConditions.titleIs("Simple Page"));

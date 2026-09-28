@@ -22,6 +22,7 @@ public class NewTabWindowTest extends BaseDriver {
 
         String mainTabID = driver.getWindowHandle();
         driver.findElement(By.id("open-tab")).click();
+        // Wait until the new tab exists before looking up its window handle.
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         Set<String> windowIDs = driver.getWindowHandles();
@@ -29,6 +30,7 @@ public class NewTabWindowTest extends BaseDriver {
                 .filter(id -> !id.equals(mainTabID))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("The new tab was not opened."));
+        // WebDriver remains attached to the original tab until switched explicitly.
         driver.switchTo().window(newTabID);
 
         wait.until(ExpectedConditions.titleIs("New tab practice target"));

@@ -23,6 +23,7 @@ public class MultipleWindowsHerokuappTest extends BaseDriver {
 
         WebElement clickHereLink = driver.findElement(By.linkText("Click Here"));
         clickHereLink.click();
+        // Wait until the popup has a handle before switching to it.
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         Set<String> allWindows = driver.getWindowHandles();
@@ -30,6 +31,7 @@ public class MultipleWindowsHerokuappTest extends BaseDriver {
                 .filter(window -> !window.equals(originalWindow))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("The new window was not opened."));
+        // Switch to the new window to inspect its heading.
         driver.switchTo().window(newWindow);
 
         WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
