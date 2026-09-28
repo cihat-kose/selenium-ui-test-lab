@@ -13,6 +13,7 @@ public class IframeTextCheckTest extends BaseDriver {
 
     @Test
     public void verifyIframeContentAndEmailInput() {
+        useExplicitWaitsOnly();
         driver.get("https://www.selenium.dev/selenium/web/iframes.html");
 
         WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("iframe1")));

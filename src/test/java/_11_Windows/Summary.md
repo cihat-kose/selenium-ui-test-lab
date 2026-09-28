@@ -1,24 +1,10 @@
- Windows (Multiple Windows) Summary
+# Browser Windows and Tabs
 
- - Definition:
-   Selenium allows switching between multiple browser windows or tabs. Each window has a unique identifier called a window handle.
+Each open browser window or tab has a unique **window handle**. WebDriver commands run in the currently selected handle.
 
- - Key Methods:
-   a) getWindowHandle(): Returns the handle of the current window
-      Example: String mainWindow = driver.getWindowHandle();
+1. Save the current handle with `driver.getWindowHandle()`.
+2. Wait until `driver.getWindowHandles()` contains the new window.
+3. Find the handle that differs from the original and switch to it with `driver.switchTo().window(handle)`.
+4. After checking the new page, close it if needed and switch back to the original handle.
 
-   b) getWindowHandles(): Returns a Set of all open window handles
-      Example: Set<String> allWindows = driver.getWindowHandles();
-
-   c) switchTo().window(windowHandle): Switches the driver's context to the specified window
-
- - Use Case:
-   Used when a click event opens a new tab or window, and you want to interact with elements inside that new context.
-
- - Best Practice:
-   Always store the original window handle before opening a new window.
-   After operations on the new window, switch back to the main window using:
-   driver.switchTo().window(mainWindow);
-
- - Caution:
-   If you do not switch to the correct window before interacting with it, Selenium may throw a NoSuchWindowException.
+[NewTabWindowTest](./_01_NewTabLocalFixture/NewTabWindowTest.java) uses local pages. It opens a new tab, switches to it, checks the heading, closes the tab, and verifies that only the original remains. The other examples practice windows on public Selenium and Herokuapp demos.

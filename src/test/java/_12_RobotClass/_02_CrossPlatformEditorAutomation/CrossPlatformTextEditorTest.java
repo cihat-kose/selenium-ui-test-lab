@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import org.junit.Assume;
+
 public class CrossPlatformTextEditorTest {
 
     /**
@@ -16,17 +18,17 @@ public class CrossPlatformTextEditorTest {
     public void writeInSystemEditorAndClose() throws AWTException, IOException, InterruptedException {
         // 1. Detect the operating system
         String os = System.getProperty("os.name").toLowerCase();
-        System.out.println("Operating System: " + os);
+        Assume.assumeFalse("A visible desktop is required for Robot input.", GraphicsEnvironment.isHeadless());
+        Assume.assumeTrue("This example supports Windows and macOS.", os.contains("win") || os.contains("mac"));
 
         // 2. Launch the appropriate text editor
+        ProcessBuilder editor;
         if (os.contains("win")) {
-            Runtime.getRuntime().exec("notepad");
-        } else if (os.contains("mac")) {
-            Runtime.getRuntime().exec("open -a TextEdit");
+            editor = new ProcessBuilder("notepad.exe");
         } else {
-            System.out.println("Unsupported OS.");
-            return;
+            editor = new ProcessBuilder("open", "-a", "TextEdit");
         }
+        editor.start();
 
         // 3. Wait for the editor to open
         MyFunction.wait(3);
@@ -40,18 +42,13 @@ public class CrossPlatformTextEditorTest {
         for (char ch : message.toCharArray()) {
             if (Character.isUpperCase(ch)) robot.keyPress(KeyEvent.VK_SHIFT);
 
-            int keyCode = KeyEvent.getExtendedKeyCodeForChar(ch);
+            int keyCode = ch == ' ' ? KeyEvent.VK_SPACE : KeyEvent.getExtendedKeyCodeForChar(ch);
             if (keyCode != KeyEvent.CHAR_UNDEFINED) {
                 robot.keyPress(keyCode);
                 robot.keyRelease(keyCode);
             }
 
             if (Character.isUpperCase(ch)) robot.keyRelease(KeyEvent.VK_SHIFT);
-
-            if (ch == ' ') {
-                robot.keyPress(KeyEvent.VK_SPACE);
-                robot.keyRelease(KeyEvent.VK_SPACE);
-            }
         }
 
         // 6. Small pause after typing

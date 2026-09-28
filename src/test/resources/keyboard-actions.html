@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keyboard Actions Practice</title>
+</head>
+<body>
+<h1>Keyboard Actions Practice</h1>
+<p>Focus the input and use Selenium to press keys and key combinations.</p>
+<label for="keyboard-input">Practice input</label>
+<input id="keyboard-input" type="text" value="Selenium">
+<p>Keys received: <output id="key-log" aria-live="polite"></output></p>
+<script>
+    const keyLog = document.querySelector('#key-log');
+    const pressedKeys = [];
+    const modifierKeys = new Set(['Control', 'Shift', 'Alt', 'Meta']);
+
+    window.addEventListener('keydown', (event) => {
+        if (modifierKeys.has(event.key)) {
+            return;
+        }
+
+        if (event.key === ' ') {
+            event.preventDefault();
+        }
+        const key = event.key === ' ' ? 'SPACE' : event.key.toUpperCase();
+        const modifiers = [];
+        if (event.ctrlKey) modifiers.push('CTRL');
+        if (event.shiftKey) modifiers.push('SHIFT');
+        if (event.altKey) modifiers.push('ALT');
+        if (event.metaKey) modifiers.push('META');
+        pressedKeys.push([...modifiers, key].join('+'));
+        keyLog.textContent = pressedKeys.join(', ');
+    });
+</script>
+</body>
+</html>

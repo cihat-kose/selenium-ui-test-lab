@@ -14,6 +14,7 @@ public class IframeCountTest extends BaseDriver {
 
     @Test
     public void countIframesOnPage() {
+        useExplicitWaitsOnly();
         driver.get("https://www.selenium.dev/selenium/web/iframes.html");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("iframe1")));
 

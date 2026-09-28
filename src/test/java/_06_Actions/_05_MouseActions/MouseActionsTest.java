@@ -7,15 +7,20 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+/** Demonstrates mouse gestures and checks the page or dialog response where available. */
 public class MouseActionsTest extends BaseDriver {
 
     private Actions actions;
 
     @Before
     public void createActions() {
+        useExplicitWaitsOnly();
         actions = new Actions(driver);
     }
 
@@ -28,6 +33,11 @@ public class MouseActionsTest extends BaseDriver {
 
         WebElement elementToHover = driver.findElement(By.xpath("(//div[@class='figure'])[1]/img"));
         actions.moveToElement(elementToHover).perform();  // Move the pointer over the element.
+
+        WebElement caption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("(//div[@class='figure'])[1]//div[@class='figcaption']")));
+        assertTrue("Hovering should reveal the first profile caption.",
+                caption.getText().contains("name: user1"));
 
 //      Alternative: hover the mouse over a specific point of the element
 //      actions.moveToElement(elementToHover, 50, 50).perform();
@@ -51,7 +61,7 @@ public class MouseActionsTest extends BaseDriver {
         // Verify the feedback message (Was the message shown as a result of a double click?)
         WebElement message = driver.findElement(By.id("doubleClickMessage"));
         String expectedMessage = "You have done a double click";
-        Assert.assertEquals(message.getText(), expectedMessage);
+        Assert.assertEquals("Double-click feedback should appear.", expectedMessage, message.getText());
 
         // waitAndClose();
     }
@@ -67,8 +77,8 @@ public class MouseActionsTest extends BaseDriver {
         actions.contextClick(elementToRightClick).perform();
 
         // Handle the alert window that opens
-        Alert alert = driver.switchTo().alert();
-        System.out.println("Alert content: " + alert.getText());
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        assertEquals("You selected a context menu", alert.getText());
         alert.accept();
 
         // waitAndClose();
@@ -83,6 +93,9 @@ public class MouseActionsTest extends BaseDriver {
 
         WebElement elementToClick = driver.findElement(By.xpath("//button[text()='Add Element']"));
         actions.click(elementToClick).perform();
+
+        assertTrue("Clicking Add Element should create a Delete button.", wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Delete']"))).isDisplayed());
 
 //        Alternative: Click action with actions.moveToElement()
 //        actions.moveToElement(elementToClick).click().perform();
@@ -103,6 +116,9 @@ public class MouseActionsTest extends BaseDriver {
         // Click and hold the element and drop it on the target
         actions.clickAndHold(elementToClickAndHold).moveToElement(elementToDrop).release().perform();
 
+        assertEquals("B", wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("column-a"))).getText());
+        assertEquals("A", driver.findElement(By.id("column-b")).getText());
+
 //        Alternative: Drag and drop to a specific pixel distance (dragAndDropBy)
 //        actions.clickAndHold(elementToClickAndHold).moveByOffset(150, 0).release().perform();
 
@@ -120,6 +136,9 @@ public class MouseActionsTest extends BaseDriver {
         WebElement targetElement = driver.findElement(By.id("column-b"));
 
         actions.dragAndDrop(sourceElement, targetElement).perform();  // Drag the source element to the target
+
+        assertEquals("B", wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("column-a"))).getText());
+        assertEquals("A", driver.findElement(By.id("column-b")).getText());
 
         waitAndClose();
     }

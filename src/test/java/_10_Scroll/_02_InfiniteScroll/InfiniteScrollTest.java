@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class InfiniteScrollTest extends BaseDriver {
 
@@ -18,6 +19,7 @@ public class InfiniteScrollTest extends BaseDriver {
      */
     @Test
     public void loadAndPrintTenParagraphs() {
+        useExplicitWaitsOnly();
         driver.get("https://the-internet.herokuapp.com/infinite_scroll");
 
         By paragraphsLocator = By.cssSelector("div.jscroll-added");
@@ -36,7 +38,9 @@ public class InfiniteScrollTest extends BaseDriver {
             System.out.println(i + ". Paragraph: " + text);
         }
 
-        assertEquals("The page should load exactly ten paragraphs.", 10, paragraphs.size());
+        assertEquals("The test should inspect ten paragraphs.", 10, paragraphs.size());
+        assertTrue("The page should contain at least ten loaded paragraphs.",
+                driver.findElements(paragraphsLocator).size() >= 10);
 
         waitAndClose();
     }

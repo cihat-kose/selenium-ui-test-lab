@@ -14,6 +14,7 @@ public class DynamicLoadingTest extends BaseDriver {
      */
     @Test
     public void explicitWaitButtonTask() {
+        useExplicitWaitsOnly();
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
 
         WebElement startButton = driver.findElement(By.xpath("//button[text()='Start']"));

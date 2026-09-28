@@ -1,23 +1,17 @@
- Scroll Summary
+# Scrolling Pages
 
- - Definition:
-   Scrolling is the process of moving the visible portion of a web page.
-   In Selenium, scrolling is often needed when elements are not visible in the current viewport.
+Selenium can scroll to an element directly with `scrollIntoView()` or run page-level scrolling with `JavascriptExecutor`:
 
- - Scrolling Methods in Selenium:
-   a) Scroll by Pixels:
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript("window.scrollBy(0, 1000);");  // Scroll down by 1000 pixels vertically
+```java
+javascriptExecutor.executeScript("window.scrollTo(0, document.documentElement.scrollHeight)");
+```
 
-   b) Scroll to Element:
-      WebElement element = driver.findElement(By.id("elementId"));
-      js.executeScript("arguments[0].scrollIntoView(true);", element);
+Scrolling matters when a page is taller than the browser window or loads more content near the bottom. Use a wait or assertion to check the result instead of assuming the scroll worked.
 
-   c) Scroll to Bottom/Top of Page:
-      js.executeScript("window.scrollTo(0, document.body.scrollHeight);");  // Scroll to bottom
-      js.executeScript("window.scrollTo(document.body.scrollHeight, 0);");  // Scroll to top
+## What these examples check
 
- - Notes:
-   - Scrolling is useful for lazy-loaded content and dynamic pages.
-   - Waits might be necessary before scrolling to ensure the page has fully loaded.
-   - Horizontal scrolling can be done with: js.executeScript("window.scrollBy(500, 0);")
+- `ScrollPageAfterLoginTest` signs in to the OrangeHRM demo, checks the dashboard URL, scrolls to the bottom, then returns to and checks the top.
+- `InfiniteScrollTest` loads ten paragraphs and checks that they are non-empty.
+- `YouTubeSearchAndScrollTest` searches a live site, tries up to twelve scrolls, checks that at least 80 video cards loaded, opens the 80th, and checks for a video URL.
+
+The OrangeHRM and YouTube lessons depend on public websites. Their content can change; the infinite-scroll page is also external, though its expected paragraph count is asserted.

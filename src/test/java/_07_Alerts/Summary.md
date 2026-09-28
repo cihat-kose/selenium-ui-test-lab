@@ -1,71 +1,20 @@
-Selenium Alerts Overview
-=========================
+# JavaScript Alerts
 
-1. What is an Alert in Selenium?
---------------------------------
-- An alert is a pop-up window used in web applications to display a message or request user interaction.
-- In Selenium, alerts are handled using the method:
-  driver.switchTo().alert();
+## What is an alert?
 
-2. Types of Alerts in Selenium
-------------------------------
-a) Simple Alert:
-   - Displays a simple message.
-   - Contains only an "OK" button.
+A JavaScript alert is a small browser dialog created by page code. It is not an HTML element, so Selenium cannot locate it with `findElement()`.
 
-b) Confirmation Alert:
-   - Requests confirmation from the user.
-   - Contains both "OK" and "Cancel" buttons.
+## What does Selenium do?
 
-c) Prompt Alert:
-   - Requests user input (text).
-   - Contains "OK" and "Cancel" buttons.
+First switch from the page to the dialog with `driver.switchTo().alert()`. Selenium's `Alert` methods match the dialog:
 
-3. Handling Alerts in Selenium
-------------------------------
-- When an alert appears, the WebDriver loses control over the browser.
-- You must switch to the alert before interacting with it:
-  driver.switchTo().alert();
+- `getText()` reads its message.
+- `accept()` chooses **OK**.
+- `dismiss()` chooses **Cancel**.
+- `sendKeys()` enters text in a prompt.
 
-4. Common Alert Methods
------------------------
-- accept(): Clicks the "OK" button.
-- dismiss(): Clicks the "Cancel" button.
-- getText(): Retrieves the alert message.
-- sendKeys(): Sends input text to a Prompt Alert.
+## What does this lesson test?
 
-5. Working with Alerts - Step-by-Step
--------------------------------------
-a) Switch to the alert:
-   Alert alert = driver.switchTo().alert();
+[`JavaScriptAlertsTest`](./_03_LocalJavaScriptAlerts/JavaScriptAlertsTest.java) opens a local page and checks four results: accepting an alert, dismissing a confirmation, entering text in a prompt, and right-clicking an area to open an alert. The delayed alert example is in [Waits](../_08_Waits/_04_ExplicitWaitAlert/DelayedAlertWaitTest.java); it uses `WebDriverWait` to wait until the dialog appears.
 
-b) Get the alert message:
-   String alertText = alert.getText();
-
-c) Click OK:
-   alert.accept();
-
-d) Click Cancel:
-   alert.dismiss();
-
-e) Send input (Prompt Alert):
-   alert.sendKeys("text");
-
-6. Examples
------------
-- Simple Alert:
-  driver.switchTo().alert().accept();
-
-- Confirmation Alert:
-  Alert alert = driver.switchTo().alert();
-  alert.dismiss();
-
-- Prompt Alert:
-  Alert alert = driver.switchTo().alert();
-  alert.sendKeys("Selenium");
-  alert.accept();
-
-7. UnhandledAlertException in Selenium
---------------------------------------
-- If you do not handle an alert when it appears, Selenium will throw an UnhandledAlertException.
-- Always switch to the alert using driver.switchTo().alert() before attempting any interaction.
+Each test checks both the dialog message and the page result after handling it. The local fixture makes these basic examples repeatable without relying on an external demo site.

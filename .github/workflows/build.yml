@@ -5,8 +5,11 @@ on:
   pull_request:
 
 jobs:
-  test-compile:
+  build-and-smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
 
     steps:
       - name: Check out repository
@@ -19,5 +22,13 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Compile test sources
-        run: ./mvnw -B -ntp test-compile
+      - name: Install stable Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          install-chromedriver: true
+
+      - name: Compile lessons and run local browser smoke tests
+        run: ./mvnw -B -ntp -Dselenium.headless=true test
+
+      - name: Run the local WebDriver BiDi smoke test
+        run: ./mvnw -B -ntp -Dselenium.headless=true -Dtest=ConsoleLogBidiTest#receivesConsoleMessageFromLocalFixture test

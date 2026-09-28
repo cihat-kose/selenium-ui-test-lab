@@ -8,8 +8,8 @@ import org.openqa.selenium.bidi.log.ConsoleLogEntry;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import utility.TestResources;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +23,9 @@ public class ConsoleLogBidiTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("webSocketUrl", true);
+        if (Boolean.getBoolean("selenium.headless")) {
+            options.addArguments("--headless=new", "--window-size=1440,1000");
+        }
         driver = new ChromeDriver(options);
     }
 
@@ -40,8 +43,7 @@ public class ConsoleLogBidiTest {
         String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
 
         try {
-            driver.get(Objects.requireNonNull(getClass().getResource("/webdriver-bidi-example.html"))
-                    .toExternalForm());
+            driver.get(TestResources.url("webdriver-bidi-example.html").toExternalForm());
             driver.findElement(By.id("write-console-message")).click();
 
             ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);

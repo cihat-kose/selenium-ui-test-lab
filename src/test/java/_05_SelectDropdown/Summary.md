@@ -1,21 +1,7 @@
-Select Class in Selenium
+# Native Select Dropdowns
 
-1. What is the Select Class?
-   - The Select class is used to handle dropdown menus (`<select>` elements) in HTML.
+Selenium's `Select` class works with a native HTML `<select>` element. It can choose an option by visible text, `value`, or index, and can read available and selected options.
 
-2. Methods Covered:
-   a) selectByVisibleText()
-   b) selectByValue()
-   c) selectByIndex()
-   d) getOptions()
-   e) getFirstSelectedOption()
-   f) deselectAll()
+[`SelectDropdownTest`](SelectDropdownTest.java) tries the three selection methods in order and checks which option is selected each time. Its page uses a single-select dropdown, so `deselectAll()` is not applicable.
 
-3. Purpose:
-   - Learn to select options and assert selected values.
-   - Practice real dropdown interactions with Selenium.
-
-## Practice order
-
-1. [SelectDropdownTest](SelectDropdownTest.java): select an option by text, value, or index and inspect the selection.
-2. [Calculator operations](_01_CalculatorOperations/Summary.md): select arithmetic operations and check the calculated results. This follow-up exercise also uses Actions and waits from later chapters.
+The [calculator exercise](_01_CalculatorOperations/Summary.md) is a follow-up: it selects an arithmetic operation and checks the displayed answer. That exercise also uses keyboard Actions and explicit waits.

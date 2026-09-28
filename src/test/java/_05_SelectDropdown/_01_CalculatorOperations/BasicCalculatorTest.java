@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -14,31 +13,28 @@ import utility.BaseDriver;
 public class BasicCalculatorTest extends BaseDriver {
 
     /**
-     * Task: Basic Calculator Randomized Operations
+     * Runs the same five calculator operations for several reproducible input pairs.
      */
     @Test
     public void testBasicCalculatorOperations() {
+        useExplicitWaitsOnly();
         driver.get("https://testsheepnz.github.io/BasicCalculator.html");
 
         Actions actions = new Actions(driver);
 
         WebElement integersOnlyRadioInput = driver.findElement(By.id("integerSelect"));
 
-        for (int i = 0; i < 5; i++) {
-
-            int randomNumber1 = (int) (Math.random() * 100);
-            int randomNumber2 = (int) (Math.random() * 99) + 1;
+        int[][] inputPairs = {{27, 4}, {42, 7}, {85, 9}, {36, 11}, {91, 13}};
+        for (int i = 0; i < inputPairs.length; i++) {
+            int firstNumberValue = inputPairs[i][0];
+            int secondNumberValue = inputPairs[i][1];
 
             WebElement firstNumber = driver.findElement(By.id("number1Field"));
-
-            if (i == 0) {
-                firstNumber.sendKeys(String.valueOf(randomNumber1));
-                Action action = actions.moveToElement(firstNumber).click().keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys(Integer.toString(randomNumber2)).build();
-                action.perform();
-            } else {
-                Action action = actions.moveToElement(firstNumber).click().keyDown(Keys.BACK_SPACE).keyUp(Keys.BACK_SPACE).keyDown(Keys.BACK_SPACE).keyUp(Keys.BACK_SPACE).sendKeys(Integer.toString(randomNumber1)).keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys(Integer.toString(randomNumber2)).build();
-                action.perform();
-            }
+            actions.moveToElement(firstNumber).click()
+                    .sendKeys(String.valueOf(firstNumberValue))
+                    .sendKeys(Keys.TAB)
+                    .sendKeys(String.valueOf(secondNumberValue))
+                    .perform();
 
             for (int j = 0; j < 5; j++) {
 
@@ -47,34 +43,33 @@ public class BasicCalculatorTest extends BaseDriver {
                 Select operationSelect = new Select(operationMenu);
                 operationSelect.selectByIndex(j);
 
-                wait.until(ExpectedConditions.elementToBeClickable(By.id("calculateButton")));
+                String expectedAnswer = switch (j) {
+                    case 0 -> String.valueOf(firstNumberValue + secondNumberValue);
+                    case 1 -> String.valueOf(firstNumberValue - secondNumberValue);
+                    case 2 -> String.valueOf(firstNumberValue * secondNumberValue);
+                    case 3 -> String.valueOf(firstNumberValue / secondNumberValue);
+                    case 4 -> String.valueOf(firstNumberValue) + secondNumberValue;
+                    default -> throw new IllegalStateException("Unexpected calculator operation index: " + j);
+                };
 
-                WebElement calculateButton = driver.findElement(By.id("calculateButton"));
-                calculateButton.click();
-
-                WebElement calculateAnswer = driver.findElement(By.id("numberAnswerField"));
-
-                switch (j) {
-                    case 0:
-                        Assert.assertEquals(calculateAnswer.getAttribute("value"), String.valueOf(randomNumber1 + randomNumber2));
-                        break;
-                    case 1:
-                        Assert.assertEquals(calculateAnswer.getAttribute("value"), String.valueOf(randomNumber1 - randomNumber2));
-                        break;
-                    case 2:
-                        Assert.assertEquals(calculateAnswer.getAttribute("value"), String.valueOf(randomNumber1 * randomNumber2));
-                        break;
-                    case 3:
-                        integersOnlyRadioInput.click();
-                        Assert.assertEquals(calculateAnswer.getAttribute("value"), String.valueOf((randomNumber1 / randomNumber2)));
-                        break;
-                    case 4:
-                        Assert.assertEquals(calculateAnswer.getAttribute("value"), "" + randomNumber1 + randomNumber2);
-                        break;
+                if (j == 3 && !integersOnlyRadioInput.isSelected()) {
+                    integersOnlyRadioInput.click();
                 }
-                WebElement clearButton = driver.findElement(By.id("clearButton"));
-                clearButton.click();
+
+                wait.until(ExpectedConditions.elementToBeClickable(By.id("calculateButton"))).click();
+
+                String actualAnswer = wait.until(d -> {
+                    String value = d.findElement(By.id("numberAnswerField")).getAttribute("value");
+                    return expectedAnswer.equals(value) ? value : null;
+                });
+                Assert.assertEquals("Unexpected answer for operation index " + j + ".",
+                        expectedAnswer, actualAnswer);
             }
+
+            // Keep the same pair for all five calculations; clear once before entering the next pair.
+            driver.findElement(By.id("clearButton")).click();
+            wait.until(d -> d.findElement(By.id("number1Field")).getAttribute("value").isEmpty()
+                    && d.findElement(By.id("number2Field")).getAttribute("value").isEmpty());
         }
         waitAndClose();
     }

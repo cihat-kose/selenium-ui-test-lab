@@ -25,10 +25,14 @@ Examples are grouped by their main learning goal. A locator exercise can also cl
 
 ## What is actually verified
 
-The organization change does not add runtime assertions. CSS/XPath practice currently checks typed input values, a login message, and search text; its calculator prints a result, and its HTML dialog methods only perform clicks. The fake alerts are ordinary DOM elements, not native JavaScript alerts.
+- The local keyboard lesson checks recorded key combinations and the input value. The local alert lessons check dialog text and the page response after each alert, confirmation, prompt, or right-click.
+- The local iframe, tab, and Shadow DOM examples assert the value, heading, handle count, or message they are meant to produce. The local BiDi example listens for and checks a console event.
+- The CSS/XPath practice checks submitted form values, a login message, search text, a calculator sum, and the closing of its HTML dialogs. Those dialogs are regular page elements, not native JavaScript alerts.
+- The jQuery UI drag-and-drop example checks its drop message. The three drag-and-drop challenges check that each city or student ended up in its expected target.
+- YouTube stops after twelve scroll attempts, checks that it has 80 video cards, opens the 80th, and checks that navigation reached a video URL. The test still depends on live search results and loading behavior.
+- The calculator operations check expected answers for five fixed input pairs on a live page. The WebDriver file-selection fixture is part of the local smoke-test set; neither file-selection example sends a file to a server.
+- The Robot search checks that a result appeared before moving the mouse. The desktop-editor example types into another application but cannot verify that application's contents.
 
-The three drag-and-drop exercises perform gestures but have no final placement assertions. YouTube waits for a title change and prints it; it has no result assertion and its scroll loop is currently unbounded. These are legacy practice exercises, not evidence of a passing automated regression suite.
+## Build and test scope
 
-The combined calculator checks operation results, but it uses random inputs and live-page behavior. The file-selection fixture confirms a filename (and, in the Robot example, local form submission); it does not transfer a file to a server.
-
-Compile validation confirms Java source compatibility. Live-site behavior and OS dialog handling require separate, targeted browser runs.
+`./mvnw -B -ntp test-compile` compiles every lesson without launching a browser. Plain `./mvnw -B -ntp test` compiles all test sources and runs the repeatable local-fixture smoke tests in headless Chrome, including direct WebDriver file selection. CI also runs `receivesConsoleMessageFromLocalFixture` separately to verify the BiDi event listener. Live-site and desktop examples require focused runs and depend on their site, browser, operating system, and window focus.

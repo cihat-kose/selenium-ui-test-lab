@@ -13,6 +13,7 @@ public class NewWindowTest extends BaseDriver {
 
     @Test
     public void newWindowTest() {
+        useExplicitWaitsOnly();
         driver.get("https://www.selenium.dev/selenium/web/window_switching_tests/page_with_frame.html");
 
         String mainWindow = driver.getWindowHandle();

@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
-import java.nio.file.Paths;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,8 @@ public class NewTabWindowTest extends BaseDriver {
      */
     @Test
     public void newTabWindowTest() {
-        driver.get(Paths.get("src/test/resources/new-tab.html").toAbsolutePath().toUri().toString());
+        useExplicitWaitsOnly();
+        openFixture("new-tab.html");
 
         String mainTabID = driver.getWindowHandle();
         driver.findElement(By.id("open-tab")).click();

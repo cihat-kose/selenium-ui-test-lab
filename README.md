@@ -42,7 +42,7 @@ The project uses the standard Maven test layout, matching `selenium-practice-les
 | [`pom.xml`](pom.xml) | Java version, dependencies, and Maven plugins |
 | [`mvnw`](mvnw) / [`mvnw.cmd`](mvnw.cmd) | Maven launchers for macOS/Linux and Windows |
 | [`.mvn/wrapper/`](.mvn/wrapper) | Pinned Maven Wrapper configuration |
-| [`.github/workflows/`](.github/workflows) | CI compilation checks |
+| [`.github/workflows/`](.github/workflows) | CI compilation and local browser checks |
 | [`LICENSE`](LICENSE) | MIT license |
 
 Maven discovers `src/test/java` and `src/test/resources` automatically. Each lesson's `Task.md` and `Summary.md` notes sit beside its Java examples.
@@ -69,7 +69,7 @@ Open a topic below to find its examples and notes. Start with the basic example 
 | 14 | [WebDriver BiDi](src/test/java/_14_WebDriverBiDi/Summary.md) | Click a button and receive the console message it produces directly from the browser. |
 | 15 | [File Selection](src/test/java/_15_FileUpload) | Compare direct WebDriver file selection with a native Robot file picker. |
 
-**Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, and test-data helpers.
+**Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, test-resource, and test-data helpers.
 
 **Further reading:** [Lesson map and verification limits](docs/LESSON_MAP.md) · [Manual HTML exercise](docs/html-basics/README.md)
 
@@ -112,7 +112,7 @@ macOS/Linux:
 ./mvnw -B -ntp test-compile
 ```
 
-`test-compile` compiles the lesson and test sources without starting Chrome. GitHub Actions runs this same compilation check; it does not execute live-site or desktop automation tests.
+`test-compile` compiles all lesson and test sources without starting Chrome. GitHub Actions runs `test`: it compiles the project and executes a small, repeatable set of local-fixture browser tests in headless Chrome. It then runs the local WebDriver BiDi example as a separate smoke test. Live-site and desktop lessons are not run by the default Maven test command.
 
 <a id="run-a-lesson"></a>
 
@@ -125,11 +125,17 @@ macOS/Linux:
 3. Chrome opens the local practice page, clicks **Accept** inside the Shadow DOM, and checks the message **Consent accepted**.
 4. Inspect the result in IntelliJ's **Run** window. A failed assertion or browser startup error appears there with its details.
 
-These are JUnit tests; they run through the test runner and do not need a `main` method. Keep the run configuration's working directory at the repository root so the resource paths work.
+These are JUnit tests; they run through the test runner and do not need a `main` method. Local pages and sample files are loaded from the Maven test classpath, so the tests do not depend on the IDE working directory.
 
 ### With Maven
 
-JUnit lesson classes use descriptive `*Test.java` names and are discoverable by Maven Surefire. Run one class at a time:
+Run the stable local-fixture smoke tests:
+
+```bash
+./mvnw -B -ntp test
+```
+
+Maven is configured to run only repeatable local examples by default. Run a live-site lesson explicitly, one class at a time:
 
 ```bash
 ./mvnw "-Dtest=InfiniteScrollTest" test
@@ -146,12 +152,14 @@ Browser tests depend on Chrome, network access, and the current state of externa
 
 ## Stable Local Examples
 
+- Keyboard input, JavaScript alerts, the delayed-alert wait, iframe editing, new tabs, and Shadow DOM use local HTML fixtures. Their expected results can be checked without relying on a third-party page.
+- The local WebDriver BiDi example also uses a fixture; CI runs that method separately from the default smoke-test set. Its live Selenium demo method is an optional focused run.
 - The textarea iframe exercise uses `src/test/resources/iframe-textarea.html` instead of the W3Schools editor, which can be obscured by external page overlays.
 - Shadow DOM exercises use local HTML fixtures so students can see the host, shadow root, click, and expected result without a third-party site.
-- The file-selection examples share `src/test/resources/upload-sample.txt`. The Robot test interacts with the operating-system file picker; the WebDriver test sends the path directly to `input[type=file]`. These demonstrate different techniques. The Robot example opens the file control directly and does not guess a TAB count.
+- The file-selection examples share `src/test/resources/upload-sample.txt`. The WebDriver test sends the path directly to `input[type=file]` and is part of the local smoke-test set. The separate Robot test interacts with the operating-system file picker; it opens the file control directly and does not guess a TAB count.
 - Both search lessons use DuckDuckGo instead of Google's variable automated-traffic and consent flow.
 
-The file-picker example requires a visible desktop session and keyboard focus. It may not run in a headless CI environment. It demonstrates selection and the page's confirmation message; it does not upload a file to a server.
+The Robot file-picker example requires a visible desktop session and keyboard focus. It may not run in a headless CI environment. Both examples demonstrate selection on a local page; they do not upload a file to a server.
 
 ## Waits and Browser Lifecycle
 
@@ -162,19 +170,19 @@ The file-picker example requires a visible desktop session and keyboard focus. I
 >
 > In real-world automation, prefer **explicit waits** such as `WebDriverWait`. They continue when a specific condition is met—for example, when a button becomes clickable—and fail if that condition is not met before the timeout.
 >
-> `waitAndClose()` is a three-second observation pause at the end of a lesson. It gives you time to inspect the final page before the browser closes; it is not test synchronization.
+> `waitAndClose()` is a three-second observation pause at the end of a lesson. It gives you time to inspect the final page before the browser closes; it is not test synchronization. Headless CI runs skip this observation pause.
 
-`BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. The shared driver retains a 30-second implicit wait for the existing lessons, and the implicit-wait lesson changes it to ten seconds. Combining implicit and explicit waits can make total wait times difficult to predict; use explicit waits alone in new examples.
+`BaseDriver` creates a browser in JUnit `@Before` and closes it in `@After`, including when a test fails. It retains a 30-second implicit wait for older lessons, while the implicit-wait lesson changes that value to ten seconds. Tests using explicit conditions call `useExplicitWaitsOnly()` to set the implicit wait to zero; combining implicit and explicit waits can make total wait times difficult to predict.
 
 ## Troubleshooting and Limitations
 
 - **No Run triangle or unresolved Selenium/JUnit imports:** reload the Maven project and wait for dependency resolution.
 - **Java release 21 error:** select JDK 21 for both the project and the Maven runner.
-- **Local fixture not found:** run from the repository root and compile the test resources.
+- **Local fixture not found:** reload the Maven project so it copies `src/test/resources` to the test classpath.
 
 - Public demo websites can change, become unavailable, or block automated traffic.
 - Robot examples interact with the desktop and depend on the operating system and focused window.
-- The full set of lessons is not a stable headless CI suite; run focused examples locally. Bare `mvn test` now discovers all `*Test` lessons, including desktop and live-site examples.
+- The full set of lessons is not a stable headless CI suite. Plain `mvn test` runs only the selected local-fixture tests; use `-Dtest=ClassName` to run a live-site lesson explicitly.
 - Some legacy exercises only demonstrate interactions or print results; see the lesson map for their current verification limits.
 - A Chrome startup failure occurs before the test reaches its page and assertions.
 

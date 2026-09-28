@@ -1,8 +1,10 @@
-Task: Handling Timed Alert with Explicit Wait
+# Wait for a Delayed Alert
 
-Steps:
-1. Go to the website: https://demoqa.com/alerts
-2. Click the "Click me" button which triggers an alert after 5 seconds.
-3. Use Explicit Wait to wait for the alert to appear.
-4. Once the alert appears, accept it by clicking OK.
-5. Close the browser.
+Run `DelayedAlertWaitTest` on the local `javascript-alerts.html` page.
+
+1. Click **Open delayed alert**. The page waits one second before opening a native JavaScript alert.
+2. Use `WebDriverWait` with `ExpectedConditions.alertIsPresent()` to wait for the dialog.
+3. Check its message and accept it.
+4. Wait for and check **Delayed alert accepted.** on the page.
+
+This example demonstrates a condition wait; it does not sleep for a guessed five-second duration.

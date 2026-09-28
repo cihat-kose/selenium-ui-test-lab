@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
-import java.nio.file.Paths;
-
 public class IframeTextAreaEditTest extends BaseDriver {
 
     /**
@@ -18,8 +16,8 @@ public class IframeTextAreaEditTest extends BaseDriver {
      */
     @Test
     public void editTextareaInIframe() {
-        driver.get(Paths.get("src/test/resources/iframe-textarea.html")
-                .toAbsolutePath().toUri().toString());
+        useExplicitWaitsOnly();
+        openFixture("iframe-textarea.html");
 
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("textarea-frame")));
 

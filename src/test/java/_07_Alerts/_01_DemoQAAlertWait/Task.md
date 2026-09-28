@@ -1,10 +1,5 @@
-Task: Handling a Timed Alert with Explicit Wait
+# Wait for a Delayed JavaScript Alert
 
-Steps:
-1. Go to "https://demoqa.com/alerts".
-2. Click the "Click me" button which triggers an alert after 5 seconds.
-3. Wait for the alert to appear using explicit wait.
-4. Accept the alert once it becomes visible.
+The executable version of this task is in [Waits](../../_08_Waits/_04_ExplicitWaitAlert/Task.md). It uses the local `javascript-alerts.html` fixture instead of relying on DemoQA's current page layout.
 
-
-Implementation: [shared lesson](../../_08_Waits/_04_ExplicitWaitAlert/DelayedAlertWaitTest.java). This task revisits the alert handling in that example; a second copy of the same test is unnecessary.
+Follow that task to click the delayed-alert button, wait with `WebDriverWait`, check the dialog text, accept it, and verify the page response. A second copy of the same test is unnecessary.

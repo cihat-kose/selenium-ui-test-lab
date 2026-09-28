@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
-import java.util.Objects;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,7 +16,8 @@ public class ShadowDomExampleTest extends BaseDriver {
 
     @Test
     public void clickButtonInsideOpenShadowRoot() {
-        driver.get(Objects.requireNonNull(getClass().getResource("/shadow-dom-example.html")).toExternalForm());
+        useExplicitWaitsOnly();
+        openFixture("shadow-dom-example.html");
 
         // Find the custom element that owns the Shadow DOM (the shadow host).
         WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(

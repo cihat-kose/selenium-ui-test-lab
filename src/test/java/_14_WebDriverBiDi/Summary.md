@@ -32,4 +32,4 @@ The message is a console entry, not an alert popup or a success label on the pag
 
 Yes. The second method, `receivesConsoleMessageFromSeleniumLiveDemo()`, opens Selenium's demo page. It clicks a button and checks the console message `Hello, world!` in the same way.
 
-The local example needs no public website. The live example needs internet access. Both require a browser and driver that support BiDi; CI only compiles these lessons.
+The local example needs no public website. CI runs that local method with headless Chrome. The live example needs internet access. Both require a browser and driver that support BiDi.

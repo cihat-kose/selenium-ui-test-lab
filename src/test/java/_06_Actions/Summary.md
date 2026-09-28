@@ -1,54 +1,19 @@
-===============================
-Selenium Actions Class Guide
-===============================
+# Selenium Actions
 
-1. What is Selenium Actions Class?
---------------------------------------
-- The `Actions` class in Selenium WebDriver is used to simulate advanced user interactions.
-- It enables:
-  - Mouse actions like hover, right-click, double-click
-  - Drag and drop
-  - Complex keyboard interactions like key combinations
+Selenium's `Actions` class builds mouse and keyboard gestures that involve more than a basic click or `sendKeys()` call. Chain the steps, then call `.perform()` to send them to the browser.
 
-2. How to Use the Actions Class?
-------------------------------------
-- First, create an instance of the Actions class:
-    Actions actions = new Actions(driver);
+```java
+new Actions(driver)
+        .moveToElement(menu)
+        .click()
+        .perform();
+```
 
-- Then chain your desired actions and end with:
-    .perform();
+## What the examples cover
 
-3. Commonly Used Actions Methods
--------------------------------------
-🖱 Mouse Actions:
-  a) `moveToElement(element)` – Move the mouse to the given element (hover)
-  b) `contextClick()` – Right-click on an element
-  c) `doubleClick()` – Double-click on an element
-  d) `clickAndHold()` – Click and hold without releasing
-  e) `dragAndDrop(source, target)` – Drag one element to another
+- **Keyboard:** [KeyboardActionsTest](./_04_KeyboardActions/KeyboardActionsTest.java) presses a space key and key combinations on a local page. The page records each key event, and the tests check the log and final input value.
+- **Mouse:** [MouseActionsTest](./_05_MouseActions/MouseActionsTest.java) demonstrates hover, click, double-click, right-click, click-and-hold, and drag-and-drop on practice pages. The double-click example checks the page message.
+- **Context and double-click alerts:** [ContextClickAndDoubleClickTest](./_01_ContextClickAndDoubleClick/ContextClickAndDoubleClickTest.java) performs the gesture and checks the alert or page response.
+- **Drag and drop:** the jQuery UI exercise checks its **Dropped!** result. The three matching and distribution exercises also check that each city or student ended up in its expected drop area.
 
-⌨ Keyboard Actions:
-  f) `sendKeys(Keys.ENTER)` – Press keys
-  g) `keyDown(Keys.CONTROL)` / `keyUp(Keys.CONTROL)` – Hold or release a key
-
-🔗 Chaining Actions:
-  h) `build()` – Builds a chain of actions
-     → Must be followed by `.perform()`
-
-4. Example – Chained Actions
--------------------------------
-Example:
-    actions.moveToElement(menu)
-           .click()
-           .sendKeys("Test")
-           .build()
-           .perform();
-
-5. Basic Syntax Summary
----------------------------
-    Actions actions = new Actions(driver);
-
-    actions.moveToElement(element)
-           .click()
-           .contextClick()
-           .perform();
+Most mouse examples use public demo sites, which can change. Plain `mvn test` includes the local keyboard lesson; run a live example separately when needed.

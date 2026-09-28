@@ -1,27 +1,33 @@
 package _08_Waits._04_ExplicitWaitAlert;
 
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
 
+import static org.junit.Assert.assertEquals;
+
 public class DelayedAlertWaitTest extends BaseDriver {
 
     /**
-     * Handling Timed Alert with Explicit Wait
+     * Waits for a delayed native alert, checks its text, and verifies the page after accepting it.
      */
     @Test
     public void waitForAlert() {
-        driver.get("https://demoqa.com/alerts");
+        useExplicitWaitsOnly();
+        openFixture("javascript-alerts.html");
 
-        // Click the button that triggers an alert after 5 seconds
-        WebElement timerAlertButton = driver.findElement(By.id("timerAlertButton"));
+        WebElement timerAlertButton = driver.findElement(By.id("timer-alert-button"));
         timerAlertButton.click();
 
-        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        assertEquals("This alert appeared after one second.", alert.getText());
+        alert.accept();
 
-        driver.switchTo().alert().accept();
+        assertEquals("Delayed alert accepted.", wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("result"))).getText());
 
         waitAndClose();
     }

@@ -1,7 +1,7 @@
 Subject: Finding and Validating Web Elements with CssSelector
 
 Task 1 – Demo QA Text Box:
-1. Go to: http://demoqa.com/text-box
+1. Go to: https://demoqa.com/text-box
 2. Enter "Automation" in the Full Name field.
 3. Enter "Testing@gmail.com" in the Email field.
 4. Enter "Testing Current Address" in the Current Address field.
@@ -25,18 +25,18 @@ Task 3 – Snapdeal Search:
 Task 4 – TestPages Calculator:
 1. Go to: https://testpages.herokuapp.com/styled/index.html
 2. Click on "Calculate".
-3. Enter any number in each input field.
+3. Enter 7 in the first input and 6 in the second.
 4. Click the "Calculate" button.
-5. Print the result to the console.
+5. Check that the displayed result is 13.
 
 Task 5 – TestPages Fake Alert:
 1. Go to: https://testpages.herokuapp.com/styled/index.html
 2. Click on "Fake Alerts".
 3. Click "Show Alert Box".
-4. Close the alert by clicking "OK".
+4. Click "OK" and check that the HTML alert closes.
 
 Task 6 – TestPages Modal Dialog:
 1. Go to: https://testpages.herokuapp.com/styled/index.html
 2. Click on "Fake Alerts".
 3. Click "Show Modal Dialog".
-4. Click the "OK" button on the modal dialog.
+4. Click "OK" and check that the HTML modal closes.

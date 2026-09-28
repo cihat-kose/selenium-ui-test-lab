@@ -6,8 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utility.BaseDriver;
-
-import java.nio.file.Paths;
+import utility.TestResources;
 
 /**
  * Selects the same shared file by sending its path directly to input[type=file].
@@ -17,11 +16,10 @@ public class FileSelectionWithWebDriverTest extends BaseDriver {
 
     @Test
     public void selectsAFileWithWebDriver() {
-        driver.get(Paths.get("src/test/resources/robot-file-upload.html")
-                .toAbsolutePath().toUri().toString());
+        useExplicitWaitsOnly();
+        openFixture("robot-file-upload.html");
 
-        String filePath = Paths.get("src/test/resources/upload-sample.txt")
-                .toAbsolutePath().toString();
+        String filePath = TestResources.path("upload-sample.txt").toAbsolutePath().toString();
         WebElement fileInput = driver.findElement(By.cssSelector("input[type='file']"));
         fileInput.sendKeys(filePath);
 

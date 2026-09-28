@@ -12,6 +12,7 @@ public class NinjaRegisterTest extends BaseDriver {
 
     @Test
     public void registerTest() {
+        useExplicitWaitsOnly();
         driver.get("http://tutorialsninja.com/demo/");
 
         WebElement myAccount = driver.findElement(By.xpath("//span[text()='My Account']"));
