@@ -9,7 +9,7 @@ IFrames
 - To switch one level up (in nested iframes): `driver.switchTo().parentFrame();`
 
 3. Key Notes:
-- Failing to switch to the correct iframe causes `NoSuchElementException`.
+- Searching for iframe content before switching into the correct frame can cause `NoSuchElementException`.
 - You must switch out of the iframe before accessing other page elements.
 - You can switch to iframes using id, name, index, or WebElement.
 
@@ -21,3 +21,4 @@ driver.switchTo().frame(iframe);
 
 // Switch back to the main document
 driver.switchTo().defaultContent();
+```

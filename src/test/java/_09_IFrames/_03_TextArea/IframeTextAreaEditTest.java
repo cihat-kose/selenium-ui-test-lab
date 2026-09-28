@@ -21,6 +21,7 @@ public class IframeTextAreaEditTest extends BaseDriver {
         driver.get(Paths.get("src/test/resources/iframe-textarea.html")
                 .toAbsolutePath().toUri().toString());
 
+        // Wait for the frame and switch into it before searching for the textarea.
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("textarea-frame")));
 
         // Alternative ways to switch to this frame:
@@ -29,6 +30,7 @@ public class IframeTextAreaEditTest extends BaseDriver {
         // driver.switchTo().frame(0);
         WebElement textArea = wait.until(ExpectedConditions.elementToBeClickable(By.id("review")));
         textArea.click();
+        // Select the existing value before typing so the test replaces it instead of appending.
         textArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), "This text was changed with Selenium!");
         Assert.assertEquals("This text was changed with Selenium!", textArea.getAttribute("value"));
 

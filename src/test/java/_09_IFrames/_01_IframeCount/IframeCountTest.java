@@ -8,18 +8,19 @@ import utility.BaseDriver;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class IframeCountTest extends BaseDriver {
 
     @Test
     public void countIframesOnPage() {
         driver.get("https://www.selenium.dev/selenium/web/iframes.html");
+        // Wait for the example frame to confirm the page has finished rendering its frames.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("iframe1")));
 
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("Number of iframes on the page: " + iframes.size());
-        assertTrue("The Selenium iframe example should contain at least one iframe.", !iframes.isEmpty());
+        assertFalse("The Selenium iframe example should contain at least one iframe.", iframes.isEmpty());
 
         waitAndClose();
     }
