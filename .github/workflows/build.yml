@@ -27,6 +27,7 @@ jobs:
         id: setup-chrome
         with:
           install-chromedriver: true
+          install-dependencies: true
 
       - name: Compile lessons and run local browser smoke tests
         env:

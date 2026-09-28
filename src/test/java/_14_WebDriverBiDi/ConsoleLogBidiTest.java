@@ -28,7 +28,8 @@ public class ConsoleLogBidiTest {
             options.setBinary(chromeBinary);
         }
         if (Boolean.getBoolean("selenium.headless")) {
-            options.addArguments("--headless=new", "--window-size=1440,1000");
+            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage",
+                    "--window-size=1440,1000");
         }
         driver = new ChromeDriver(options);
     }
