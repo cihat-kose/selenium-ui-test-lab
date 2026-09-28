@@ -28,7 +28,10 @@ public class ShadowDomExampleTest extends BaseDriver {
         SearchContext shadowRoot = shadowHost.getShadowRoot();
         shadowRoot.findElement(By.id("accept")).click();
 
-        WebElement result = wait.until(d -> shadowRoot.findElement(By.id("result")));
+        WebElement result = wait.until(d -> {
+            WebElement message = shadowRoot.findElement(By.id("result"));
+            return "Consent accepted".equals(message.getText()) ? message : null;
+        });
         assertEquals("Consent accepted", result.getText());
         waitAndClose();
     }
