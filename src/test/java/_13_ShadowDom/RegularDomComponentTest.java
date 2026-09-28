@@ -26,6 +26,7 @@ public class RegularDomComponentTest extends BaseDriver {
         WebElement username = component.findElement(By.id("username"));
         wait.until(ExpectedConditions.elementToBeClickable(username)).sendKeys("student");
         assertEquals("student", username.getAttribute("value"));
+
         waitAndClose();
     }
 }
