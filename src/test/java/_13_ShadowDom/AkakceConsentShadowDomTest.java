@@ -9,22 +9,28 @@ import utility.BaseDriver;
 
 import static org.junit.Assert.assertTrue;
 
-/** Demonstrates getShadowRoot() on a live consent component. */
+/**
+ * Demonstrates getShadowRoot() on a live consent component.
+ */
 public class AkakceConsentShadowDomTest extends BaseDriver {
 
     @Test
     public void acceptConsentInsideShadowRoot() {
         driver.get("https://www.akakce.com/");
 
-        WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.className("efilli-layout-tuttur")));
+        WebElement shadowHost = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.cssSelector("efilli-layout-dynamic")));
+
         SearchContext shadowRoot = shadowHost.getShadowRoot();
+
         WebElement acceptButton = wait.until(d -> {
             WebElement button = shadowRoot.findElement(By.cssSelector("div[data-name='kabul et']"));
             return button.isDisplayed() && button.isEnabled() ? button : null;
         });
 
         acceptButton.click();
+
         assertTrue("The consent button should disappear after acceptance.",
                 wait.until(ExpectedConditions.invisibilityOf(acceptButton)));
         waitAndClose();
