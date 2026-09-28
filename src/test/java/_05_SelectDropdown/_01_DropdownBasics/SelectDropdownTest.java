@@ -1,4 +1,4 @@
-package _05_SelectDropdown;
+package _05_SelectDropdown._01_DropdownBasics;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,41 +13,43 @@ import java.util.List;
 public class SelectDropdownTest extends BaseDriver {
 
     @Test
-    public void testSelectDropdown() {
+    public void selectOptionsUsingTheSelectClass() {
         driver.get("https://the-internet.herokuapp.com/dropdown");
 
         WebElement dropdownElement = driver.findElement(By.id("dropdown"));
         Select dropdown = new Select(dropdownElement);
 
-        // 1. Select by visible text
+        // Demonstrate each selection API and assert the selected value immediately.
         dropdown.selectByVisibleText("Option 2");
         Assert.assertEquals("Option 2", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by visible text: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
+        // Intentional pauses let learners observe each change in the browser; see README for their limits.
+        MyFunction.wait(2);
 
         // 2. Select by value
         dropdown.selectByValue("1");
         Assert.assertEquals("Option 1", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by value: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
+        MyFunction.wait(2);
 
         // 3. Select by index
         dropdown.selectByIndex(2); // Option 2
         Assert.assertEquals("Option 2", dropdown.getFirstSelectedOption().getText());
         System.out.println("Selected by index: " + dropdown.getFirstSelectedOption().getText());
 
-        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
+        MyFunction.wait(2);
 
         // 4. Get all options
         List<WebElement> options = dropdown.getOptions();
+        Assert.assertEquals("The dropdown should contain a placeholder and two choices", 3, options.size());
         System.out.println("All available options:");
         for (WebElement option : options) {
             System.out.println("- " + option.getText());
         }
 
-        MyFunction.wait(2); /// For visibility only. Use WebDriverWait in real automation.
+        MyFunction.wait(2);
 
         // 5. Get first selected option
         WebElement firstSelected = dropdown.getFirstSelectedOption();
@@ -57,10 +59,12 @@ public class SelectDropdownTest extends BaseDriver {
         // 6. getAllSelectedOptions() (mostly useful for multi-select dropdowns)
         List<WebElement> selectedOptions = dropdown.getAllSelectedOptions();
         System.out.println("Selected options count: " + selectedOptions.size());
+        Assert.assertEquals("A single-select dropdown has one selected option", 1, selectedOptions.size());
 
         // 7. deselectAll() – only for multi-select dropdowns
         // dropdown.deselectAll(); // Not applicable here (single-select)
 
+        // Keep the final state visible briefly so learners can inspect the selection.
         waitAndClose();
     }
 }
