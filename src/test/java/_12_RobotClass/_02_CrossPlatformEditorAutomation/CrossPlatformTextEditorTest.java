@@ -4,6 +4,7 @@ import org.junit.Test;
 import utility.MyFunction;
 
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
@@ -35,24 +36,15 @@ public class CrossPlatformTextEditorTest {
         Robot robot = new Robot();
         robot.setAutoDelay(100);
 
-        // 5. Type the message
+        // 5. Paste the message so keyboard layout differences do not alter its characters.
         String message = "Hello from Robot Class";
-        for (char ch : message.toCharArray()) {
-            if (Character.isUpperCase(ch)) robot.keyPress(KeyEvent.VK_SHIFT);
-
-            int keyCode = KeyEvent.getExtendedKeyCodeForChar(ch);
-            if (keyCode != KeyEvent.CHAR_UNDEFINED) {
-                robot.keyPress(keyCode);
-                robot.keyRelease(keyCode);
-            }
-
-            if (Character.isUpperCase(ch)) robot.keyRelease(KeyEvent.VK_SHIFT);
-
-            if (ch == ' ') {
-                robot.keyPress(KeyEvent.VK_SPACE);
-                robot.keyRelease(KeyEvent.VK_SPACE);
-            }
-        }
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(message), null);
+        int pasteModifier = os.contains("mac") ? KeyEvent.VK_META : KeyEvent.VK_CONTROL;
+        robot.keyPress(pasteModifier);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(pasteModifier);
+        robot.waitForIdle();
 
         // 6. Small pause after typing
         MyFunction.wait(1);

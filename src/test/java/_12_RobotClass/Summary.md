@@ -27,7 +27,7 @@ The example needs a visible desktop and the correct window in focus. It selects 
 ## What do the other examples show?
 
 - [DuckDuckGoRobotSearchTest](_01_DuckDuckGoSearch/DuckDuckGoRobotSearchTest.java) pastes a search phrase, presses Enter, and demonstrates mouse movement and clicks.
-- [CrossPlatformTextEditorTest](_02_CrossPlatformEditorAutomation/CrossPlatformTextEditorTest.java) opens a desktop text editor and types a message. Its current code handles Windows and macOS.
+- [CrossPlatformTextEditorTest](_02_CrossPlatformEditorAutomation/CrossPlatformTextEditorTest.java) opens a desktop text editor, pastes a message with Robot using the operating system's shortcut, and closes the editor. Its current code handles Windows and macOS.
 
 These two are interaction demonstrations; they do not assert the final search or editor contents.
 

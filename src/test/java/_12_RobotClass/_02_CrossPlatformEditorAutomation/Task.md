@@ -7,6 +7,6 @@ Steps:
    - Windows: Notepad
    - macOS: TextEdit
 3. Wait a few seconds for the application to load.
-4. Use Robot Class to type the text "Hello from Robot Class" into the editor.
+4. Copy "Hello from Robot Class" to the clipboard and use Robot to paste it into the editor (Ctrl+V on Windows, Cmd+V on macOS).
 5. After writing, close the application using OS-specific keyboard shortcuts.
 

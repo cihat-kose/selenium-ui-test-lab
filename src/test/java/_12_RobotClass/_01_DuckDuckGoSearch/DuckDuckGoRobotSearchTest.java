@@ -17,7 +17,7 @@ public class DuckDuckGoRobotSearchTest extends BaseDriver {
     public void searchDuckduckgo() throws AWTException {
         driver.get("https://duckduckgo.com");
 
-        WebElement searchBox = driver.findElement(By.id("searchbox_input"));
+        WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.click();
 
         // Initialize Robot instance
