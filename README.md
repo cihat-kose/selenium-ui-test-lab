@@ -42,7 +42,7 @@ The project uses the standard Maven test layout, matching `selenium-practice-les
 | [`pom.xml`](pom.xml) | Java version, dependencies, and Maven plugins |
 | [`mvnw`](mvnw) / [`mvnw.cmd`](mvnw.cmd) | Maven launchers for macOS/Linux and Windows |
 | [`.mvn/wrapper/`](.mvn/wrapper) | Pinned Maven Wrapper configuration |
-| [`.github/workflows/`](.github/workflows) | CI compilation and local browser checks |
+| [`.github/workflows/`](.github/workflows) | CI compilation, local browser checks, and extended lesson validation |
 | [`LICENSE`](LICENSE) | MIT license |
 
 Maven discovers `src/test/java` and `src/test/resources` automatically. Each lesson's `Task.md` and `Summary.md` notes sit beside its Java examples.
@@ -113,6 +113,8 @@ macOS/Linux:
 ```
 
 `test-compile` compiles all lesson and test sources without starting Chrome. GitHub Actions runs `test`: it compiles the project and executes a small, repeatable set of local-fixture browser tests in headless Chrome. It then runs the local WebDriver BiDi example as a separate smoke test. Live-site and desktop lessons are not run by the default Maven test command.
+
+The **Extended lesson validation** workflow can be started from GitHub Actions when you want to exercise every `*Test` class. It runs Chrome in a virtual desktop so Robot-based browser and file-picker examples can receive input. The Windows/macOS system-editor lesson is skipped on Linux by its operating-system assumption. Live-site tests can fail when a public demo changes or blocks automated traffic; check the individual Surefire report before treating such a failure as a Selenium code defect.
 
 <a id="run-a-lesson"></a>
 
