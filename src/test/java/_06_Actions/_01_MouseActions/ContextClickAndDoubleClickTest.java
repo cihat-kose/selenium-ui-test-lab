@@ -1,4 +1,4 @@
-package _06_Actions._01_ContextClickAndDoubleClick;
+package _06_Actions._01_MouseActions;
 
 import org.junit.Test;
 import org.junit.Assert;
@@ -10,46 +10,43 @@ import utility.BaseDriver;
 public class ContextClickAndDoubleClickTest extends BaseDriver {
 
     @Test
-    public void chainOfActionsTest() {
+    public void verifyContextClickAndDoubleClickAlerts() {
         Actions actions = new Actions(driver);
 
-        // 1. Step: Go to the test
+        // Open the demo page for custom context-menu and double-click events.
         driver.get("http://demo.guru99.com/test/simple_context_menu.html");
 
         WebElement rightClickButton = driver.findElement(By.cssSelector(".context-menu-one"));
 
-        // 3. Step: Find the element to double-click
+        // Locate the button before interacting with the context menu.
         WebElement doubleClickButton = driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
 
-        // 4. Step: Perform right-click action
+        // Open the custom context menu with a right-click.
         actions.moveToElement(rightClickButton)
                 .contextClick(rightClickButton)
                 .perform();
 
-        // 5. Step: Click on "Copy" option from context menu
+        // Choose Copy and verify the page's alert response.
         WebElement copyOption = driver.findElement(By.cssSelector(".context-menu-icon-copy"));
         copyOption.click();
 
-        // 6. Step: Verify and close the alert after right-click
         String alertMessage = driver.switchTo().alert().getText();
         System.out.println("Right-click alert: " + alertMessage);
         Assert.assertEquals("clicked: copy", alertMessage);
         driver.switchTo().alert().accept();
 
-        // 7. Step: Perform double-click action
+        // Verify the separate alert triggered by a double-click.
         actions.moveToElement(doubleClickButton)
                 .doubleClick(doubleClickButton)
                 .perform();
 
-        // 8. Step: Verify the alert after double-click
         String doubleClickAlert = driver.switchTo().alert().getText();
         String expectedAlert = "You double clicked me.. Thank You..";
         Assert.assertEquals("Unexpected alert message after double click", expectedAlert, doubleClickAlert);
 
-        // 9. Step: Close the alert after double-click
         driver.switchTo().alert().accept();
 
-        // 10. Step: Close the browser
+        // Intentional observation pause; see the README wait guidance.
         waitAndClose();
     }
 }

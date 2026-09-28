@@ -1,4 +1,4 @@
-package _06_Actions._05_MouseActions;
+package _06_Actions._01_MouseActions;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.BaseDriver;
-
 
 public class MouseActionsTest extends BaseDriver {
 
@@ -32,7 +31,6 @@ public class MouseActionsTest extends BaseDriver {
 //      Alternative: hover the mouse over a specific point of the element
 //      actions.moveToElement(elementToHover, 50, 50).perform();
 
-        // waitAndClose();
     }
 
     /**
@@ -43,7 +41,7 @@ public class MouseActionsTest extends BaseDriver {
         driver.get("https://demoqa.com/buttons");
 
         WebElement doubleClickButton = driver.findElement(By.id("doubleClickBtn"));
-        actions.doubleClick(doubleClickButton).perform();
+        actions.doubleClick(doubleClickButton).build().perform();
 
 //        Alternative: To double-click, move on the element first and double-click
 //        actions.moveToElement(doubleClickButton).doubleClick().perform();
@@ -53,7 +51,6 @@ public class MouseActionsTest extends BaseDriver {
         String expectedMessage = "You have done a double click";
         Assert.assertEquals(message.getText(), expectedMessage);
 
-        // waitAndClose();
     }
 
     /**
@@ -71,7 +68,6 @@ public class MouseActionsTest extends BaseDriver {
         System.out.println("Alert content: " + alert.getText());
         alert.accept();
 
-        // waitAndClose();
     }
 
     /**
@@ -87,7 +83,6 @@ public class MouseActionsTest extends BaseDriver {
 //        Alternative: Click action with actions.moveToElement()
 //        actions.moveToElement(elementToClick).click().perform();
 
-        // waitAndClose();
     }
 
     /**
@@ -106,7 +101,6 @@ public class MouseActionsTest extends BaseDriver {
 //        Alternative: Drag and drop to a specific pixel distance (dragAndDropBy)
 //        actions.clickAndHold(elementToClickAndHold).moveByOffset(150, 0).release().perform();
 
-        // waitAndClose();
     }
 
     /**
@@ -121,6 +115,7 @@ public class MouseActionsTest extends BaseDriver {
 
         actions.dragAndDrop(sourceElement, targetElement).perform();  // Drag the source element to the target
 
+        // Intentional observation pause for the final mouse example; see the README wait guidance.
         waitAndClose();
     }
 }

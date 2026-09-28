@@ -1,4 +1,4 @@
-package _06_Actions._04_KeyboardActions;
+package _06_Actions._02_KeyboardActions;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -29,7 +29,6 @@ public class KeyboardActionsTest extends BaseDriver {
 //        Alternative: Using Actions
 //        actions.sendKeys(Keys.SPACE).perform();
 
-//        waitAndClose();
     }
 
     /**
@@ -44,7 +43,6 @@ public class KeyboardActionsTest extends BaseDriver {
 //        Alternative: using keyDown and keyUp
 //        actions.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
 
-//        waitAndClose();
     }
 
     /**
@@ -59,7 +57,6 @@ public class KeyboardActionsTest extends BaseDriver {
 //        Alternative: Simply sending uppercase T
 //        body.sendKeys("T");
 
-//        waitAndClose();
     }
 
     /**
@@ -76,6 +73,7 @@ public class KeyboardActionsTest extends BaseDriver {
 //        Alternative using chord:
 //        body.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 
+        // Intentional observation pause for the final keyboard example; see the README wait guidance.
         waitAndClose();
     }
 }

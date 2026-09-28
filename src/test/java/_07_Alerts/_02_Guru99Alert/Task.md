@@ -8,4 +8,4 @@ Steps:
 5. Handle and verify the alert that appears after double-click.
 
 
-Implementation: [shared lesson](../../_06_Actions/_01_ContextClickAndDoubleClick/ContextClickAndDoubleClickTest.java). This task revisits the alert handling in that example; a second copy of the same test is unnecessary.
+Implementation: [shared lesson](../../_06_Actions/_01_MouseActions/ContextClickAndDoubleClickTest.java). This task revisits the alert handling in that example; a second copy of the same test is unnecessary.

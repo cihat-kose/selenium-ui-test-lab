@@ -1,4 +1,4 @@
-package _06_Actions._02_DragAndDropJQuery;
+package _06_Actions._01_MouseActions;
 
 import org.junit.Test;
 import org.junit.Assert;

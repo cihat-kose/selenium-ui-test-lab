@@ -1,54 +1,21 @@
-===============================
-Selenium Actions Class Guide
-===============================
+# Selenium Actions
 
-1. What is Selenium Actions Class?
---------------------------------------
-- The `Actions` class in Selenium WebDriver is used to simulate advanced user interactions.
-- It enables:
-  - Mouse actions like hover, right-click, double-click
-  - Drag and drop
-  - Complex keyboard interactions like key combinations
+Selenium's `Actions` class models pointer and keyboard input that goes beyond a simple element click or `sendKeys` call. The examples are grouped by the interaction they teach.
 
-2. How to Use the Actions Class?
-------------------------------------
-- First, create an instance of the Actions class:
-    Actions actions = new Actions(driver);
+## Common operations
 
-- Then chain your desired actions and end with:
-    .perform();
+- Pointer: `moveToElement`, `contextClick`, `doubleClick`, `clickAndHold`, and `dragAndDrop`.
+- Keyboard: `sendKeys`, `keyDown`, and `keyUp` for individual keys and key combinations.
+- Chaining: `build()` creates an `Action` from a sequence; `perform()` executes it.
 
-3. Commonly Used Actions Methods
--------------------------------------
-🖱 Mouse Actions:
-  a) `moveToElement(element)` – Move the mouse to the given element (hover)
-  b) `contextClick()` – Right-click on an element
-  c) `doubleClick()` – Double-click on an element
-  d) `clickAndHold()` – Click and hold without releasing
-  e) `dragAndDrop(source, target)` – Drag one element to another
+## Lessons
 
-⌨ Keyboard Actions:
-  f) `sendKeys(Keys.ENTER)` – Press keys
-  g) `keyDown(Keys.CONTROL)` / `keyUp(Keys.CONTROL)` – Hold or release a key
+- [Context click and double click](./_01_MouseActions/ContextClickAndDoubleClickTest.java) ([task](./_01_MouseActions/ContextClickAndDoubleClickTask.md)): trigger and handle the demo page's JavaScript alerts.
+- [Mouse actions](./_01_MouseActions/MouseActionsTest.java) ([task](./_01_MouseActions/MouseActionsTask.md)): hover, click, right-click, double-click, and drag elements.
+- [jQuery UI drag and drop](./_01_MouseActions/DragAndDropJQueryTest.java) ([task](./_01_MouseActions/JQueryUiTask.md)): drag an item into a target inside an iframe.
+- [Keyboard actions](./_02_KeyboardActions/KeyboardActionsTest.java) ([task](./_02_KeyboardActions/Task.md)): send individual keys and key combinations.
+- [Search with Actions](./_03_SearchActions/DuckDuckGoSearchActionTest.java) ([task](./_03_SearchActions/Task.md)): enter a query and submit it with the Enter key.
 
-🔗 Chaining Actions:
-  h) `build()` – Builds a chain of actions
-     → Must be followed by `.perform()`
+Some examples retain `waitAndClose()` so learners can inspect the resulting browser state. It is an intentional observation pause, not test synchronization; the [README wait guidance](../../../../README.md#waits-and-browser-lifecycle) explains the distinction.
 
-4. Example – Chained Actions
--------------------------------
-Example:
-    actions.moveToElement(menu)
-           .click()
-           .sendKeys("Test")
-           .build()
-           .perform();
-
-5. Basic Syntax Summary
----------------------------
-    Actions actions = new Actions(driver);
-
-    actions.moveToElement(element)
-           .click()
-           .contextClick()
-           .perform();
+Public practice sites can change or become unavailable. The examples depend on each site's current markup and behavior.

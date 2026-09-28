@@ -58,7 +58,7 @@ Open a topic below to find its examples and notes. Start with the basic example 
 | 03 | [CSS Selectors](src/test/java/_03_CssSelector) | [Registration](src/test/java/_03_CssSelector/_01_Registration) and [practice exercises](src/test/java/_03_CssSelector/_02_Practice) for CSS locator patterns. |
 | 04 | [XPath](src/test/java/_04_XPath) | [Registration](src/test/java/_04_XPath/_01_Registration) and [practice exercises](src/test/java/_04_XPath/_02_Practice) for XPath locator patterns. |
 | 05 | [Select Dropdowns](src/test/java/_05_SelectDropdown) | [Dropdown basics](src/test/java/_05_SelectDropdown/_01_DropdownBasics) and [calculator follow-up](src/test/java/_05_SelectDropdown/_02_CalculatorOperations). |
-| 06 | [Actions](src/test/java/_06_Actions) | Use keyboard input, hover, context click, double click, and drag-and-drop. |
+| 06 | [Actions](src/test/java/_06_Actions) | [Mouse and drag-and-drop actions](src/test/java/_06_Actions/_01_MouseActions), [keyboard](src/test/java/_06_Actions/_02_KeyboardActions), and [search](src/test/java/_06_Actions/_03_SearchActions). |
 | 07 | [Alerts](src/test/java/_07_Alerts) | Accept, dismiss, and enter text into browser dialogs. |
 | 08 | [Waits](src/test/java/_08_Waits) | Practice implicit, explicit, and fluent waits for dynamic content. |
 | 09 | [Iframes](src/test/java/_09_IFrames) | Switch into a frame, interact with its contents, and return. |

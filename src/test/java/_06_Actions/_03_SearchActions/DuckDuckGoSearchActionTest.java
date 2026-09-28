@@ -1,4 +1,4 @@
-package _06_Actions._03_DuckDuckGoSearchActions;
+package _06_Actions._03_SearchActions;
 
 import org.junit.Assert;
 import org.junit.Test;
