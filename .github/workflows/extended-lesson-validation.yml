@@ -41,4 +41,4 @@ jobs:
       - name: Run all lesson test classes in a virtual desktop
         env:
           SELENIUM_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
-        run: xvfb-run -a ./mvnw -B -ntp -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" -Dtest='*Test' test
+        run: xvfb-run -a ./mvnw -B -ntp -Dselenium.ci=true -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" -Dtest='*Test' test

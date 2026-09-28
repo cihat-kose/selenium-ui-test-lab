@@ -21,17 +21,20 @@ public class BaseDriver {
     @Before
     public void setUp() {
         headless = Boolean.getBoolean("selenium.headless");
+        boolean ci = Boolean.getBoolean("selenium.ci");
         ChromeOptions options = new ChromeOptions();
         String chromeBinary = System.getProperty("selenium.chrome.binary");
         if (chromeBinary != null && !chromeBinary.isBlank()) {
             options.setBinary(chromeBinary);
         }
+        if (ci) {
+            options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1440,1000");
+        }
         if (headless) {
-            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage",
-                    "--window-size=1440,1000");
+            options.addArguments("--headless=new", "--window-size=1440,1000");
         }
         driver = new ChromeDriver(options);
-        if (!headless) {
+        if (!headless && !ci) {
             driver.manage().window().maximize();
         }
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
@@ -84,3 +87,4 @@ public class BaseDriver {
         }
     }
 }
+
