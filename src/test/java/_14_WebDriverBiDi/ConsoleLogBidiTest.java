@@ -23,6 +23,10 @@ public class ConsoleLogBidiTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("webSocketUrl", true);
+        String chromeBinary = System.getProperty("selenium.chrome.binary");
+        if (chromeBinary != null && !chromeBinary.isBlank()) {
+            options.setBinary(chromeBinary);
+        }
         if (Boolean.getBoolean("selenium.headless")) {
             options.addArguments("--headless=new", "--window-size=1440,1000");
         }

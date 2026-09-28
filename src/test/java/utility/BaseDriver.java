@@ -22,6 +22,10 @@ public class BaseDriver {
     public void setUp() {
         headless = Boolean.getBoolean("selenium.headless");
         ChromeOptions options = new ChromeOptions();
+        String chromeBinary = System.getProperty("selenium.chrome.binary");
+        if (chromeBinary != null && !chromeBinary.isBlank()) {
+            options.setBinary(chromeBinary);
+        }
         if (headless) {
             options.addArguments("--headless=new", "--window-size=1440,1000");
         }

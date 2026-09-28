@@ -24,11 +24,16 @@ jobs:
 
       - name: Install stable Chrome
         uses: browser-actions/setup-chrome@v2
+        id: setup-chrome
         with:
           install-chromedriver: true
 
       - name: Compile lessons and run local browser smoke tests
-        run: ./mvnw -B -ntp -Dselenium.headless=true test
+        env:
+          SELENIUM_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: ./mvnw -B -ntp -Dselenium.headless=true -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" test
 
       - name: Run the local WebDriver BiDi smoke test
-        run: ./mvnw -B -ntp -Dselenium.headless=true -Dtest=ConsoleLogBidiTest#receivesConsoleMessageFromLocalFixture test
+        env:
+          SELENIUM_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: ./mvnw -B -ntp -Dselenium.headless=true -Dselenium.chrome.binary="$SELENIUM_CHROME_BINARY" -Dtest=ConsoleLogBidiTest#receivesConsoleMessageFromLocalFixture test
