@@ -67,7 +67,7 @@ Open a topic below to find its examples and notes. Start with the basic example 
 | 12 | [Robot](src/test/java/_12_RobotClass/Summary.md) | Let Java press keys and move the mouse, including in windows outside the web page. |
 | 13 | [Shadow DOM](src/test/java/_13_ShadowDom/Summary.md) | Reach a button inside a component's separate area, click it, and check the result. |
 | 14 | [WebDriver BiDi](src/test/java/_14_WebDriverBiDi/Summary.md) | Click a button and receive the console message it produces directly from the browser. |
-| 15 | [File Selection](src/test/java/_15_FileUpload) | Compare direct WebDriver file selection with a native Robot file picker. |
+| 15 | [File Upload](src/test/java/_15_FileUpload/Summary.md) | Compare Robot file-picker input on Guru99 with direct WebDriver selection on LetCode. |
 
 **Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, and test-data helpers.
 
@@ -148,10 +148,10 @@ Browser tests depend on Chrome, network access, and the current state of externa
 
 - The textarea iframe exercise uses `src/test/resources/iframe-textarea.html` instead of the W3Schools editor, which can be obscured by external page overlays.
 - Shadow DOM exercises use local HTML fixtures so students can see the host, shadow root, click, and expected result without a third-party site.
-- The file-selection examples share `src/test/resources/upload-sample.txt`. The Robot test interacts with the operating-system file picker; the WebDriver test sends the path directly to `input[type=file]`. These demonstrate different techniques. The Robot example opens the file control directly and does not guess a TAB count.
+- The file-upload examples share `src/test/resources/upload-sample.txt`. The Robot test uses Guru99 and interacts with its operating-system file picker; the WebDriver test sends the path directly to LetCode's `input[type=file]`.
 - Both search lessons use DuckDuckGo instead of Google's variable automated-traffic and consent flow.
 
-The file-picker example requires a visible desktop session and keyboard focus. It may not run in a headless CI environment. It demonstrates selection and the page's confirmation message; it does not upload a file to a server.
+The Robot file-picker example requires a visible Windows desktop session and depends on the native dialog's focus and tab order, so it may not run in headless CI. The Robot method uploads to Guru99; the WebDriver method selects the file on LetCode. Both use public demo sites whose availability and markup can change.
 
 ## Waits and Browser Lifecycle
 

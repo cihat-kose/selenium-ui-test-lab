@@ -12,17 +12,16 @@ Robot can press keys in that window. It sends input to whichever window currentl
 
 ## What do we do in our example?
 
-Open [FileSelectionWithRobotTest](../_15_FileUpload/FileSelectionWithRobotTest.java).
+Open [FileUploadWithRobot](../_15_FileUpload/_01_RobotGuru99/FileUploadWithRobot.java), especially `uploadFileUsingRobotTest()`, and its [task](../_15_FileUpload/_01_RobotGuru99/Task.md).
 
-1. Selenium opens our local page and clicks its file input.
-2. The computer's file picker opens.
-3. Robot presses **Ctrl+V** to paste the sample file's path, then **Enter** to select it.
-4. Selenium waits until the page shows `upload-sample.txt`.
-5. The test submits the local form and checks **File selected and form submitted.**
+1. Selenium opens the Guru99 file-upload demo.
+2. Robot uses **Tab** and **Enter** to open the native file picker, then **Ctrl+V** to paste the sample file path.
+3. Robot confirms the file selection. Selenium accepts the terms and clicks **Submit File**.
+4. The test checks Guru99's upload confirmation.
 
 **In one sentence:** Robot uses the keyboard to select a file in a window outside the web page; Selenium checks the result on the page.
 
-The example needs a visible desktop and the correct window in focus. It selects a local file; the practice page does not upload it to a server.
+The example needs a visible Windows desktop and depends on the native file picker's keyboard focus and tab order. It submits the sample file to Guru99's public demo.
 
 ## What do the other examples show?
 
@@ -31,4 +30,4 @@ The example needs a visible desktop and the correct window in focus. It selects 
 
 These two are interaction demonstrations; they do not assert the final search or editor contents.
 
-For comparison, [FileSelectionWithWebDriverTest](../_15_FileUpload/FileSelectionWithWebDriverTest.java) sends the file path directly to the page's file input. It does not use Robot or open the computer's file picker.
+For comparison, `uploadFileUsingWebDriver()` in [FileUploadWithWebDriverLetcode](../_15_FileUpload/_02_WebDriverLetcode/FileUploadWithWebDriverLetcode.java) sends the path directly to LetCode's file input. It does not use Robot or open the computer's file picker. See its [task](../_15_FileUpload/_02_WebDriverLetcode/Task.md).

@@ -1,8 +1,0 @@
-File Upload: Native Picker and WebDriver
-
-Both examples use the same file, `src/test/resources/upload-sample.txt`, and a local practice page.
-
-1. `FileSelectionWithRobotTest` opens the operating-system file picker and uses Robot to paste the file path. It demonstrates native keyboard input. It requires a visible desktop session and depends on the picker focus behavior of the operating system. The test opens the file input directly and does not use a guessed TAB count.
-2. `FileSelectionWithWebDriverTest` sends the absolute file path to `input[type=file]` with Selenium's `sendKeys`. This does not open the operating-system dialog and is the usual browser automation approach.
-
-Both examples assert the selected file name. The local page displays a confirmation when the form is submitted; it does not send the file to a server.
