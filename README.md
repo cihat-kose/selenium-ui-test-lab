@@ -10,7 +10,7 @@
 
 This repository contains hands-on Selenium WebDriver lessons and exercises in Java. It is an educational project: examples focus on one browser interaction at a time and use JUnit assertions where the expected result can be checked.
 
-**Quick links:** [Install in IntelliJ IDEA](#installation) · [Run a lesson](#run-a-lesson) · [Repository layout](#repository-layout) · [Lesson map](docs/LESSON_MAP.md)
+**Quick links:** [Install in IntelliJ IDEA](#installation) · [Run a lesson](#run-a-lesson) · [Repository layout](#repository-layout)
 
 ## Technology Stack
 
@@ -38,7 +38,7 @@ The project uses the standard Maven test layout, matching `selenium-practice-les
 | --- | --- |
 | [`src/test/java/`](src/test/java) | Numbered lesson packages, JUnit classes, tasks, and summaries |
 | [`src/test/resources/`](src/test/resources) | Local HTML pages and shared upload sample |
-| [`docs/`](docs) | Lesson map and the independent HTML exercise |
+| [`docs/`](docs) | Independent HTML exercise |
 | [`pom.xml`](pom.xml) | Java version, dependencies, and Maven plugins |
 | [`mvnw`](mvnw) / [`mvnw.cmd`](mvnw.cmd) | Maven launchers for macOS/Linux and Windows |
 | [`.mvn/wrapper/`](.mvn/wrapper) | Pinned Maven Wrapper configuration |
@@ -71,7 +71,7 @@ Open a topic below to find its examples and notes. Start with the basic example 
 
 **Shared helpers:** [`utility/`](src/test/java/utility) contains browser setup, cleanup, and test-data helpers.
 
-**Further reading:** [Lesson map and verification limits](docs/LESSON_MAP.md) · [Manual HTML exercise](docs/html-basics/README.md)
+**Further reading:** [Manual HTML exercise](docs/html-basics/README.md)
 
 <a id="installation"></a>
 
@@ -175,7 +175,7 @@ The Robot file-picker example requires a visible Windows desktop session and dep
 - Public demo websites can change, become unavailable, or block automated traffic.
 - Robot examples interact with the desktop and depend on the operating system and focused window.
 - The full set of lessons is not a stable headless CI suite; run focused examples locally. Bare `mvn test` now discovers all `*Test` lessons, including desktop and live-site examples.
-- Some legacy exercises only demonstrate interactions or print results; see the lesson map for their current verification limits.
+- Some lessons demonstrate interactions or print results without asserting a final outcome.
 - A Chrome startup failure occurs before the test reaches its page and assertions.
 
 ## IDE Reference
