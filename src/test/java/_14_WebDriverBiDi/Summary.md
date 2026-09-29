@@ -1,35 +1,31 @@
-# 🔄 WebDriver BiDi: Let the Browser Tell the Test What Happened
+# WebDriver BiDi: Receive Events from the Browser
 
-## What is it?
+Traditional WebDriver tests send commands to the browser and wait for the result. **WebDriver BiDi** adds a WebSocket connection that lets a test subscribe to browser events while the session is running. In this lesson, the event is a message written to the browser console.
 
-In a familiar Selenium step, the test tells the browser to do something: **click this button**.
+BiDi means *bidirectional*: the test can send browser commands and receive events from the browser. The Selenium project describes it as the W3C bidirectional protocol for streaming events such as console messages, JavaScript errors, and network activity. See the [Selenium WebDriver BiDi guide](https://www.selenium.dev/documentation/webdriver/bidi/).
 
-With **WebDriver BiDi**, the browser can also send events back to the test as they happen: **a message was just written to the console**. BiDi means *bidirectional*, or communication in both directions.
+## How the test works
 
-The test chooses which events to listen for. In this lesson, it listens for console messages.
+1. Enable the BiDi WebSocket connection when creating Chrome:
 
-## What is it useful for?
+   ```java
+   options.setCapability("webSocketUrl", true);
+   ```
 
-A button may run JavaScript without changing any visible text on the page. That JavaScript can still write a message to the browser's **console**, where developers inspect messages from page code.
+2. Register a console-message handler **before** clicking the page button. The handler completes a `CompletableFuture` when the browser sends a console event.
+3. Click the button. Its JavaScript calls `console.log(...)`.
+4. Wait up to five seconds for the event and assert the message text.
+5. Remove the handler in a `finally` block so it is cleaned up even if the wait or assertion fails.
 
-BiDi lets our test receive that console message and check it automatically.
+The event is separate from page content: it is not an alert, and the message does not need to appear in the page DOM.
 
-## What do we test here?
+## Examples in this folder
 
-Open [ConsoleLogBidiTest](ConsoleLogBidiTest.java) and start with `receivesConsoleMessageFromLocalFixture()`.
+| Test method | Page | Expected console message |
+| --- | --- | --- |
+| `receivesConsoleMessageFromLocalFixture()` | Local `webdriver-bidi-example.html` page | `Hello from WebDriver BiDi` |
+| `receivesConsoleMessageFromSeleniumLiveDemo()` | Selenium's live demo page | `Hello, world!` |
 
-1. Start Chrome with BiDi enabled.
-2. Tell Selenium to listen for console messages.
-3. Open our local page and click **Write console message**.
-4. The button's JavaScript writes `Hello from WebDriver BiDi` to the console.
-5. The test receives the message and checks that its text is exactly correct.
+Start with the local fixture to learn the flow without depending on a public website. The live demo also needs internet access. Both examples require a browser and driver with BiDi support; this test enables it through Chrome's `webSocketUrl` capability.
 
-The message is a console entry, not an alert popup or a success label on the page. The test waits up to five seconds for it, then stops listening and closes Chrome.
-
-**In one sentence:** We click a button and use BiDi to check the console message that the button produces.
-
-## Is there a live-site example?
-
-Yes. The second method, `receivesConsoleMessageFromSeleniumLiveDemo()`, opens Selenium's demo page. It clicks a button and checks the console message `Hello, world!` in the same way.
-
-The local example needs no public website. The live example needs internet access. Both require a browser and driver that support BiDi; CI only compiles these lessons.
+**In one sentence:** Subscribe to a browser console event, trigger it with a click, then verify the event's message in the test.

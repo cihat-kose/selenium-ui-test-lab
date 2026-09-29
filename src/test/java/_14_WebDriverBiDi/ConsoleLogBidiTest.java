@@ -22,6 +22,7 @@ public class ConsoleLogBidiTest {
     @Before
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
+        // Ask ChromeDriver to expose the WebSocket connection used by BiDi.
         options.setCapability("webSocketUrl", true);
         driver = new ChromeDriver(options);
     }
@@ -37,6 +38,7 @@ public class ConsoleLogBidiTest {
     public void receivesConsoleMessageFromLocalFixture() throws Exception {
         RemoteWebDriver remoteDriver = driver;
         CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
+        // Subscribe before clicking so the event cannot be missed.
         String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
 
         try {
@@ -47,6 +49,7 @@ public class ConsoleLogBidiTest {
             ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
             assertEquals("Hello from WebDriver BiDi", entry.getText());
         } finally {
+            // Remove the listener even if waiting for the event or the assertion fails.
             remoteDriver.script().removeConsoleMessageHandler(handlerId);
         }
     }
@@ -55,6 +58,7 @@ public class ConsoleLogBidiTest {
     public void receivesConsoleMessageFromSeleniumLiveDemo() throws Exception {
         RemoteWebDriver remoteDriver = driver;
         CompletableFuture<ConsoleLogEntry> consoleEvent = new CompletableFuture<>();
+        // Subscribe before clicking so the event cannot be missed.
         String handlerId = remoteDriver.script().addConsoleMessageHandler(consoleEvent::complete);
 
         try {
@@ -64,6 +68,7 @@ public class ConsoleLogBidiTest {
             ConsoleLogEntry entry = consoleEvent.get(5, TimeUnit.SECONDS);
             assertEquals("Hello, world!", entry.getText());
         } finally {
+            // Remove the listener even if waiting for the event or the assertion fails.
             remoteDriver.script().removeConsoleMessageHandler(handlerId);
         }
     }
