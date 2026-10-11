@@ -1,5 +1,10 @@
 # Selenium UI Test Lab
 
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-4.49.0-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![JUnit](https://img.shields.io/badge/JUnit-4.13.2-25A162?style=for-the-badge&logo=junit&logoColor=white)
+![GitHub last commit](https://img.shields.io/github/last-commit/cihat-kose/selenium-ui-test-lab?style=for-the-badge)
+
 ## Introduction
 
 This repository contains hands-on Selenium WebDriver lessons and exercises in Java. It is an educational project: examples focus on one browser interaction at a time and use JUnit assertions where the expected result can be checked.
